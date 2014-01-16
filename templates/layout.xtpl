@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xtpl>
+
+    <html version="5" lang="en">
+        <head>
+            <title>
+                <var name="title" default="New Document" />
+            </title>
+
+            <for var="style" key="id" in="styleSheets">
+                <link rel="stylesheet" href="{{style}}" />
+            </for>
+            <block name="styleSheets" />
+
+            <for var="script" key="id" in="javaScripts">
+                <script src="{{script}}"></script>
+            </for>
+            <block name="javaScripts" />
+        </head>
+        <body>
+
+
+            <block name="layout" />
+
+
+        </body>
+    </html>
+
+</xtpl>

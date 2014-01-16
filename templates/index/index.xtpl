@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xtpl extends="../one-column">
+
+    <block name="javaScripts" mode="append">
+        <script src="some-custom-script.js"></script>
+    </block>
+
+    <block name="content">
+
+        <article>
+
+            <h1>Header 1</h1>
+            <p>
+
+                This is some test content.
+                But what happens, when I want to <strong>strong</strong> some text? :)<br />
+                <br />
+                After some breaks maybe I want to <em>em</em> it, who knows?
+            </p>
+
+        </article>
+
+    </block>
+
+</xtpl>

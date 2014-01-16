@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xtpl extends="layout">
+
+    <block name="layout">
+
+        <div class="grid grid-main">
+            <header>
+
+                <include file="navigation" position="header" />
+
+            </header>
+
+            <block name="content" />
+
+            <footer>
+
+                <include file="navigation" position="footer" />
+
+            </footer>
+        </div>
+
+    </block>
+
+</xtpl>
