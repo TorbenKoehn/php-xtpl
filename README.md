@@ -1,5 +1,5 @@
 # What is XTPL?
-__________
+
 
 XTPL is a template system for PHP that tries not to create new fancy language constructs or languages itself.
 XTPL uses plain HTML tags to trigger specific template functions, display variables, loop through arrays etc.
@@ -10,10 +10,10 @@ You can find a list of what can be done with these tags below (or soon)
 
 This is server-side processed, enhanced HTML.
 
-<br><br><br><br>
+<br><br><br>
 
 # Why is it called XTPL?
-__________
+
 
 Honestly, because I didn't find any fancy, fitting name yet.
 Maybe it will always be XTPL, maybe I change it at some time, I don't know
@@ -22,10 +22,10 @@ XTPL comes from XML and Template (TPL), which makes it XTPL. Nifty, I know.
 
 I'm open for name suggestions.
 
-<br><br><br><br>
+<br><br><br>
 
 # What else can I do with it?
-__________
+
 
 You can enhance it. XTPL includes a small plugin system with some default extensions.
 Based on the tags you use you can add new tags and classes that handle them.
@@ -38,10 +38,9 @@ An example might be Bootstrap-Extensions, that allow you to use bootstrap elemen
 The possibilities here are unlimited.
 It works kind of like server-side HTML Custom Elements.
 
-<br><br><br><br>
+<br><br><br>
 
 # What can it do right now?
-__________
 
 Some basic features work already. Many, many, many, many more will follow soon.
 
@@ -236,10 +235,9 @@ Now it already looks a bit like MDV, eeh? That's good, I guess. It's all the sam
 
 ##More stuff will follow soon...
 
-<br><br><br><br>
+<br><br><br>
 
 # How does the compilation work?
-__________
 
 The process is not finished, right now you can use the `Xtpl\Compiler` class to get up and running.
 
@@ -256,10 +254,9 @@ So don't.
 
 **For anything else, just look in the `templates/` folder above or in the `index.php` file.**
 
-<br><br><br><br>
+<br><br><br>
 
 # I'm interested, I can code, I want to help, I want to contribute [, I have a new name for this?]
-__________
 
 Please send an email to torben@devmonks.net and inform me.
 
