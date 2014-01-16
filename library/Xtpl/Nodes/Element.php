@@ -1,6 +1,6 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class Element extends Node {
 
@@ -80,7 +80,7 @@ class Element extends Node {
         $this->ignoredAttributes[] = $attr;
     }
 
-    public function getAttributeHtml() {
+    public function renderAttributes( $nice = false, $level = 0 ) {
 
         if( empty( $this->attributes ) )
             return '';
@@ -90,20 +90,24 @@ class Element extends Node {
             if( $value !== null && $value !== false && !in_array( $key, $this->ignoredAttributes ) )
                 $attrs[] = strtolower( $key ).'="'.$value.'"';
 
-        return ' '.implode( ' ', $attrs );
+        return implode( ' ', $attrs );
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
 
         $tag = strtolower( $this->tagName );
-        $attrHtml = $this->getAttributeHtml();
-        $childHtml = $this->getChildHtml();
+        $attrHtml = $this->renderAttributes( $nice, $level );
+        $childHtml = $this->renderChildren( $nice, $level + 1 );
+        $pre = $nice ? "\n".str_repeat( '    ', $level ) : '';
+
+        if( !empty( $attrHtml ) )
+            $attrHtml = " $attrHtml";
 
         //Specific one-liner tags
         if( in_array( $this->tagName, array( 'BR', 'IMG', 'INPUT', 'META', 'LINK' ) ) )
-            return "<$tag$attrHtml>";
+            return "$pre<$tag$attrHtml>";
 
-        return "<$tag$attrHtml>$childHtml</$tag>";
+        return "$pre<$tag$attrHtml>$childHtml$pre</$tag>";
     }
 
     public function find( $tagName, array $attributes = array() ) {

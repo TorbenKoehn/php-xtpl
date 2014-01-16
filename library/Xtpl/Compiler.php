@@ -2,8 +2,8 @@
 
 namespace Xtpl;
 
-use Xtpl\Parser\Node,
-    Xtpl\Parser\Element;
+use Xtpl\Nodes\Node,
+    Xtpl\Nodes\Element;
 
 class Compiler {
 
@@ -20,11 +20,7 @@ class Compiler {
 
         $compiledRoot = $xtpl->compile( $this, dirname( $path ) )->getRoot();
 
-        echo '<span style="font-family: Arial, Helvetica, sans-serif"><pre>';
-        $this->dump( $compiledRoot );
-        echo '</pre></span>';
-
-        return $compiledRoot->getHtml();
+        return $compiledRoot;
     }
 
     public function parseFile( $path, &$realPath = null ) {
@@ -59,7 +55,7 @@ class Compiler {
             ).basename( str_replace( '\\', '/', get_class( $node->getParent() ) ) ) : 'NULL' ).']</font>';
         
         if( $node instanceof Element ) {
-            echo '(<font color="darkred">'.trim( $node->getAttributeHtml() ).'</font>)';
+            echo '(<font color="darkred">'.trim( $node->renderAttributes() ).'</font>)';
         }
 
         if( !$deep ) {
@@ -82,7 +78,7 @@ class Compiler {
             ).basename( str_replace( '\\', '/', get_class( $node->getParent() ) ) ) : 'NULL' ).']</font>';
         
         if( $node instanceof Element ) {
-            echo '(<font color="darkred">'.trim( $node->getAttributeHtml() ).'</font>)';
+            echo '(<font color="darkred">'.trim( $node->renderAttributes() ).'</font>)';
         }
 
         echo '<br>';

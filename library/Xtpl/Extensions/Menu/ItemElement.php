@@ -2,9 +2,9 @@
 
 namespace Xtpl\Extensions\Menu;
 
-use \Xtpl\Parser\Node,
-    \Xtpl\Parser\TextNode,
-    \Xtpl\Parser\Element,
+use \Xtpl\Nodes\Node,
+    \Xtpl\Nodes\TextNode,
+    \Xtpl\Nodes\Element,
     \Xtpl\Extensions\MenuElement;
 
 class ItemElement extends Element {

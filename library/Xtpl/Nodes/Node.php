@@ -1,14 +1,15 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class Node {
 
-    protected static $uniqueId = 0;
+    protected static $uniqueIdCounter = 0;
 
     protected $children = array();
     protected $parent = null;
     protected $compiled = false;
+    protected $uniqueId;
 
     public function hasParent() {
 
@@ -175,19 +176,19 @@ class Node {
         array_splice( $this->children, intval( $i + 1 ), 0, $newChildren );
     }
 
-    public function getChildHtml() {
+    public function renderChildren( $nice = false, $level = 0 ) {
 
         $html = '';
         foreach( $this->children as $child )
-            $html .= $child->getHtml();
+            $html .= $child->render( $nice, $level );
 
         return $html;
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
 
         //Nodes only render their children, not themself
-        return $this->getChildHtml();
+        return $this->renderChildren( $nice, $level );
     }
 
     public function compile( \Xtpl\Compiler $compiler, $cwd ) {
@@ -201,11 +202,14 @@ class Node {
 
     public function __toString() {
 
-        return htmlspecialchars( $this->getHtml() );
+        return htmlspecialchars( $this->render() );
     }
 
-    public static function getUniqueId() {
+    public function getUniqueId() {
 
-        return 'node-'.( self::$uniqueId++ );
+        if( !$this->uniqueId )
+            $this->uniqueId = 'node-'.( self::$uniqueIdCounter++ );
+
+        return $this->uniqueId;
     }
 }

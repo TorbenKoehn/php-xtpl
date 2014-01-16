@@ -1,6 +1,6 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class BlockElement extends Element {
 
@@ -54,9 +54,9 @@ class BlockElement extends Element {
         return parent::compile( $compiler, $cwd );
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
 
         //Render only the children
-        return $this->getChildHtml();
+        return $this->renderChildren( $nice, $level );
     }
 }

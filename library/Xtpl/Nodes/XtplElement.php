@@ -1,6 +1,6 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class XtplElement extends Element {
 
@@ -8,9 +8,9 @@ class XtplElement extends Element {
         parent::__construct( 'XTPL', $attributes );
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
 
-        return $this->getChildHtml();
+        return $this->renderChildren( $nice, $level );
     }
 
     public function compile( \Xtpl\Compiler $compiler, $cwd ) {

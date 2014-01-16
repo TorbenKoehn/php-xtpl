@@ -1,6 +1,6 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class IncludeElement extends Element {
 
@@ -27,10 +27,10 @@ class IncludeElement extends Element {
         return parent::compile( $compiler, $cwd );
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
 
         //Render only the children
-        return $this->getChildHtml();
+        return $this->renderChildren( $nice, $level );
     }
 
     protected function applyArgs( Node $node ) {

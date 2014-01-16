@@ -1,6 +1,6 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class HtmlElement extends Element {
 
@@ -12,7 +12,7 @@ class HtmlElement extends Element {
         $this->ignoreAttribute( 'VERSION' );
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
 
         $html = '';
 
@@ -25,6 +25,6 @@ class HtmlElement extends Element {
             }
         }
 
-        return $html.parent::getHtml();
+        return $html.parent::render( $nice, $level );
     }
 }

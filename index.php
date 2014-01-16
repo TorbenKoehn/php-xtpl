@@ -11,6 +11,13 @@ function __autoload( $class ) {
 }
 
 
-$xtpl = new Xtpl\Compiler;
+$compiler = new Xtpl\Compiler;
 
-echo( $xtpl->compile( 'templates/index/index' ) );
+$root = $compiler->compile( 'templates/index/index' );
+echo '<pre>';
+
+$compiler->dump( $root );
+
+echo htmlspecialchars( $root->render( true ) );
+
+echo '</pre>';

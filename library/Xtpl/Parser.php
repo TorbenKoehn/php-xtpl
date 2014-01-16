@@ -2,9 +2,9 @@
 
 namespace Xtpl;
 
-use Xtpl\Parser\Node,
-    Xtpl\Parser\Element,
-    Xtpl\Parser\TextNode;
+use Xtpl\Nodes\Node,
+    Xtpl\Nodes\Element,
+    Xtpl\Nodes\TextNode;
 
 class Parser {
 

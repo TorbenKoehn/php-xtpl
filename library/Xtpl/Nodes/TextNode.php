@@ -1,6 +1,6 @@
 <?php
 
-namespace Xtpl\Parser;
+namespace Xtpl\Nodes;
 
 class TextNode extends Node {
 
@@ -26,9 +26,11 @@ class TextNode extends Node {
         return $this->content;
     }
 
-    public function getHtml() {
+    public function render( $nice = false, $level = 0 ) {
+
+        $pre = $nice ? "\n".str_repeat( '    ', $level ) : '';
 
         //Text nodes probably never have children (They're not tags)
-        return $this->content;
+        return $pre.$this->content;
     }
 }
