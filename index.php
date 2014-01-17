@@ -31,6 +31,7 @@ $xtpl->menu = array(
         'Interpolation' => 'index.php?m=features&a=interpolation',
         'Inline PHP' => 'index.php?m=features&a=inline-php',
         'Loops' => 'index.php?m=features&a=loops',
+        'Conditions' => 'index.php?m=features&a=conditions',
         'Custom Elements / Plugins' => 'index.php?m=features&a=custom-elements'
     ),
     'Examples' => array(

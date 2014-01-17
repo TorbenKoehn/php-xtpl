@@ -156,12 +156,15 @@ abstract class Node {
             $i = count( $this->children ) - $child;
         else if( $child instanceof Node )
             $i = $this->indexOf( $child );
-    
-        if( is_array( $newChildren ) )
-            foreach( $newChildren as $child )
-                $child->setParent( $this );
-        else
-            $newChildren->setParent( $this );
+
+        if( !is_array( $newChildren ) )
+            $newChildren = array( $newChildren );
+
+        foreach( $newChildren as $child ) {
+            if( $child->hasParent() )
+                $child->getParent()->removeChild( $child );
+            $child->setParent( $this );
+        }
 
         array_splice( $this->children, intval( $i ), 0, is_array( $newChildren ) ? $newChildren : array( $newChildren ) );
     }
@@ -174,11 +177,14 @@ abstract class Node {
         else if( $child instanceof Node )
             $i = $this->indexOf( $child );
 
-        if( is_array( $newChildren ) )
-            foreach( $newChildren as $child )
-                $child->setParent( $this );
-        else
-            $newChildren->setParent( $this );
+        if( !is_array( $newChildren ) )
+            $newChildren = array( $newChildren );
+
+        foreach( $newChildren as $child ) {
+            if( $child->hasParent() )
+                $child->getParent()->removeChild( $child );
+            $child->setParent( $this );
+        }
 
         array_splice( $this->children, intval( $i + 1 ), 0, is_array( $newChildren ) ? $newChildren : array( $newChildren ) );
     }
@@ -222,7 +228,7 @@ abstract class Node {
         if( $this instanceof Element ) {
             foreach( $this->getAttributes() as $key => $val ) {
 
-                $this->setAttribute( $key, $this->parseVarExpressions( $val ) );
+                $this->setAttribute( $key, $this->parseVarExpressions( $val, $key ) );
             }
         }
 
@@ -234,11 +240,10 @@ abstract class Node {
 
     protected function parseVarExpressions( $string ) {
 
-        return preg_replace_callback( '/\{\{(?<var>[a-z][a-z0-9\._]+)(\((?<default>[^\)]*)\))?(:(?<callbacks>[a-z][a-z0-9\.:_]+))?\}\}/si', function( $matches ) {
+        return preg_replace_callback( '/\{\{(?<var>[_a-z][a-z0-9\._]*)(\((?<default>[^\)]*)\))?(:(?<callbacks>[a-z][a-z0-9\.:_]+))?\}\}/si', function( $matches ) {
 
             $var = '$'.str_replace( '.', '->', $matches[ 'var' ] );
             $default = array_key_exists( 'default', $matches ) ? $matches[ 'default' ] : '';
-            
 
             $php = '';
 

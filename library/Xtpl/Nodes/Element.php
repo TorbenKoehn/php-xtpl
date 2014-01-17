@@ -110,15 +110,16 @@ class Element extends Node {
         return "$pre<$tag$attrHtml>$childHtml$pre</$tag>";
     }
 
-    public function find( $tagName, array $attributes = array() ) {
+    public function find( $tagName, array $attributes = array(), $recursive = true ) {
 
         $results = array();
         foreach( $this->children as $child ) {
 
             if( $child instanceof self ) {
 
-                foreach( $child->find( $tagName, $attributes ) as $result )
-                    $results[] = $result;
+                if( $recursive )
+                    foreach( $child->find( $tagName, $attributes ) as $result )
+                        $results[] = $result;
 
                 if( $child->getTagName() == $tagName ) {
                     if( !empty( $attributes ) )
@@ -133,6 +134,11 @@ class Element extends Node {
         }
 
         return $results;
+    }
+
+    public function findChild( $tagName, array $attributes = array() ) {
+
+        return $this->find( $tagName, $attributes, false );
     }
 
     public function findAll( $tagName, array $attributes = array() ) {

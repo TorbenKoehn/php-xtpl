@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <for times="5" as="i">
+        Heeey, I should be printed 5 times! ({{i}})<br />
+    </for>
+
+    <for each="variables" as="value" key="var">
+
+        <h3>{{var}} (Value: <php>var_export( $value, false );</php>)</h3>
+
+        <h4>{{var}} - Empty</h4>
+        <if empty="value">
+            <else>
+                (ELSE) Variable is anything else
+            </else>
+            (IF) Variable is empty
+            <elseif not-empty="value">
+                (ELSE-IF) Variable is not empty
+            </elseif>
+            some content in between
+            
+            that should actually render in the if() loop
+        </if>
+
+        <h4>{{var}} - Not-Empty</h4>
+        <if not-empty="value">
+            (IF) Variable is not empty
+            <elseif empty="value">
+                (ELSE-IF) Variable is empty
+            </elseif>
+            <else>
+                (ELSE) Variable is anything else
+            </else>
+        </if>
+
+        <h4>{{var}} - Set</h4>
+        <if set="value">
+            (IF) Variable is set
+            <elseif not-set="value">
+                (ELSE-IF) Variable is not set
+            </elseif>
+            <else>
+                (ELSE) Variable is anything else
+            </else>
+        </if>
+
+        <h4>{{var}} - Not-Set</h4>
+        <if not-set="value">
+            (IF) Variable is not set
+            <elseif set="value">
+                (ELSE-IF) Variable is set
+            </elseif>
+            <else>
+                (ELSE) Variable is anything else
+            </else>
+        </if>
+
+    </for>
+
+</xtpl>

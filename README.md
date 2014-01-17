@@ -313,7 +313,7 @@ Something like `<{{var.name}}>` isn't possible and probably never will be.
     </nav>
 ```
 
-**Note**: *If you think it makes sense using interpolation in `<php>` nodes, you can do it, but honestly, it makes no sense. You have access to the variables using plain `$varName` anyways.*
+**Note**: *If you think it makes sense using interpolation in `<php>` nodes, you can do it, but honestly, it makes no sense. You have access to the variables using plain `$varName` anyways. Even though, in some cases it may make sense, so it works.*
 
 
 As for attributes, if the variable is the only thing you have in your attribute value and the variable is null or false, it won't render the attribute itself.
@@ -342,10 +342,9 @@ You can also use default values and callbacks/filters in the expression-way of c
 
 ## Loops
 
-There is only one kind of loop right now:
+There are for and foreach-loops right now. Both work with the `<for>` element.
 
-The for-loop (Which is also a foreach loop)
-You might think it works like a for-loop, but right now it's really **only** a foreach loop
+A simple foreach-loop works like this:
 
 ```xml
     <for each="my.posts" as="post">
@@ -361,7 +360,82 @@ You might think it works like a for-loop, but right now it's really **only** a f
     </for>
 ```
 
-It's almost the same syntax as MDV so if you already used MDV, you might be familiar with this.
+You might also get the key as a variable with
+
+```xml
+<for each="my.posts" as="post" key="currentIndex">
+```
+
+
+The for loops is just a counter currently, you can do something for a limited amount of times and specify a start-point.
+This is pretty useless right now, since you can't use interpolation for the `times` attribute, but this will surely be changed in the future.
+
+A for-loop works like this:
+
+```xml
+<for times="5" as="i">
+    ({{i}}): Hey, this should happen 5 times! 
+</for>
+```
+
+## Conditions
+
+Yes, they are in now!
+XTPL supports `<if>`, `<else>` and `<elseif>` blocks.
+The latter two always need to be **inside** the `if` element they refer to.
+
+Possible checks via attribute are `empty`, `not-empty`, `set`, `not-set`, `cond` and `not-cond`
+
+`cond` and `not-cond` just translate into plain PHP, it's like defining what's between the `(...)` of the if statement in PHP.
+
+
+```xml
+<if not-empty="myVar">
+    Heeey, we made sure that {{myVar}} is not empty!
+</if>
+```
+
+```xml
+<if cond="!empty( $myVar ) and $myVar > 0">
+    This gets printed if the condition is true
+</if>
+```
+
+```xml
+<if not-set="myVar">
+    myVar is not set
+    <else>
+        myVar is set!
+    </else>
+</if>
+```
+
+It doesn't matter where in the node you put the else/else-if tags, they will always be rendered at the end automatically.
+This is useful if you want to put your else-block at the top of a large if-block to improve readability.
+```xml
+<if not-set="myVar">
+    myVar is not set
+    <else>
+        myVar is set!
+    </else>
+    and here is some more content<br>
+    but this will only be rendered, if the if-block is true!
+</if>
+```
+
+```xml
+<if not-set="myVar">
+    myVar is not set
+    <elseif set="myVar">
+        myVar is set
+    </elseif>
+    <else>
+        This won't ever be printed.
+    </else>
+</if>
+```
+
+Play with it, get a feeling for it, it actually works!
 
 
 ## Inline PHP

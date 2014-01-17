@@ -19,6 +19,15 @@ class ForElement extends Element {
                 $this->prependPhp( 'foreach( $'.$this->getAttribute( 'EACH' ).' as '.$as.' ):' );
                 $this->addPhp( 'endforeach;' );
             }
+
+            if( $this->hasAttribute( 'TIMES' ) ) {
+
+                $start = $this->hasAttribute( 'FIRST' ) ? intval( $this->getAttribute( 'FIRST' ) ) : 0;
+                $as = $this->hasAttribute( 'AS' ) ? $this->getAttribute( 'AS' ) : '_xtplLoopCounter';
+                $end = $start + intval( $this->getAttribute( 'TIMES' ) );
+                $this->prependPhp( 'for( $'.$as.' = '.$start.'; $'.$as.' < '.$end.'; $'.$as.'++ ):' );
+                $this->addPhp( 'endfor;' );
+            }
         }
 
         return parent::compile( $compiler, $cwd );
