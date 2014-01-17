@@ -26,14 +26,6 @@
           <li><a href="https://github.com/TorbenKoehn/php-xtpl/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/TorbenKoehn/php-xtpl">View On <strong>GitHub</strong></a></li>
         </ul>
-        
-        <p>You like this project? Spend me a coffee via PayPal!</p>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-          <input type="hidden" name="cmd" value="_s-xclick">
-          <input type="hidden" name="hosted_button_id" value="E9LVM4VM2DKH4">
-          <input type="image" src="https://www.paypalobjects.com/en_US/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-          <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
-        </form>
       </header>
       <section>
         <h1>
@@ -346,7 +338,7 @@ Something like <code>&lt;{{var.name}}&gt;</code> isn't possible and probably nev
     <span class="nt">&lt;/nav&gt;</span>
 </pre></div>
 
-<p><strong>Note</strong>: <em>If you think it makes sense using interpolation in <code>&lt;php&gt;</code> nodes, you can do it, but honestly, it makes no sense. You have access to the variables using plain <code>$varName</code> anyways.</em></p>
+<p><strong>Note</strong>: <em>If you think it makes sense using interpolation in <code>&lt;php&gt;</code> nodes, you can do it, but honestly, it makes no sense. You have access to the variables using plain <code>$varName</code> anyways. Even though, in some cases it may make sense, so it works.</em></p>
 
 <p>As for attributes, if the variable is the only thing you have in your attribute value and the variable is null or false, it won't render the attribute itself.
 This is useful for optional classes</p>
@@ -371,10 +363,9 @@ This is useful for optional classes</p>
 <h2>
 <a name="loops" class="anchor" href="#loops"><span class="octicon octicon-link"></span></a>Loops</h2>
 
-<p>There is only one kind of loop right now:</p>
+<p>There are for and foreach-loops right now. Both work with the <code>&lt;for&gt;</code> element.</p>
 
-<p>The for-loop (Which is also a foreach loop)
-You might think it works like a for-loop, but right now it's really <strong>only</strong> a foreach loop</p>
+<p>A simple foreach-loop works like this:</p>
 
 <div class="highlight highlight-xml"><pre>    <span class="nt">&lt;for</span> <span class="na">each=</span><span class="s">"my.posts"</span> <span class="na">as=</span><span class="s">"post"</span><span class="nt">&gt;</span>
 
@@ -389,7 +380,75 @@ You might think it works like a for-loop, but right now it's really <strong>only
     <span class="nt">&lt;/for&gt;</span>
 </pre></div>
 
-<p>It's almost the same syntax as MDV so if you already used MDV, you might be familiar with this.</p>
+<p>You might also get the key as a variable with</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;for</span> <span class="na">each=</span><span class="s">"my.posts"</span> <span class="na">as=</span><span class="s">"post"</span> <span class="na">key=</span><span class="s">"currentIndex"</span><span class="nt">&gt;</span>
+</pre></div>
+
+<p>The for loops is just a counter currently, you can do something for a limited amount of times and specify a start-point.
+This is pretty useless right now, since you can't use interpolation for the <code>times</code> attribute, but this will surely be changed in the future.</p>
+
+<p>A for-loop works like this:</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;for</span> <span class="na">times=</span><span class="s">"5"</span> <span class="na">as=</span><span class="s">"i"</span><span class="nt">&gt;</span>
+    ({{i}}): Hey, this should happen 5 times! 
+<span class="nt">&lt;/for&gt;</span>
+</pre></div>
+
+<h2>
+<a name="conditions" class="anchor" href="#conditions"><span class="octicon octicon-link"></span></a>Conditions</h2>
+
+<p>Yes, they are in now!
+XTPL supports <code>&lt;if&gt;</code>, <code>&lt;else&gt;</code> and <code>&lt;elseif&gt;</code> blocks.
+The latter two always need to be <strong>inside</strong> the <code>if</code> element they refer to.</p>
+
+<p>Possible checks via attribute are <code>empty</code>, <code>not-empty</code>, <code>set</code>, <code>not-set</code>, <code>cond</code> and <code>not-cond</code></p>
+
+<p><code>cond</code> and <code>not-cond</code> just translate into plain PHP, it's like defining what's between the <code>(...)</code> of the if statement in PHP.</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;if</span> <span class="na">not-empty=</span><span class="s">"myVar"</span><span class="nt">&gt;</span>
+    Heeey, we made sure that {{myVar}} is not empty!
+<span class="nt">&lt;/if&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;if</span> <span class="na">cond=</span><span class="s">"!empty( $myVar ) and $myVar &gt; 0"</span><span class="nt">&gt;</span>
+    This gets printed if the condition is true
+<span class="nt">&lt;/if&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;if</span> <span class="na">not-set=</span><span class="s">"myVar"</span><span class="nt">&gt;</span>
+    myVar is not set
+    <span class="nt">&lt;else&gt;</span>
+        myVar is set!
+    <span class="nt">&lt;/else&gt;</span>
+<span class="nt">&lt;/if&gt;</span>
+</pre></div>
+
+<p>It doesn't matter where in the node you put the else/else-if tags, they will always be rendered at the end automatically.
+This is useful if you want to put your else-block at the top of a large if-block to improve readability.</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;if</span> <span class="na">not-set=</span><span class="s">"myVar"</span><span class="nt">&gt;</span>
+    myVar is not set
+    <span class="nt">&lt;else&gt;</span>
+        myVar is set!
+    <span class="nt">&lt;/else&gt;</span>
+    and here is some more content<span class="nt">&lt;br&gt;</span>
+    but this will only be rendered, if the if-block is true!
+<span class="nt">&lt;/if&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;if</span> <span class="na">not-set=</span><span class="s">"myVar"</span><span class="nt">&gt;</span>
+    myVar is not set
+    <span class="nt">&lt;elseif</span> <span class="na">set=</span><span class="s">"myVar"</span><span class="nt">&gt;</span>
+        myVar is set
+    <span class="nt">&lt;/elseif&gt;</span>
+    <span class="nt">&lt;else&gt;</span>
+        This won't ever be printed.
+    <span class="nt">&lt;/else&gt;</span>
+<span class="nt">&lt;/if&gt;</span>
+</pre></div>
+
+<p>Play with it, get a feeling for it, it actually works!</p>
 
 <h2>
 <a name="inline-php" class="anchor" href="#inline-php"><span class="octicon octicon-link"></span></a>Inline PHP</h2>
