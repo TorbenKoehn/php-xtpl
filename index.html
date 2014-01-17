@@ -1,0 +1,518 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Php-xtpl by TorbenKoehn</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Php-xtpl</h1>
+        <p>A PHP Template System that uses HTML (or rather, XML) instead of a new template &quot;language&quot; you have to learn.</p>
+
+        <p class="view"><a href="https://github.com/TorbenKoehn/php-xtpl">View the Project on GitHub <small>TorbenKoehn/php-xtpl</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/TorbenKoehn/php-xtpl/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/TorbenKoehn/php-xtpl/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/TorbenKoehn/php-xtpl">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="what-is-xtpl" class="anchor" href="#what-is-xtpl"><span class="octicon octicon-link"></span></a>What is XTPL?</h1>
+
+<p>XTPL is a <strong>template system for PHP</strong> that tries not to create new fancy language constructs or languages itself.
+XTPL uses <strong>plain HTML tags</strong> to trigger specific template functions, display variables, loop through arrays etc.</p>
+
+<p>It is based on XML parsing and requires <strong>strict XML templates</strong>, but allows you to use any <strong>HTML5</strong> tag (or rather, <strong>any</strong> tag). While allowing that, it takes specific elements and enhances them with special functionality.</p>
+
+<p>You can find a list of what can be done with these tags below.</p>
+
+<p>This is <strong>server-side processed, enhanced HTML</strong>. It can do a lot of useful stuff.</p>
+
+<p>The output you get is <strong>PHTML</strong> which you can include in PHP.
+PHTML is just <strong>PHP with HTML</strong>, which renders a dynamic, server-side processed HTML page.</p>
+
+<h1>
+<a name="what-can-it-do-right-now" class="anchor" href="#what-can-it-do-right-now"><span class="octicon octicon-link"></span></a>What can it do right now?</h1>
+
+<p>Some basic features work already. Many, many, many, many more will follow soon.</p>
+
+<h2>
+<a name="blocks" class="anchor" href="#blocks"><span class="octicon octicon-link"></span></a>Blocks</h2>
+
+<p>You can define a block and let other blocks add or replace content in it.
+This works recursively, this means that you can define blocks in a layout template, extend from that and just define the block contents.
+You can also define blocks and then include the templates that specify the block content.</p>
+
+<p><strong>my-page.xtpl</strong></p>
+
+<div class="highlight highlight-xml"><pre><span class="cp">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="nt">&lt;xtpl&gt;</span>
+
+    <span class="nt">&lt;html</span> <span class="na">version=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;head&gt;</span>
+            <span class="nt">&lt;title&gt;</span>XTPL is awesome!<span class="nt">&lt;/title&gt;</span>
+
+            <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"scripts"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"jquery.js"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/block&gt;</span>
+
+            <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"styles"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/block&gt;</span>
+        <span class="nt">&lt;/head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+
+            <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+                I'm some placeholder content, I won't stay here.
+            <span class="nt">&lt;/block&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+
+
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"scripts"</span> <span class="na">mode=</span><span class="s">"append"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"bootstrap.js"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/block&gt;</span>
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"styles"</span> <span class="na">mode=</span><span class="s">"prepend"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"bootstrap.css"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/block&gt;</span>
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;h1&gt;</span>My current content<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            This might be some static or dynamic content, whatever you prefer.
+        <span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;p&gt;</span>
+            It actually doesn't matter what's in here, you can include stuff, you can have sub-blocks and sub-sub-blocks, XTPL can handle all of it.
+        <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;/block&gt;</span>
+
+<span class="nt">&lt;/xtpl&gt;</span>
+</pre></div>
+
+<p><strong>Note</strong>: <em>Indeed, you don't need to close script elements anymore.</em></p>
+
+<p>The resulting HTML will be this:</p>
+
+<div class="highlight highlight-html"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>XTPL is awesome!<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bootstrap.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"bootstrap.css"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="nt">&lt;h1&gt;</span>My current content<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            This might be some static or dynamic content, whatever you prefer.
+        <span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;p&gt;</span>
+            It actually doesn't matter what's in here, you can include stuff, you can have sub-blocks and sub-sub-blocks, XTPL can handle all of it.
+        <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>Notice that the script block got appended, the style block got prepended and the content block replaced the previous content.</p>
+
+<p>The target block is always the first block with its name that the parser finds, all other blocks will add to it (or not)</p>
+
+<p>People who played with Jade already should know this kind of template mechanism.</p>
+
+<h2>
+<a name="extend" class="anchor" href="#extend"><span class="octicon octicon-link"></span></a>Extend</h2>
+
+<p>Templates can extend other templates. Again, if you're coming from Jade, you should already know the way it works.
+This does nothing more than putting your current template DOM inside the extended template DOM, but allows for recursive block usage, global main-layouts and stuff like that.</p>
+
+<p>Imagine you have a great main-layout</p>
+
+<p><strong>layout.xtpl</strong></p>
+
+<div class="highlight highlight-xml"><pre><span class="cp">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="nt">&lt;xtpl&gt;</span>
+
+    <span class="nt">&lt;html</span> <span class="na">version=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;head&gt;</span>
+            <span class="nt">&lt;title&gt;</span>XTPL is awesome!<span class="nt">&lt;/title&gt;</span>
+
+            <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"scripts"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"jquery.js"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/block&gt;</span>
+
+            <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"styles"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/block&gt;</span>
+        <span class="nt">&lt;/head&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+
+            <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+                I'm some placeholder content, I won't stay here.
+            <span class="nt">&lt;/block&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+
+<span class="nt">&lt;/xtpl&gt;</span>
+</pre></div>
+
+<p>and you render a template that extends it</p>
+
+<p><strong>my-page.xtpl</strong></p>
+
+<div class="highlight highlight-xml"><pre><span class="cp">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="nt">&lt;xtpl</span> <span class="na">extends=</span><span class="s">"layout"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"scripts"</span> <span class="na">mode=</span><span class="s">"append"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">"bootstrap.js"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/block&gt;</span>
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"styles"</span> <span class="na">mode=</span><span class="s">"prepend"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"bootstrap.css"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/block&gt;</span>
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;h1&gt;</span>My current content<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            This might be some static or dynamic content, whatever you prefer.
+        <span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;p&gt;</span>
+            It actually doesn't matter what's in here, you can include stuff, you can have sub-blocks and sub-sub-blocks, XTPL can handle all of it.
+        <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;/block&gt;</span>
+<span class="nt">&lt;/xtpl&gt;</span>
+</pre></div>
+
+<p>The resulting HTML will be this:</p>
+
+<div class="highlight highlight-html"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>XTPL is awesome!<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bootstrap.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"bootstrap.css"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"style.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="nt">&lt;h1&gt;</span>My current content<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+            This might be some static or dynamic content, whatever you prefer.
+        <span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;p&gt;</span>
+            It actually doesn't matter what's in here, you can include stuff, you can have sub-blocks and sub-sub-blocks, XTPL can handle all of it.
+        <span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>There actually is no programatic limitation on how many levels you can extend, how many blocks there are or anything like that.
+You can extend layouts as many levels deep as you like, even in included XTPLs.</p>
+
+<p>Just try to avoid recursion</p>
+
+<p><strong>Note</strong>: <em>No really, recursion will fuck everything up right now I guess.</em></p>
+
+<h2>
+<a name="includes" class="anchor" href="#includes"><span class="octicon octicon-link"></span></a>Includes</h2>
+
+<p>Include a sub-template. 
+In the sub-template you got access to the template variables as well as the attributes of the include-element.</p>
+
+<p><strong>my-page.xtpl</strong></p>
+
+<div class="highlight highlight-xml"><pre><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;xtpl&gt;</span>
+
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"page-header"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;header&gt;</span>
+
+            <span class="nt">&lt;include</span> <span class="na">file=</span><span class="s">"navigation"</span> <span class="na">orientation=</span><span class="s">"vertical"</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;/header&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/xtpl&gt;</span>
+</pre></div>
+
+<p><strong>navigaton.xtpl</strong></p>
+
+<div class="highlight highlight-xml"><pre><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;xtpl&gt;</span>
+
+    <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"nav nav-[[orientation]]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#home"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#about-me"</span><span class="nt">&gt;</span>About me<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#blog"</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#portfolio"</span><span class="nt">&gt;</span>Portfolio<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/nav&gt;</span>
+
+    <span class="nt">&lt;block</span> <span class="na">name=</span><span class="s">"page-header"</span><span class="nt">&gt;</span>
+        My Page Header
+    <span class="nt">&lt;/block&gt;</span>
+
+<span class="nt">&lt;/xtpl&gt;</span>
+</pre></div>
+
+<p>To use the <code>orientation</code> attribute in the included template (or any of its extended templates), you use <code>[[orientation]]</code> in any attribute or text node, take a look at the <code>class=""</code> attribute of the <code>&lt;nav&gt;</code> element. This also works on templates, that the included template extended.
+<code>orientation</code> is just an example, you can use any attribute name or value you like (You could even load the value of the <code>file</code> attribute)</p>
+
+<p>The interpolation with <code>[[attributeName]]</code> works on attribute values and plain text nodes.</p>
+
+<h2>
+<a name="variables" class="anchor" href="#variables"><span class="octicon octicon-link"></span></a>Variables</h2>
+
+<p>What else, one of the most important parts.
+There are two ways to use variables inside templates, there is a <code>&lt;var&gt;</code> element and you can use interpolation.</p>
+
+<h3>
+<a name="the-var-element" class="anchor" href="#the-var-element"><span class="octicon octicon-link"></span></a>The <code>&lt;var&gt;</code> element</h3>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">"my.variable.name"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<p>is the same as</p>
+
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$my</span><span class="o">-&gt;</span><span class="na">variable</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+
+<p>You can also set</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">"my.variable.name"</span> <span class="na">value=</span><span class="s">"New Value!"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<p>and you can use default values if the variable isn't set (Which does an automatic <code>!empty()</code> check)</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">"title"</span> <span class="na">default=</span><span class="s">"My Website Title!"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<p><strong>But this uses the official <code>&lt;var&gt;</code> tag, doesn't it?</strong></p>
+
+<p>Yes it does, but it won't affect it in any way. VarElement only reacts if there is at least a <code>name</code> attribute existent (And there is no reason to set one on a normal <code>&lt;var&gt;</code> element).
+Everything else stays plain HTML.</p>
+
+<h3>
+<a name="interpolation" class="anchor" href="#interpolation"><span class="octicon octicon-link"></span></a>Interpolation</h3>
+
+<p>Variable interpolation works on attribute values and text nodes.
+Something like <code>&lt;{{var.name}}&gt;</code> isn't possible and probably never will be.</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"nav nav-{{orientation}}"</span><span class="nt">&gt;</span>
+
+        Hey, this is some text and I don't want to use a tag now so I just {{output}} my variable named "output" here.
+
+    <span class="nt">&lt;/nav&gt;</span>
+</pre></div>
+
+<p><strong>Note</strong>: <em>If you think it makes sense using interpolation in <code>&lt;php&gt;</code> nodes, you can do it, but honestly, it makes no sense. You have access to the variables using plain <code>$varName</code> anyways.</em></p>
+
+<p>As for attributes, if the variable is the only thing you have in your attribute value and the variable is null or false, it won't render the attribute itself.
+This is useful for optional classes</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"my-link.html"</span> <span class="na">class=</span><span class="s">"{{link.active}}"</span><span class="nt">&gt;</span>My link!<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+
+<p>if <code>$link-&gt;active</code> is <code>null</code> or <code>false</code>, this will render</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"my-link.html"</span><span class="nt">&gt;</span>My link!<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+
+<p>Actually, this was a lie, it doesn't do this right now, but it will soon.</p>
+
+<p>You can also use default values and callbacks/filters in the expression-way of calling variables.</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;p&gt;</span>
+        HEY, THE NEXT TEXT SHOULD ALSO BE {{someText(I dont have a Text):strtoupper:SomeClass.doSomeStaticStuff}}
+    <span class="nt">&lt;/p&gt;</span>
+</pre></div>
+
+<h2>
+<a name="loops" class="anchor" href="#loops"><span class="octicon octicon-link"></span></a>Loops</h2>
+
+<p>There is only one kind of loop right now:</p>
+
+<p>The for-loop (Which is also a foreach loop)
+You might think it works like a for-loop, but right now it's really <strong>only</strong> a foreach loop</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;for</span> <span class="na">each=</span><span class="s">"my.posts"</span> <span class="na">as=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;article&gt;</span>
+            <span class="nt">&lt;header&gt;</span>
+                <span class="nt">&lt;h1&gt;</span>{{post.title}}<span class="nt">&lt;/h1&gt;</span>
+            <span class="nt">&lt;/header&gt;</span>
+            <span class="nt">&lt;p&gt;</span>
+                {{item.content}}
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/article&gt;</span>
+    <span class="nt">&lt;/for&gt;</span>
+</pre></div>
+
+<p>It's almost the same syntax as MDV so if you already used MDV, you might be familiar with this.</p>
+
+<h2>
+<a name="inline-php" class="anchor" href="#inline-php"><span class="octicon octicon-link"></span></a>Inline PHP</h2>
+
+<p>You can use PHP-HTML-Tags to use plain PHP inside your template.
+Through the XML restrictions you have to put complex code into <code>&lt;![CDATA[ ... ]]&gt;</code> tags.</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;php&gt;</span>echo $someVariable;<span class="nt">&lt;/php&gt;</span>
+
+    <span class="nt">&lt;php&gt;</span>while( $i <span class="nt">&lt; 10</span> <span class="err">):&lt;/php</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;span&gt;</span>{{i}}<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;php&gt;</span>$++;<span class="nt">&lt;/php&gt;</span>
+    <span class="nt">&lt;php&gt;</span>endwhile;<span class="nt">&lt;/php&gt;</span>
+
+    <span class="nt">&lt;php&gt;</span><span class="cp">&lt;![CDATA[</span>
+
+<span class="cp">        //Here you can use any kind of complex PHP code</span>
+
+<span class="cp">        class SomeClass {}</span>
+
+<span class="cp">        $instance = new SomeClass;</span>
+<span class="cp">        $instance-&gt;something = 'SomeValue';</span>
+
+<span class="cp">        var_dump( $instance );</span>
+
+<span class="cp">    ]]&gt;</span><span class="nt">&lt;/php&gt;</span>
+</pre></div>
+
+<p><strong>More documentation following soon.</strong></p>
+
+<h1>
+<a name="what-else-can-i-do-with-it" class="anchor" href="#what-else-can-i-do-with-it"><span class="octicon octicon-link"></span></a>What else can I do with it?</h1>
+
+<p>You can enhance it. XTPL includes a plugin system with some default extensions.
+Based on the tags you use you can add new tags and classes that handle them.</p>
+
+<p>You might think it just translates XML to HTML, but it actually creates a complete DOM with a bunch of traversing and manipulation methods in the background. This allows you to manipulate any specific point of the DOM from every specific or any other point that gets handled.
+The implementation does <strong>not</strong> use DOMDocument of PHP but an own DOM implementation (that at least uses similar naming) that works different and more efficient for this kind of project.</p>
+
+<p>An example might be Bootstrap-Extensions, that allow you to use bootstrap elements easily (e.g. <code>&lt;bs-btn type="success"&gt;Success!!&lt;/bs-btn&gt;</code>) and you don't even need to include any CSS or JS files by yourself, the elements can check if bootstrap is loaded or not by traversing the <code>&lt;head&gt;</code> element, if not, they can just <code>addChild()</code> a new <code>&lt;script&gt;</code> and <code>&lt;link&gt;</code> to it and it will be loaded when it's required. Actually, there is a method called <code>addCss( $css )</code> in it that already does that for you :)</p>
+
+<p>The possibilities here are unlimited.
+It works kind of like server-side HTML Custom Elements.
+With enough plugins you don't need a line of plain PHP to get your dynamic website working with pure HTML syntax.</p>
+
+<p>To add an element plugin, create a PHP Class that extends from <code>Xtpl\Nodes\Element</code>, call it anything with <code>Element</code> in the end, put it into some namespace and let the parser know about your element namespace with</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">getCompiler</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getParser</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addElementNamespace</span><span class="p">(</span> <span class="s1">'Your\\Element\\Namespace'</span> <span class="p">);</span>
+</pre></div>
+
+<p>Then just go on rendering normally.</p>
+
+<p>What will happen is that the parser will inflect the name of the HTML tag it processes and find a class that fits it.
+e.g. an element like <code>&lt;my-custom-tag&gt;</code> will search for a class called <code>MyCustomTagElement</code> in the element namespaces of the parser. The DOM will then receive a new instance of this class instead of a plain <code>Element</code>-instance and allows you to modify the compiling and rendering process of that element.</p>
+
+<p>In your class you have a bunch of DOM utilities to make your elements as mighty as possible.
+Just take a look at the <code>Xtpl\Extensions</code> or the <code>Xtpl\Nodes</code> element namespaces to get a feeling for it.</p>
+
+<h1>
+<a name="planned-features" class="anchor" href="#planned-features"><span class="octicon octicon-link"></span></a>Planned features</h1>
+
+<ul>
+<li>[ ] Less and CoffeeScript integration</li>
+<li>[ ] If-statements</li>
+<li>[ ] Medium-sized standard library</li>
+<li>[ ] Twitter Bootstrap elements</li>
+<li>[ ] Fancy filters (Markdown?)</li>
+</ul><h1>
+<a name="how-does-the-compilation-work" class="anchor" href="#how-does-the-compilation-work"><span class="octicon octicon-link"></span></a>How does the compilation work?</h1>
+
+<p>You can either let the XTPL Renderer handle all the work or you can get your hands dirty and do it with the raw API.</p>
+
+<p>The most easy way:</p>
+
+<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Xtpl\Renderer</span><span class="p">;</span>
+
+    <span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">displayFile</span><span class="p">(</span> <span class="s1">'your/path/to/the/xtpl/file'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'My Page Title'</span><span class="p">,</span>
+        <span class="s1">'posts'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'Some post title'</span><span class="p">,</span>
+                <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">'bla bla bla bla bla'</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span> <span class="p">);</span>
+</pre></div>
+
+<p>It doesn't matter if you use the xtpl Extension or not.</p>
+
+<p>Using display like that will <code>eval()</code> the code, and as we all know, eval is evil.
+You better give the renderer a caching directory as the first argument</p>
+
+<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Xtpl\Renderer</span><span class="p">(</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/cache'</span> <span class="p">);</span>
+</pre></div>
+
+<p>This directory of course needs to be writable, but this will improve the performance of the system <strong>greatly</strong>.</p>
+
+<p>Using this way, the renderer will handle all the caching on its own, you don't need to do a thing.</p>
+
+<p>If you want to dig in the dirt you can also use the system in a more raw manner, like this:</p>
+
+<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">renderFileToFile</span><span class="p">(</span> <span class="s1">'your/xtpl'</span><span class="p">,</span> <span class="s1">'./phtml/your/xtpl.phtml'</span> <span class="p">);</span>
+    <span class="nb">extract</span><span class="p">(</span> <span class="nv">$yourTemplateArgs</span> <span class="p">);</span>
+    <span class="k">include</span> <span class="s1">'./phtml/your/xtpl.phtml'</span><span class="p">;</span>
+</pre></div>
+
+<p><strong>For anything else, just look the codes above.</strong></p>
+
+<h1>
+<a name="why-is-it-called-xtpl" class="anchor" href="#why-is-it-called-xtpl"><span class="octicon octicon-link"></span></a>Why is it called XTPL?</h1>
+
+<p>Honestly, because I didn't find any fancy, fitting name yet.
+Maybe it will always be XTPL, maybe I change it at some time, I don't know</p>
+
+<p>XTPL comes from XML and Template (TPL), which makes it XTPL. Nifty, I know.</p>
+
+<p>I'm open for name suggestions.</p>
+
+<h1>
+<a name="i-have-feedback-im-interested-i-want-to-contribute-i-have-a-new-name-for-this" class="anchor" href="#i-have-feedback-im-interested-i-want-to-contribute-i-have-a-new-name-for-this"><span class="octicon octicon-link"></span></a>I have feedback, I'm interested, I want to contribute, I have a new name for this?</h1>
+
+<p>Please send an email to <a href="mailto:torben@devmonks.net">torben@devmonks.net</a> and inform me.</p>
+
+<p>I'm looking forward to talk to interested people :)</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/TorbenKoehn">TorbenKoehn</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
