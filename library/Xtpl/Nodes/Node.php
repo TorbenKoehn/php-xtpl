@@ -166,7 +166,7 @@ abstract class Node {
         array_splice( $this->children, intval( $i ), 0, is_array( $newChildren ) ? $newChildren : array( $newChildren ) );
     }
 
-    public function insertAfter( Node $child, $newChildren ) {
+    public function insertAfter( $child, $newChildren ) {
 
         $i = count( $this->children ) - 1;
         if( is_numeric( $child ) && $child < 0 )

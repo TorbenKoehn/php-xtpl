@@ -14,7 +14,7 @@ class Parser {
     public function __construct( array $additionalElementNamespaces = null ) {
 
         if( $additionalElementNamespaces )
-            $this->addElementNamespaces( $additionalElementNamespaces );
+            $this->addElementNamespace( $additionalElementNamespaces );
     }
 
     public function addElementNamespace( $namespace ) {
