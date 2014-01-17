@@ -14,13 +14,11 @@ class IncludeElement extends Element {
             if( $this->hasAttribute( 'FILE' ) ) {
 
                 $includePath = $cwd.DIRECTORY_SEPARATOR.$this->getAttribute( 'FILE' );
-                $xtpl = $compiler->parseFile( $includePath, $realPath );
-                $xtpl->compile( $compiler, dirname( $realPath ) );
+                $xtpl = $compiler->compileFile( $includePath );
 
                 //Apply arguments on templates (Even on extended ones, yay!)
                 $this->applyArgs( $xtpl );
-
-                $this->addChild( $xtpl->getRoot() );
+                $this->addChild( $xtpl );
             }
         }
 

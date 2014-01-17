@@ -6,9 +6,9 @@ XTPL uses plain HTML tags to trigger specific template functions, display variab
 
 It is based on XML parsing and requires strict XML templates, but allows you to use any HTML5 tag (or rather, **any** tag). While allowing that, it takes specific elements and enhances them with special functionality.
 
-You can find a list of what can be done with these tags below (or soon)
+You can find a list of what can be done with these tags below.
 
-This is server-side processed, enhanced HTML.
+This is server-side processed, enhanced HTML. It can do a lot of useful stuff.
 
 <br><br><br>
 
@@ -33,10 +33,11 @@ Based on the tags you use you can add new tags and classes that handle them.
 You might think it just translates XML to HTML, but it actually creates a complete DOM with a bunch of traversing and manipulation methods in the background. This allows you to manipulate any specific point of the DOM from every specific or any other point that gets handled.
 The implementation does **not** use DOMDocument of PHP but an own DOM implementation (that at least uses similar naming) that works different and more efficient for this kind of project.
 
-An example might be Bootstrap-Extensions, that allow you to use bootstrap elements easily (e.g. `<bs-btn type="success">Success!!</bs-btn>`) and you don't even need to include any CSS or JS files by yourself, the elements can check if bootstrap is loaded or not by traversing the `<head>` element, if not, they can just `addChild()` a new `<script>` and `<link>` to it and it will be loaded when it's required.
+An example might be Bootstrap-Extensions, that allow you to use bootstrap elements easily (e.g. `<bs-btn type="success">Success!!</bs-btn>`) and you don't even need to include any CSS or JS files by yourself, the elements can check if bootstrap is loaded or not by traversing the `<head>` element, if not, they can just `addChild()` a new `<script>` and `<link>` to it and it will be loaded when it's required. Actually, there is a method called `addCss( $css )` in it that already does that for you :)
 
 The possibilities here are unlimited.
 It works kind of like server-side HTML Custom Elements.
+With enough plugins you don't need a line of plain PHP to get your dynamic website working with pure HTML syntax.
 
 <br><br><br>
 
@@ -157,7 +158,7 @@ People who played with Jade already should know this kind of template mechanism.
 ## Variables
 
 What else, one of the most important parts.
-There are two ways to use variables inside templates, the element-way and the attribute-way
+There are two ways to use variables inside templates, the element-way and the expression-way
 
 The element-way:
 
@@ -175,8 +176,13 @@ and you can use default values if the variable isn't set
 
     <var name="title" default="My Website Title!" />
 
+**But this uses the official `<var>` tag, doesn't it?**
 
-And the attribute way to use variables:
+Yes it does, but it won't affect it in any way. VarElement only reacts if there is at least a `name` attribute existent (And there is no reason to set one on a normal `<var>` element).
+Everything else stays plain HTML.
+
+
+And the expression way to use variables:
 
     <nav class="nav nav-{{orientation}}">
 
@@ -200,15 +206,14 @@ if `$link->active` is `null` or `false`, this will render
     <a href="my-link.html">My link!</a>
 
 
-Actually, this was a lie, it doesn't do this right now, but it will.
+Actually, this was a lie, it doesn't do this right now, but it will soon.
 
+You can also use default values and callbacks in the expression-way of calling variables.
 
-**But this uses the official `<var>` tag, doesn't it?**
+	<p>
+		HEY, THE NEXT TEXT SHOULD ALSO BE {{someText(I dont have a Text):strtoupper:SomeClass.doSomeStaticStuff}}
+	</p>
 
-Yes it does, but it won't affect it in any way. VarElement only reacts if there is at least a `name` attribute existent (And there is no reason to set one on a normal `<var>` element).
-Everything else stays plain HTML.
-
-A lie again. All `<var>` elements get stripped completely right now, but I already got this in mind :)
 
 
 ## Loops
@@ -232,6 +237,30 @@ You might think it works like a for-loop, but right now it's really **only** a f
 
 Now it already looks a bit like MDV, eeh? That's good, I guess. It's all the same syntax, everywhere.
 
+## Inline PHP
+
+You can use PHP-HTML-Tags to use plain PHP inside your template.
+Through the XML restrictions you have to put complex code into `<![CDATA[ ... ]]>` tags.
+
+	<php>echo $someVariable;</php>
+	
+	<php>while( $i < 10 ):</php>
+		<span>{{i}}</span>
+		<php>$++;</php>
+	<php>endwhile;</php>
+
+	<php><![CDATA[
+	
+		//Here you can use any kind of complex PHP code
+		
+		class SomeClass {}
+		
+		$instance = new SomeClass;
+		$instance->something = 'SomeValue';
+		
+		var_dump( $instance );
+	
+	]]></php>
 
 ##More stuff will follow soon...
 
@@ -241,18 +270,36 @@ Now it already looks a bit like MDV, eeh? That's good, I guess. It's all the sam
 
 The process is not finished, right now you can use the `Xtpl\Compiler` class to get up and running.
 
-    $compiler = new \Xtpl\Compiler;
+    $xtpl = new \Xtpl\Renderer;
 
-    $pthml = $compiler->compile( 'your/path/to/the/xtpl/file' );
+    $xtpl->displayFile( 'your/path/to/the/xtpl/file', array(
+    	'title' => 'My Page Title',
+    	'posts' => array(
+    		0 => array(
+    			'title' => 'Some post title',
+    			'content' => 'bla bla bla bla bla'
+    		)
+    	)
+    ) );
 
 It doesn't matter if you use the xtpl Extension or not.
-And you're right, this doesn't produce HTML, but PHTML. This means, you don't just echo it, you rather save it up and some location and `include()` it. You have to `extract()` your template variables by yourself right now.
+And you're right, this doesn't produce HTML, but PHTML. 
 
-You might also `eval()` the PHTML, but eeeeeeh, someone will shoot me when I allow you that.
-So don't.
+Using display like that will `eval()` the code, and as we all know, eval is evil.
+You better give the renderer a caching directory as the first argument
+
+	$xtpl = new \Xtpl\Renderer( __DIR__.'/cache' );
+	
+which will handle everything on its own or you want to implement it deeper and
+
+	$xtpl = $xtpl->renderFileToFile( 'your/xtpl', './phtml/your/xtpl.phtml' );
+	extract( $yourTemplateArgs );
+	include './phtml/your/xtpl.phtml';
+
+do it your own way.
 
 
-**For anything else, just look in the `templates/` folder above or in the `index.php` file.**
+**For anything else, just look the codes above.**
 
 <br><br><br>
 

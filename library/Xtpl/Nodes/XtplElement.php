@@ -19,11 +19,10 @@ class XtplElement extends Element {
             if( $this->hasAttribute( 'EXTENDS' ) ) {
 
                 $extendPath = $cwd.DIRECTORY_SEPARATOR.$this->getAttribute( 'EXTENDS' );
-                $xtpl = $compiler->parseFile( $extendPath, $realPath );
-                $xtpl->compile( $compiler, dirname( $realPath ) );
+                $xtpl = $compiler->compileFile( $extendPath );
 
                 //Incorporate trees
-                $xtpl->addChild( $this->getRoot() );
+                $xtpl->addChild( $this );
             }
         }
 

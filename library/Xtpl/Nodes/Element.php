@@ -155,6 +155,36 @@ class Element extends Node {
         return null;
     }
 
+    public function getTextNodes() {
+
+        $textNodes = array();
+        foreach( $this->children as $child )
+            if( $child instanceof TextNode )
+                $textNodes[] = $child;
+
+        return $textNodes;
+    }
+
+    public function getText() {
+
+        $textNodes = $this->getTextNodes();
+        $text = '';
+        foreach( $textNodes as $textNode )
+            $text .= $textNode->getContent();
+
+        return $text;
+    }
+
+    public function prependPhp( $code ) {
+
+        $this->prependChild( new PhpElement() )->setCode( $code );
+    }
+
+    public function addPhp( $code ) {
+
+        $this->addChild( new PhpElement() )->setCode( $code );
+    }
+
     public function addClass( $class ) {
 
         $args = func_get_args();
@@ -185,27 +215,18 @@ class Element extends Node {
         $this->setAttribute( 'CLASS', implode( ' ', $classes ) );
     }
 
-    public static function create( $tagName, array $attributes = array() ) {
+    public function addCss( $css ) {
 
-        //We have some specific implementations as well as generic ones (HTML tags)
-        switch( $tagName ) {
-            case 'BLOCK':       return new BlockElement( $attributes );
-            case 'INCLUDE':     return new IncludeElement( $attributes );
-            case 'XTPL':        return new XtplElement( $attributes );
-            case 'FOR':        return new ForElement( $attributes );
-            case 'VAR':         return new VarElement( $attributes );
-            case 'HTML':        return new HtmlElement( $attributes );
-        }
+        $head = $this->findParent( 'HEAD' );
+        $parent = $head ? $head : $this->getParent();
 
-        //Load Extension elements
-        $tagClassName = implode( '\\', array_map( function( $el ) {
-            return ucfirst( strtolower( $el ) );
-        }, explode( '-', $tagName ) ) ).'Element';
-        $fullClassName = "Xtpl\\Extensions\\$tagClassName";
+        $style = $this->find( 'STYLE' );
 
-        if( class_exists( $fullClassName ) )
-            return new $fullClassName( $attributes );
+        if( !$style )
+            $style = $parent->prependChild( new Element( 'STYLE' ) );
 
-        return new Element( $tagName, $attributes );
+        $style->addChild( new TextNode( $css ) );
+
+        return $style;
     }
 }

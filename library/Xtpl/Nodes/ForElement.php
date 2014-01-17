@@ -8,17 +8,24 @@ class ForElement extends Element {
         parent::__construct( 'FOR', $attributes );
     }
 
-    public function render( $nice = false, $level = 0 ) {
+    public function compile( \Xtpl\Compiler $compiler, $cwd ) {
 
-        $pre = $nice ? "\n".str_repeat( '    ', $level ) : '';
+        if( !$this->isCompiled() ) {
 
-        $html = '';
-        if( $this->hasAttribute( 'EACH' ) && $this->hasAttribute( 'AS' ) ) {
-            $html = $pre.'<?php foreach( $'.$this->getAttribute( 'EACH' ).' as $'.$this->getAttribute( 'AS' ).' ): ?>';
-            $html .= $this->renderChildren( $nice, $level + 1 );
-            $html .= $pre.'<?php endforeach; ?>';
+            if( $this->hasAttribute( 'EACH' ) && $this->hasAttribute( 'AS' ) ) {
+                //it's a foreach( $arr as $key => $val ) loop
+
+                $as = $this->hasAttribute( 'KEY' ) ? '$'.$this->getAttribute( 'KEY' ).' => $'.$this->getAttribute( 'AS' ) : '$'.$this->getAttribute( 'AS' );
+                $this->prependPhp( 'foreach( $'.$this->getAttribute( 'EACH' ).' as '.$as.' ):' );
+                $this->addPhp( 'endforeach;' );
+            }
         }
 
-        return $html;
+        return parent::compile( $compiler, $cwd );
+    }
+
+    public function render( $nice = false, $level = 0 ) {
+
+        return $this->renderChildren( $nice, $level );
     }
 }

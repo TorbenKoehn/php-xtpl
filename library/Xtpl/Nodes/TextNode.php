@@ -8,7 +8,7 @@ class TextNode extends Node {
 
     public function __construct( $content = '' ) {
 
-        $this->content = $content;
+        $this->content = trim( $content );
     }
 
     public function hasContent() {
@@ -30,7 +30,9 @@ class TextNode extends Node {
 
         $pre = $nice ? "\n".str_repeat( '    ', $level ) : '';
 
+        $content = implode( $pre, array_map( 'trim', explode( "\n", $this->content ) ) );
+
         //Text nodes probably never have children (They're not tags)
-        return $pre.$this->content;
+        return $pre.$content;
     }
 }

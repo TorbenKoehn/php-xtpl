@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+        <include file="test-include" />
+
+        <p>
+            Actually, the navigations are also handled via includes.
+        </p>
+
+        <p>
+            Includes are called like this:
+            <code><![CDATA[
+
+                <include file="path/to/the/xtpl/file" />
+
+            ]]></code>
+        </p>
+
+        <p>
+            You can include any file as many times as you like and wherever you like.
+            <div style="width: 80px; border: 1px solid #333; overflow: scroll">
+                <include file="test-include" />
+            </div>
+        </p>
+
+    </block>
+
+</xtpl>

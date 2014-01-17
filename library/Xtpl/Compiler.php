@@ -9,12 +9,26 @@ class Compiler {
 
     protected $parser;
 
-    public function __construct() {
+    public function __construct( Parser $parser = null ) {
 
-        $this->parser = new Parser();
+        $this->parser = $parser ? $parser : new Parser;
     }
 
-    public function compile( $path ) {
+    public function getParser() {
+
+        return $this->parser;
+    }
+
+    public function compile( $string ) {
+
+        $xtpl = $this->parse( $string );
+
+        $compiledRoot = $xtpl->compile( $this, __DIR__ )->getRoot();
+
+        return $compiledRoot;
+    }
+
+    public function compileFile( $path ) {
 
         $xtpl = $this->parseFile( $path );
 
@@ -23,18 +37,21 @@ class Compiler {
         return $compiledRoot;
     }
 
-    public function parseFile( $path, &$realPath = null ) {
+    public function parse( $string ) {
 
-        if( !preg_match( '/\.(xtpl|xt|xphp)$/Usi', $path ) )
+        return $this->parser->parse( $string );
+    }
+
+    public function parseFile( $path ) {
+
+        if( !preg_match( '/\.xtpl$/Usi', $path ) )
             $path .= '.xtpl';
 
-        $path = realpath( $path );
-        if( !$path )
+        $realPath = realpath( $path );
+        if( !$realPath )
             throw new \Exception( "Xtpl file not found: $path" );
 
-        $realPath = $path;
-
-        return $this->parser->parseFile( $path );
+        return $this->parser->parseFile( $realPath );
     }
 
     public function dump( Node $node, $deep = true, $level = 0, $index = 0 ) {

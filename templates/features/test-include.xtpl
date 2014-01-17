@@ -1,0 +1,10 @@
+<?xtpl version="1.0" encoding="utf-8" ?>
+<xtpl>
+
+
+    <h1>Included content</h1>
+
+    <p>
+        This is some included content.
+    </p>
+</xtpl>

@@ -4,17 +4,11 @@
     <html version="5" lang="en">
         <head>
             <title>
-                <var name="title" default="New Document" />
+                <var name="title" default="Xtpl – PHP Template Engine" />
             </title>
 
-            <for var="style" key="id" in="styleSheets">
-                <link rel="stylesheet" href="{{style}}" />
-            </for>
             <block name="styleSheets" />
 
-            <for var="script" key="id" in="javaScripts">
-                <script src="{{script}}"></script>
-            </for>
             <block name="javaScripts" />
         </head>
         <body>

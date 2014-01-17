@@ -8,12 +8,28 @@ use Xtpl\Nodes\Node,
 
 class Parser {
 
-    protected $currentRoot;
     protected $currentNode;
+    protected $elementNamespaces = array( 'Xtpl\\Nodes', 'Xtpl\\Extensions' );
+
+    public function __construct( array $additionalElementNamespaces = null ) {
+
+        if( $additionalElementNamespaces )
+            $this->addElementNamespaces( $additionalElementNamespaces );
+    }
+
+    public function addElementNamespace( $namespace ) {
+
+        if( is_array( $namespace ) ) {
+            foreach( $namespace as $ns )
+                $this->addElementNamespace( $ns );
+            return;
+        }
+
+        $this->elementNamespaces[] = $namespace;
+    }
 
     public function parse( $string ) {
 
-        $this->currentRoot = null;
         $this->currentNode = null;
         $xp = $this->createXmlParser();
         $success = xml_parse( $xp, $string, true );
@@ -28,7 +44,7 @@ class Parser {
             throw new \Exception( "$msg (On line $line:$col)", $code );
         }
 
-        return $this->currentRoot;
+        return $this->currentNode;
     }
 
     public function parseFile( $path ) {
@@ -51,27 +67,36 @@ class Parser {
 
     protected function handleElementStart( $parser, $tagName, $attributes ) {
 
-        if( !$this->currentRoot && $tagName !== 'XTPL' )
+        if( !$this->currentNode && $tagName !== 'XTPL' )
             throw new \Exception( "Root element has to be XTPL" );
 
-        if( !$this->currentRoot ) {
+        $el = null;
 
-            $this->currentRoot = Element::create( $tagName, $attributes );
-            //Enhance our root with some useful information
-            $this->currentNode = $this->currentRoot;
-        } else {
+        //Load element
+        $className = implode( '\\', array_map( function( $el ) {
+            return ucfirst( $el );
+        }, explode( '-', strtolower( $tagName ) ) ) ).'Element';
 
-            $el = Element::create( $tagName, $attributes );
-            $el->setParent( $this->currentNode );
+        $namespaces = array_reverse( $this->elementNamespaces );
+        foreach( $namespaces as $ns ) {
 
-            $this->currentNode->addChild( $el );
-            $this->currentNode = $el;
+            $nsClassName = "$ns\\$className";
+            if( class_exists( "$ns\\$className" ) )
+                $el = new $nsClassName( $attributes );
         }
+
+        if( !$el )
+            $el = new Element( $tagName, $attributes );
+
+        if( $this->currentNode )
+            $this->currentNode->addChild( $el );
+
+        $this->currentNode = $el;
     }
 
     protected function handleElementEnd( $parser, $tagName ) {
 
-        $this->currentNode = $this->currentNode->hasParent() ? $this->currentNode->getParent() : $this->currentRoot;
+        $this->currentNode = $this->currentNode->hasParent() ? $this->currentNode->getParent() : $this->currentNode;
     }
 
     protected function handleCharacterData( $parser, $cdata ) {
@@ -84,15 +109,15 @@ class Parser {
         $this->currentNode->addChild( new TextNode( $cdata ) );
     }
 
-    public static function fromString( $string, $encoding = 'UTF-8' ) {
+    public static function fromString( $string ) {
 
-        $p = new self( $encoding );
+        $p = new self;
         return $p->parse( $string );
     }
 
-    public static function fromFile( $path, $encoding = 'UTF-8' ) {
+    public static function fromFile( $path ) {
 
-        $p = new self( $encoding );
+        $p = new self;
         return $p->parseFile( $path );
     }
 }

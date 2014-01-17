@@ -2,7 +2,7 @@
 
 namespace Xtpl\Nodes;
 
-class Node {
+abstract class Node {
 
     protected static $uniqueIdCounter = 0;
 
@@ -81,6 +81,8 @@ class Node {
             $this->addChild( $child );
         else
             $this->insertBefore( 0, $child );
+
+        return $child;
     }
 
     public function addChild( Node $child ) {
@@ -94,6 +96,8 @@ class Node {
 
         $child->setParent( $this );
         $this->children[] = $child;
+
+        return $child;
     }
 
     public function removeChild( Node $child ) {
@@ -103,6 +107,8 @@ class Node {
             return $currentChild !== $child;
         } ) );
         $child->setParent( null );
+
+        return $child;
     }
 
     public function hasChildren() {
@@ -145,24 +151,25 @@ class Node {
 
     public function insertBefore( $child, $newChildren ) {
 
-        if( is_numeric( $child ) && $i < 0 )
+        $i = 0;
+        if( is_numeric( $child ) && $child < 0 )
             $i = count( $this->children ) - $child;
         else if( $child instanceof Node )
             $i = $this->indexOf( $child );
     
-
         if( is_array( $newChildren ) )
             foreach( $newChildren as $child )
                 $child->setParent( $this );
         else
             $newChildren->setParent( $this );
 
-        array_splice( $this->children, intval( $i ), 0, $newChildren );
+        array_splice( $this->children, intval( $i ), 0, is_array( $newChildren ) ? $newChildren : array( $newChildren ) );
     }
 
     public function insertAfter( Node $child, $newChildren ) {
 
-        if( is_numeric( $child ) && $i < 0 )
+        $i = count( $this->children ) - 1;
+        if( is_numeric( $child ) && $child < 0 )
             $i = count( $this->children ) - 1;
         else if( $child instanceof Node )
             $i = $this->indexOf( $child );
@@ -173,7 +180,7 @@ class Node {
         else
             $newChildren->setParent( $this );
 
-        array_splice( $this->children, intval( $i + 1 ), 0, $newChildren );
+        array_splice( $this->children, intval( $i + 1 ), 0, is_array( $newChildren ) ? $newChildren : array( $newChildren ) );
     }
 
     public function renderChildren( $nice = false, $level = 0 ) {
@@ -196,8 +203,65 @@ class Node {
         foreach( $this->children as $child )
             $child->compile( $compiler, $cwd );
 
-        $this->compiled = true;
+        //Handle variable expressions ({{my.var.name:callback:Class.staticCallback:callback}})
+        //All callbacks will receive the variable value as the first argument
+        //the return value will printed in the end
+
+        if( !$this->compiled ) {
+
+            $this->compileVarExpressions();
+
+            $this->compiled = true;
+        }
+
         return $this;
+    }
+
+    protected function compileVarExpressions() {
+
+        if( $this instanceof Element ) {
+            foreach( $this->getAttributes() as $key => $val ) {
+
+                $this->setAttribute( $key, $this->parseVarExpressions( $val ) );
+            }
+        }
+
+        if( $this instanceof TextNode ) {
+
+            $this->setContent( $this->parseVarExpressions( $this->getContent() ) );
+        }
+    }
+
+    protected function parseVarExpressions( $string ) {
+
+        return preg_replace_callback( '/\{\{(?<var>[a-z][a-z0-9\._]+)(\((?<default>[^\)]*)\))?(:(?<callbacks>[a-z][a-z0-9\.:_]+))?\}\}/si', function( $matches ) {
+
+            $var = '$'.str_replace( '.', '->', $matches[ 'var' ] );
+            $default = array_key_exists( 'default', $matches ) ? $matches[ 'default' ] : '';
+            
+
+            $php = '';
+
+            if( !empty( $matches[ 'callbacks' ] ) ) {
+
+                $callbacks = explode( ':', $matches[ 'callbacks' ] );
+                foreach( $callbacks as $i => $cb )
+                    if( ( $last = strrpos( $cb, '.' ) ) !== false ) {
+
+                        $cb[ $last ] = ':';
+                        $cb = str_replace( '.', '\\', $cb );
+
+                        $callbacks[ $i ] = explode( ':', $cb );
+                    }
+
+                $php = '<?php $_xtplResult = isset( '.$var.' ) ? '.$var.' : \''.$default.'\'; $_xtplCallbacks = '.str_replace( "\n", '', var_export( $callbacks, true ) ).'; foreach( $_xtplCallbacks as $cb ) $_xtplResult = call_user_func( $cb, $_xtplResult ); echo $_xtplResult; ?>';
+            } else {
+
+                $php = '<?php echo isset( '.$var.' ) ? '.$var.' : \''.$default.'\'; ?>';
+            }
+
+            return $php;
+        }, $string );
     }
 
     public function __toString() {

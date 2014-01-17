@@ -4,26 +4,16 @@
     <nav class="nav nav-[[position]]">
 
         <menu orientation="horizontal">
-            <menu-item href="index.php">
-                Menu 1 ([[position]])
-                <menu>
-                    <menu-item href="index.php?menu-1&amp;link-1">Link 1</menu-item>
-                    <menu-item href="index.php?menu-1&amp;link-2">Link 2</menu-item>
-                    <menu-item href="index.php?menu-1&amp;link-3">Link 3</menu-item>
-                    <menu-item href="index.php?menu-1&amp;link-4">Link 4</menu-item>
-                    <menu-item href="index.php?menu-1&amp;link-5">Link 5</menu-item>
-                </menu>
-            </menu-item>
-            <menu-item href="index.php">
-                Menu 2 ([[position]])
-                <menu>
-                    <menu-item href="index.php?menu-2&amp;link-1">Link 1</menu-item>
-                    <menu-item href="index.php?menu-2&amp;link-2">Link 2</menu-item>
-                    <menu-item href="index.php?menu-2&amp;link-3">Link 3</menu-item>
-                    <menu-item href="index.php?menu-2&amp;link-4">Link 4</menu-item>
-                    <menu-item href="index.php?menu-2&amp;link-5">Link 5</menu-item>
-                </menu>
-            </menu-item>
+            <for each="menu" as="subMenu" key="label">
+                <menu-item>
+                    {{label}}
+                    <menu orientation="vertical">
+                        <for each="subMenu" as="url" key="label">
+                            <menu-item href="{{url}}">{{label}}</menu-item>
+                        </for>
+                    </menu>
+                </menu-item>
+            </for>
         </menu>
 
     </nav>
