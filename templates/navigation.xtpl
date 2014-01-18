@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xtpl>
 
-    <nav class="nav nav-[[position]]">
-
-        <menu orientation="horizontal">
-            <for each="menu" as="subMenu" key="label">
-                <menu-item>
-                    {{label}}
-                    <menu orientation="vertical">
-                        <for each="subMenu" as="url" key="label">
-                            <menu-item href="{{url}}">{{label}}</menu-item>
-                        </for>
-                    </menu>
-                </menu-item>
-            </for>
-        </menu>
-
-    </nav>
+    <navbar>
+        <header>
+            <toggle>
+                <icon type="bar" />
+                <icon type="bar" />
+                <icon type="bar" />
+            </toggle>
+            <brand href="index.php">XTPL Template System</brand>
+        </header>
+        <collapse>
+            <nav>
+                <for each="menu" as="subMenu" key="label">
+                    <li>
+                        <a href="#">
+                            {{label}} <caret />
+                            <dropdown>
+                                <for each="subMenu" as="url" key="label">
+                                    <li><a href="{{url}}">{{label}}</a></li>
+                                </for>
+                            </dropdown>
+                        </a>
+                        
+                    </li>
+                </for>
+            </nav>
+        </collapse>
+    </navbar>
 
 </xtpl>

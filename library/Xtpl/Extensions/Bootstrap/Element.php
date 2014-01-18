@@ -220,7 +220,7 @@ class Element extends \Xtpl\Nodes\Element {
             \$el = \$( this ),
             \$el.addClass( 'disabled' )
                .attr( 'disabled', 'disabled' )
-               .children( 'input, select, button, a, textarea' )
+               .children( 'input, select, button, a, textarea, li' )
                   .disable();   
 
         } );
@@ -234,7 +234,7 @@ class Element extends \Xtpl\Nodes\Element {
             \$el = $( this ),
             \$el.removeClass( 'disabled' )
                .removeAttr( 'disabled' )
-               .children( 'input, select, button, a, textarea' )
+               .children( 'input, select, button, a, textarea, li' )
                   .enable();
 
         } );

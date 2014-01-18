@@ -292,7 +292,7 @@ abstract class Node {
     public function getUniqueId() {
 
         if( !$this->uniqueId )
-            $this->uniqueId = 'node-'.( self::$uniqueIdCounter++ );
+            $this->uniqueId = 'xtpl-node-'.( self::$uniqueIdCounter++ );
 
         return $this->uniqueId;
     }

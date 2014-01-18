@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <h1>Bootstrap Extensions</h1>
+
+            <h2>Buttons <small>(<code>&lt;button&gt;</code>)</small></h2>
+
+            <h3>Themes <small>(<code>theme="default|danger|success|info|warning|link"</code>)</small></h3>
+            <div>
+                <button>No theme</button>
+                <button theme="primary">Primary</button>
+                <button theme="default">Default</button>
+                <button theme="danger">Danger</button>
+                <button theme="success">Success</button>
+                <button theme="info">Info</button>
+                <button theme="warning">Warning</button>
+                <button theme="link">Link</button>
+            </div>
+
+
+            <h3>Sizes <small>(<code>size="extra-small|small|large"</code>)</small></h3>
+            <div>
+                <button theme="primary" size="extra-small">Extra Small</button>
+                <button theme="default" size="extra-small">Extra Small</button><br />
+                <button theme="primary" size="small">Small</button>
+                <button theme="default" size="small">Small</button><br />
+                <button theme="primary">Normal</button>
+                <button theme="default">Normal</button><br />
+                <button theme="primary" size="large">Large</button>
+                <button theme="default" size="large">Large</button>
+            </div>
+
+            <h3>Block <small>(<code>block="true"</code>)</small></h3>
+            <div>
+                <button theme="primary" block="true">Block Button</button>
+                <button theme="default" block="true">Block Button</button>
+                <button theme="primary" size="large" block="true">Large Block Button</button>
+                <button theme="default" size="large" block="true">Large Block Button</button>
+            </div>
+
+            <h3>Anchors <small>(<code>href="http://google.com"</code>)</small></h3>
+            <div>
+                <button href="http://google.com" theme="primary" block="true">Block Button</button>
+                <button href="http://google.com" theme="default" block="true">Block Button</button>
+                <button href="http://google.com" theme="primary" size="large" block="true">Large Block Button</button>
+                <button href="http://google.com" theme="default" size="large" block="true">Large Block Button</button>
+            </div>
+
+            <h3>Close Button</h3>
+            <div>
+                <close-button />
+                <close-button theme="danger" />
+            </div>
+
+            <h3>Button Groups</h3>
+            <div>
+                <button-group size="extra-small">
+                    <button theme="primary">Left</button>
+                    <button theme="default">Middle</button>
+                    <button theme="info">
+                        Right
+                        <caret />
+                        <dropdown type="dropup">
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group size="small">
+                    <button theme="primary">Left</button>
+                    <button theme="default">Middle</button>
+                    <button theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button theme="primary">Left</button>
+                    <button theme="default">Middle</button>
+                    <button theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group size="large">
+                    <button theme="primary">Left</button>
+                    <button theme="default">Middle</button>
+                    <button theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group type="vertical" size="small">
+                    <button theme="primary">Left</button>
+                    <button theme="default">Middle</button>
+                    <button theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group type="vertical" size="large">
+                    <button theme="primary">Left</button>
+                    <button theme="default">Middle</button>
+                    <button theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group type="justified" size="small">
+                    <button href="#" theme="primary">Left</button>
+                    <button href="#" theme="default">Middle</button>
+                    <button href="#" theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group type="justified" size="large">
+                    <button href="#" theme="primary">Left</button>
+                    <button href="#" theme="default">Middle</button>
+                    <button href="#" theme="info">
+                        Right
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="default">Left</button>
+                    <button href="#" theme="default">
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="primary">Left</button>
+                    <button href="#" theme="primary">
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="danger">Left</button>
+                    <button href="#" theme="danger">
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="warning">Left</button>
+                    <button href="#" theme="warning">
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="success">Left</button>
+                    <button href="#" theme="success">
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="default">Left</button>
+                    <button href="#" theme="default">
+                        <caret />
+                        <dropdown type="dropup">
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="primary">Left</button>
+                    <button href="#" theme="primary">
+                        <caret />
+                        <dropdown type="dropup">
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="danger">Left</button>
+                    <button href="#" theme="danger">
+                        <caret />
+                        <dropdown type="dropup">
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="warning">Left</button>
+                    <button href="#" theme="warning">
+                        <caret />
+                        <dropdown type="dropup">
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+
+                <button-group>
+                    <button href="#" theme="success">Left</button>
+                    <button href="#" theme="success">
+                        <caret />
+                        <dropdown type="dropup">
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </button-group>
+            </div>
+
+            <h3>Button Toolbars</h3>
+            <div>
+
+                <button-toolbar>
+                    <button-group>
+                        <button theme="primary">1</button>
+                        <button theme="default">2</button>
+                        <button theme="info">3</button>
+                    </button-group>
+                    <button-group>
+                        <button theme="primary">4</button>
+                        <button theme="default">5</button>
+                        <button theme="info">6</button>
+                        <button theme="danger">7</button>
+                    </button-group>
+                    <button-group>
+                        <button theme="primary">8</button>
+                        <button theme="default">9</button>
+                    </button-group>
+                </button-toolbar>
+            </div>
+
+            <h3>Dropdowns</h3>
+            <div>
+
+                <button theme="primary">
+                    Toggle Dropdown
+                    <caret />
+                    <dropdown>
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <divider />
+                        <li><a href="#">Link 4</a></li>
+                        <li><a href="#">Link 5</a></li>
+                    </dropdown>
+                </button>
+
+                <button theme="danger">
+                    Toggle Dropdown
+                    <caret />
+                    <dropdown pull="right">
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <divider />
+                        <li><a href="#">Link 4</a></li>
+                        <li><a href="#">Link 5</a></li>
+                    </dropdown>
+                </button>
+                    
+                <button theme="info">
+                    Toggle Dropdown
+                    <caret />
+                    <dropdown>
+                        <header>Header 1</header>
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <divider />
+                        <header>Header 2</header>
+                        <li><a href="#">Link 4</a></li>
+                        <li><a href="#">Link 5</a></li>
+                    </dropdown>
+                </button>
+            </div>
+            
+        </container>
+
+    </block>
+</xtpl>

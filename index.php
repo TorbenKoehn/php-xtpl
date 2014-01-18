@@ -43,6 +43,13 @@ $xtpl->menu = array(
     'Extensions' => array(
         'Extensions Mapping' => 'index.php?m=extensions&a=extension-mapping',
         'Bootstrap' => 'index.php?m=extensions&a=bootstrap'
+    ),
+    'Bootstrap Extension' => array(
+        'Buttons' => 'index.php?m=bootstrap-extension&a=buttons',
+        'Forms' => 'index.php?m=bootstrap-extension&a=forms',
+        'Grids' => 'index.php?m=bootstrap-extension&a=grids',
+        'Misc' => 'index.php?m=bootstrap-extension&a=misc',
+        'Navs' => 'index.php?m=bootstrap-extension&a=navs'
     )
 );
 

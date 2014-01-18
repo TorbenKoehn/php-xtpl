@@ -232,10 +232,24 @@ class Element extends Node {
         $class = $this->hasAttribute( 'CLASS' ) ? $this->getAttribute( 'CLASS' ) : '';
         $classes = array_filter( explode( ' ', $class ), function( $value ) use( $args ) {
 
-            return !in_array( $args );
+            return !in_array( $value, $args );
         } );
         
         $this->setAttribute( 'CLASS', trim( implode( ' ', $classes ) ) );
+    }
+
+    public function hasClass( $class ) {
+
+        $args = func_get_args();
+        if( is_array( $class ) )
+            $args = $class;
+
+        $result = array_filter( explode( ' ', $this->getAttribute( 'CLASS' ) ), function( $value ) use( $args ) {
+
+            return in_array( $value, $args );
+        } );
+
+        return count( $result );
     }
 
     public function addCss( $css, array $properties = null ) {

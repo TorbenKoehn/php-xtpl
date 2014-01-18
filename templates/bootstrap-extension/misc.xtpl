@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <h1>Bootstrap Extensions</h1>
+
+            <h2>Utils</h2>
+
+            <h3>Pulling <small>(All Extension Elements)(<code>pull="left|center|right"</code>)</small></h3>
+            <div>
+                <button theme="primary" pull="left">Left</button>
+                <button theme="primary" pull="center">Center</button>
+                <button theme="primary" pull="right">Right</button>
+            </div>
+
+            <h3>Responsive Utilities <small>(All Extension Elements)</small></h3>
+            <div>
+
+                <div visible="xs" /><div visible="xs sm" /><div visible="xs sm md" /><div visible="md lg print" />
+                <div hidden="xs" /><div hidden="xs sm" /><div hidden="xs sm md" /><div hidden="md lg print" />
+
+            </div>
+
+            <h3>Lead Paragraph <small>(<code>&lt;lead&gt;</code>)</small></h3>
+            <lead>
+                This is a lead text.
+            </lead>
+
+            <h3>Text Themes <small>(All Extension Elements)(<code>text-theme="muted|primary|success|info|warning|danger"</code>)</small></h3>
+            <div>
+                <p text-theme="muted">This is muted.</p>
+                <p text-theme="primary">This is primary</p>
+                <p text-theme="success">This is primary</p>
+                <p text-theme="info">This is primary</p>
+                <p text-theme="warning">This is primary</p>
+                <p text-theme="danger">This is primary</p>
+            </div>
+
+            <h3>Text Align <small>(All Extension Elements)(<code>text-align="left|center|right"</code>)</small></h3>
+            <div>
+                <p text-align="left">This is left</p>
+                <p text-align="center">This is center</p>
+                <p text-align="right">This is right</p>
+            </div>
+
+            <h3>Lists <small>(<code>type="ordered|unstyled|inline"</code>)</small></h3>
+            <div>
+                <list>
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+                <list type="ordered">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+                <list type="unstyled">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+                <list type="inline">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+            </div>
+
+            <h3>Table Themes<small>(<code>theme="default|striped|bordered|hover|condensed"</code>)</small></h3>
+            <h3>Table Element Themes<small>(tr, td, th)(<code>theme="active|warning|success|danger"</code>)</small></h3>
+            <div>
+                <table theme="default">
+                    <!-- Col Test -->
+                    <col style="width: 300px" />
+                    <tr><th theme="danger">Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td theme="warning">Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td theme="active">Data 9</td></tr>
+                </table>
+                <table theme="bordered">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr theme="success"><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr theme="danger"><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+                <table theme="striped bordered">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr theme="active"><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+                <table theme="condensed">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+                <table theme="bordered striped hover">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+            </div>
+
+            <h3>Responsive Table<small>(<code>&lt;table-responsive&gt;</code>)</small></h3>
+            <div>
+                <table-responsive>
+                    <table theme="default">
+                        <tr><th theme="danger">Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                        <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                        <tr><td>Data 4</td><td theme="warning">Data 5</td><td>Data 6</td></tr>
+                        <tr><td>Data 7</td><td>Data 8</td><td theme="active">Data 9</td></tr>
+                    </table>
+                </table-responsive>
+            </div>
+
+            <h3>Horizontal Definition List <small>(<code>&lt;hdl&gt;</code>)</small></h3>
+            <hdl>
+                <dt>Description lists</dt>
+                    <dd>A description list is perfect for defining terms.</dd>
+                <dt>Euismod</dt>
+                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                <dt>Malesuada porta</dt>
+                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                <dt>Felis euismod semper eget lacinia</dt>
+                    <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+            </hdl>
+
+            <h3>Images</h3>
+            <div>
+
+                <img type="rounded" style="width: 140px; height: 140px;" src="data:image/png;base64,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" />
+
+                <img type="circle" style="width: 140px; height: 140px;" src="data:image/png;base64,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" />
+
+                <img type="thumbnail" style="width: 140px; height: 140px;" src="data:image/png;base64,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" />
+            </div>
+
+            <h3>Caret</h3>
+            <div>
+                <caret />
+                <button theme="default"><caret />Test Content<caret /></button>
+            </div>
+
+            <h3>Icons</h3>
+            <div>
+
+                <icon type="adjust" />
+                <icon type="align-left" />
+                <icon type="align-center" />
+                <icon type="align-right" />
+                <icon type="down" />
+                <icon type="left" />
+                <icon type="right" />
+                <icon type="up" />
+
+            </div>
+            
+        </container>
+
+    </block>
+</xtpl>

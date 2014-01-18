@@ -20,12 +20,15 @@ class ButtonElement extends Element {
 
             switch( $size ) {
                 case 'large':
+                case 'lg':
                     $classes[] = 'btn-lg';
                     break;
                 case 'small':
+                case 'sm':
                     $classes[] = 'btn-sm';
                     break;
                 case 'extra-small':
+                case 'xs':
                     $classes[] = 'btn-xs';
                     break;
             }
@@ -63,9 +66,23 @@ class ButtonElement extends Element {
         if( $this->hasAttribute( 'BLOCK' ) ) {
 
             if( $this->getAttribute( 'BLOCK' ) == 'true' )
-                $this->addClass( 'btn-block' );
+                $classes[] = 'btn-block';
         }
 
         $this->addClass( implode( ' ', $classes ) );
+    }
+
+    public function process() {
+
+        if( !$this->isProcessed() ) {
+
+            if( $this->getParent() instanceof Input\GroupElement ) {
+                $span = new SpanElement( array( 'CLASS' => 'input-group-btn' ) );
+                $this->getParent()->insertBefore( $this, $span );
+                $span->addChild( $this );
+            }
+        }
+
+        return parent::process();
     }
 }

@@ -19,4 +19,18 @@ class FormElement extends Element {
             }
         }
     }
+
+    public function process() {
+
+        if( !$this->isProcessed() ) {
+
+            if( $this->getParent() instanceof NavbarElement 
+             || ( $this->getParent() instanceof CollapseElement && $this->getParent()->getParent() instanceof NavbarElement ) ) {
+
+                $this->addClass( 'navbar-form' );
+            }
+        }
+
+        return parent::process();
+    }
 }

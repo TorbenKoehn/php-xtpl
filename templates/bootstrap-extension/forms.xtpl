@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <h1>Bootstrap Extensions</h1>
+
+            <h2>Forms</h2>
+
+            <h3>Form <small>(<code>&lt;form-group&gt;, &lt;form-control&gt;, &lt;checkbox&gt;</code>)</small></h3>
+            <div>
+                <form>
+                    <form-group>
+                        <label for="email">Email address</label>
+                        <form-control type="email" id="email" placeholder="Enter email" />
+                    </form-group>
+                    <form-group>
+                        <label for="password">Password</label>
+                        <form-control type="password" id="password" placeholder="Password" />
+                    </form-group>
+                    <form-group>
+                        <label for="file">File input</label>
+                        <input type="file" id="file" />
+                        <help-block>Example block-level help text here.</help-block>
+                    </form-group>
+                    <checkbox>
+                        <label>
+                            <input type="checkbox" /> Check me out
+                        </label>
+                    </checkbox>
+                    <button type="submit" theme="default">Submit</button>
+                </form>
+
+                <form type="horizontal">
+                    <form-group>
+                        <label md="3" offset-md="2" for="email">Email address</label>
+                        <col md="5">
+                            <form-control type="email" id="email" placeholder="Enter email" />
+                        </col>
+                    </form-group>
+                    <form-group>
+                        <label md="3" offset-md="2" for="password">Password</label>
+                        <col md="5">
+                            <form-control type="password" id="password" placeholder="Password" />
+                        </col>
+                    </form-group>
+                    <form-group>
+                        <col md="5" offset-md="5">
+                            <checkbox>
+                                <label>
+                                    <input type="checkbox" /> Check me out
+                                </label>
+                            </checkbox>
+                        </col>
+                    </form-group>
+                    <form-group>
+                        <col md="5" offset-md="5">
+                            <button type="submit" theme="default">Submit</button>
+                        </col>
+                    </form-group>
+                </form>
+
+                <form type="inline">
+                    <form-group>
+                        <label for="email">Email address</label>
+                        <form-control type="email" id="email" placeholder="Enter email" />
+                    </form-group>
+                    <form-group>
+                        <label for="password">Password</label>
+                        <form-control type="password" id="password" placeholder="Password" />
+                    </form-group>
+                    <form-group>
+                        <label for="file">File input</label>
+                        <input type="file" id="file" />
+                        <help-block>Example block-level help text here.</help-block>
+                    </form-group>
+                    <checkbox>
+                        <label>
+                            <input type="checkbox" /> Check me out
+                        </label>
+                    </checkbox>
+                    <button type="submit" theme="default">Submit</button>
+                </form>
+
+                <checkbox type="inline">
+                    <label>
+                        <input type="checkbox" /> Yes
+                    </label>
+                    <label>
+                        <input type="checkbox" /> No
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Maybe
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Rather not
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Okay, good
+                    </label>
+                </checkbox>
+
+                <radio type="inline">
+                    <label>
+                        <input type="radio" /> Yes
+                    </label>
+                    <label>
+                        <input type="radio" /> No
+                    </label>
+                    <label>
+                        <input type="radio" /> Maybe
+                    </label>
+                    <label>
+                        <input type="radio" /> Rather not
+                    </label>
+                    <label>
+                        <input type="radio" /> Okay, good
+                    </label>
+                </radio>
+
+
+                <form>
+                    <form-group theme="success">
+                        <label for="inputSuccess">Input with success</label>
+                        <form-control type="text" id="inputSuccess" />
+                    </form-group>
+                    <form-group theme="warning">
+                        <label for="inputWarning">Input with warning</label>
+                        <form-control type="text" id="inputWarning" />
+                    </form-group>
+                    <form-group theme="error">
+                        <label for="inputError">Input with error</label>
+                        <form-control type="text" class="form-control" id="inputError" />
+                    </form-group>
+                </form>
+
+                <form role="form">
+                    <form-control size="large" type="text" placeholder="size=&quot;large|lg&quot;" />
+                    <form-control type="text" placeholder="Default input" />
+                    <form-control size="small" type="text" placeholder="size=&quot;small|sm&quot;" />
+                    <form-control size="large">
+                        <option value="">size=&quot;large|lg&quot;</option>
+                    </form-control>
+                    <form-control>
+                        <option value="">Default select</option>
+                    </form-control>
+                    <form-control size="small">
+                        <option value="">size=&quot;small|sm&quot;</option>
+                    </form-control>
+                </form>
+
+            </div>
+
+            <h3>Input Groups</h3>
+            <div>
+
+                <input-group size="xs">
+                    <addon>@</addon>
+                    <form-control placeholder="Username..." />
+                    <addon>0.00</addon>
+                </input-group>
+
+                <input-group size="sm">
+                    <addon>@</addon>
+                    <form-control placeholder="Username..." />
+                    <addon>0.00</addon>
+                </input-group>
+
+                <input-group>
+                    <addon>@</addon>
+                    <form-control placeholder="Username..." />
+                    <addon>0.00</addon>
+                </input-group>
+
+                <input-group size="lg">
+                    <addon>@</addon>
+                    <form-control placeholder="Username..." />
+                    <addon>0.00</addon>
+                </input-group>
+
+                <input-group>
+                    <addon>@</addon>
+                    <addon>@@</addon>
+                    <form-control placeholder="Username..." />
+                    <addon>1.11</addon>
+                    <addon>0.00</addon>
+                </input-group>
+
+                <input-group>
+                    <button theme="default">@</button>
+                    <addon>@@</addon>
+                    <form-control placeholder="Username..." />
+                    <addon>1.11</addon>
+                    <button theme="warning">
+                        <caret />
+                        <dropdown>
+                            <header>Header 1</header>
+                            <li><a href="#">Link 1</a></li>
+                            <li><a href="#">Link 2</a></li>
+                            <li><a href="#">Link 3</a></li>
+                            <divider />
+                            <header>Header 2</header>
+                            <li><a href="#">Link 4</a></li>
+                            <li><a href="#">Link 5</a></li>
+                        </dropdown>
+                    </button>
+                </input-group>
+
+            </div>
+            
+        </container>
+
+    </block>
+</xtpl>

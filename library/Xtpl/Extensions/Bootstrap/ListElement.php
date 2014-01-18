@@ -2,10 +2,10 @@
 
 namespace Xtpl\Extensions\Bootstrap;
 
-class ListElement extends Element {
+class ListElement extends UlElement {
 
     public function __construct( array $attributes = array() ) {
-        parent::__construct( 'UL', $attributes );
+        parent::__construct( $attributes );
 
         $this->ignoreAttribute( 'TYPE' );
 

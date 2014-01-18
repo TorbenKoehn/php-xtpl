@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <h1>Bootstrap Extensions</h1>
+
+            <h3>Navs</h3>
+            <div>
+
+                <nav type="pills">
+                    <li class="active">
+                        <a href="#">
+                            Link 1
+                            <caret />
+                            <dropdown>
+                                <header>Header 1</header>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                                <divider />
+                                <header>Header 2</header>
+                                <li><a href="#">Link 4</a></li>
+                                <li><a href="#">Link 5</a></li>
+                            </dropdown>
+                        </a>
+                    </li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                    <li><a href="#">Link 5</a></li>
+                </nav>
+
+                <nav type="pills stacked">
+                    <li class="active">
+                        <a href="#">
+                            Link 1
+                            <caret />
+                            <dropdown>
+                                <header>Header 1</header>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                                <divider />
+                                <header>Header 2</header>
+                                <li><a href="#">Link 4</a></li>
+                                <li><a href="#">Link 5</a></li>
+                            </dropdown>
+                        </a>
+                    </li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                    <li><a href="#">Link 5</a></li>
+                </nav>
+
+                <nav type="pills justified">
+                    <li class="active">
+                        <a href="#">
+                            Link 1
+                            <caret />
+                            <dropdown>
+                                <header>Header 1</header>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                                <divider />
+                                <header>Header 2</header>
+                                <li><a href="#">Link 4</a></li>
+                                <li><a href="#">Link 5</a></li>
+                            </dropdown>
+                        </a>
+                    </li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                    <li><a href="#">Link 5</a></li>
+                </nav>
+
+                <nav type="tabs">
+                    <li class="active">
+                        <a href="#">
+                            Link 1
+                            <caret />
+                            <dropdown>
+                                <header>Header 1</header>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                                <divider />
+                                <header>Header 2</header>
+                                <li><a href="#">Link 4</a></li>
+                                <li><a href="#">Link 5</a></li>
+                            </dropdown>
+                        </a>
+                    </li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                    <li><a href="#">Link 5</a></li>
+                </nav>
+
+                <nav type="tabs stacked">
+                    <li class="active">
+                        <a href="#">
+                            Link 1
+                            <caret />
+                            <dropdown>
+                                <header>Header 1</header>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                                <divider />
+                                <header>Header 2</header>
+                                <li><a href="#">Link 4</a></li>
+                                <li><a href="#">Link 5</a></li>
+                            </dropdown>
+                        </a>
+                    </li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                    <li><a href="#">Link 5</a></li>
+                </nav>
+
+                <nav type="tabs justified">
+                    <li class="active">
+                        <a href="#">
+                            Link 1
+                            <caret />
+                            <dropdown>
+                                <header>Header 1</header>
+                                <li><a href="#">Link 1</a></li>
+                                <li><a href="#">Link 2</a></li>
+                                <li><a href="#">Link 3</a></li>
+                                <divider />
+                                <header>Header 2</header>
+                                <li><a href="#">Link 4</a></li>
+                                <li><a href="#">Link 5</a></li>
+                            </dropdown>
+                        </a>
+                    </li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                    <li><a href="#">Link 5</a></li>
+                </nav>
+
+            </div>
+            
+        </container>
+
+    </block>
+</xtpl>

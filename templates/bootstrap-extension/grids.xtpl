@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <h1>Bootstrap Extensions</h1>
+
+            <h2>Grids</h2>
+
+            <h3>Containers <small>(<code>&lt;container&gt; the rows &lt;/container&gt;</code>)</small></h3>
+            <h3>Rows <small>(<code>&lt;row&gt; the columns &lt;/row&gt;</code>)</small></h3>
+            <h3>Columns <small>(<code>&lt;col&gt; the content &lt;/col&gt;</code>)</small></h3>
+
+            <h3>A grid</h3>
+
+            <div>
+
+                <p>
+                    Possible attributes:
+                    <ul>
+                        <li><strong>xs|phone</strong>: [width 1-12]</li>
+                        <li><strong>sm|tablet</strong>: [width 1-12]</li>
+                        <li><strong>md|desktop</strong>: [width 1-12]</li>
+                        <li><strong>lg|tv</strong>: [width 1-12]</li>
+                        <li><strong>offset-xs|offset-phone</strong>: [width 1-12]</li>
+                        <li><strong>offset-sm|offset-tablet</strong>: [width 1-12]</li>
+                        <li><strong>offset-md|offset-desktop</strong>: [width 1-12]</li>
+                        <li><strong>offset-lg|offset-tv</strong>: [width 1-12]</li>
+                    </ul>
+                </p>
+
+                <container>
+                    <row>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                    </row>
+                    <row>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                    </row>
+                    <row>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                    </row>
+                    <row>
+                        <col md="4" style="border: 1px solid black; height: 30px;">md="4"</col>
+                        <col md="4" style="border: 1px solid black; height: 30px;">md="4"</col>
+                        <col md="4" style="border: 1px solid black; height: 30px;">md="4"</col>
+                    </row>
+                    <row>
+                        <col md="5" style="border: 1px solid black; height: 30px;">md="5"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="5" style="border: 1px solid black; height: 30px;">md="5"</col>
+                    </row>
+                    <row>
+                        <col md="6" style="border: 1px solid black; height: 30px;">md="6"</col>
+                        <col md="6" style="border: 1px solid black; height: 30px;">md="6"</col>
+                    </row>
+                    <row>
+                        <col md="12" style="border: 1px solid black; height: 30px;">md="12"</col>
+                    </row>
+                </container>
+
+                <container>
+                    <row>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="2" md="2" style="border: 1px solid black; height: 30px;">offset-md="2", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="4" md="2" style="border: 1px solid black; height: 30px;">offset-md="4", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="6" md="2" style="border: 1px solid black; height: 30px;">offset-md="6", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="8" md="2" style="border: 1px solid black; height: 30px;">offset-md="8", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="10" md="2" style="border: 1px solid black; height: 30px;">offset-md="10", md="2"</col>
+                    </row>
+                </container>
+
+                <container>
+                    <row>
+                        <col desktop="9" push-desktop="3" style="border: 1px solid black; height: 30px;">desktop="9" push-desktop="9"</col>
+                        <col desktop="3" pull-desktop="9" style="border: 1px solid black; height: 30px;">desktop="3" pull-desktop="9"</col>
+                    </row>
+                </container>
+
+            </div>
+            
+        </container>
+
+    </block>
+</xtpl>
