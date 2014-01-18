@@ -19,6 +19,11 @@ class Element extends Node {
         return $this->tagName;
     }
 
+    public function setTagName( $tagName ) {
+
+        $this->tagName = $tagName;
+    }
+
     public function hasAttribute( $key ) {
 
         return array_key_exists( $key, $this->attributes );
@@ -104,8 +109,15 @@ class Element extends Node {
             $attrHtml = " $attrHtml";
 
         //Specific one-liner tags
-        if( in_array( $this->tagName, array( 'BR', 'IMG', 'INPUT', 'META', 'LINK' ) ) )
+        if( in_array( $this->tagName, array( 'BR', 'IMG', 'INPUT', 'META', 'LINK', 'COL', 'HR' ) ) )
             return "$pre<$tag$attrHtml>";
+
+        $text = trim( $this->getText() );
+        $lastPre = $pre;
+        if( !$this->hasChildren() && empty( $text ) ) {
+            $pre = substr( $pre, 1 );
+            $lastPre = '';
+        }
 
         return "$pre<$tag$attrHtml>$childHtml$pre</$tag>";
     }
@@ -191,6 +203,11 @@ class Element extends Node {
         $this->addChild( new PhpElement() )->setCode( $code );
     }
 
+    public function getClass() {
+
+        return $this->hasAttribute( 'CLASS' ) ? '' : $this->getAttribute( 'CLASS' );
+    }
+
     public function addClass( $class ) {
 
         $args = func_get_args();
@@ -203,7 +220,7 @@ class Element extends Node {
             if( !in_array( $arg, $classes ) )
                 $classes[] = $arg;
 
-        $this->setAttribute( 'CLASS', implode( ' ', $classes ) );
+        $this->setAttribute( 'CLASS', trim( implode( ' ', $classes ) ) );
     }
 
     public function removeClass( $class ) {
@@ -218,21 +235,54 @@ class Element extends Node {
             return !in_array( $args );
         } );
         
-        $this->setAttribute( 'CLASS', implode( ' ', $classes ) );
+        $this->setAttribute( 'CLASS', trim( implode( ' ', $classes ) ) );
     }
 
-    public function addCss( $css ) {
+    public function addCss( $css, array $properties = null ) {
 
-        $head = $this->findParent( 'HEAD' );
-        $parent = $head ? $head : $this->getParent();
+        $head = $this->findAll( 'HEAD' );
 
-        $style = $this->find( 'STYLE' );
+        if( empty( $head ) )
+            throw new \Exception( "Cant automatically add CSS: Head-element not found" );
 
-        if( !$style )
-            $style = $parent->prependChild( new Element( 'STYLE' ) );
+        $style = $head[ 0 ]->find( 'STYLE' );
+
+        if( empty( $style ) ) {
+            $style = new Element( 'STYLE' );
+            $head[ 0 ]->addChild( $style );
+        } else
+            $style = $style[ 0 ];
+
+        if( $properties ) {
+            //Assume $css is a selector
+            $css = "$css {";
+            foreach( $properties as $name => $value )
+                $css .= "$name: $value;";
+            $css .= '}';
+        }
 
         $style->addChild( new TextNode( $css ) );
 
         return $style;
+    }
+
+    public function addJs( $js ) {
+
+        $body = $this->findAll( 'BODY' );
+
+        if( empty( $body ) )
+            throw new \Exception( "Cant automatically add JavaScript: Body-element not found" );
+
+        $script = $body[ 0 ]->find( 'SCRIPT' );
+
+        if( empty( $script ) || $script[ 0 ]->hasAttribute( 'SRC' ) ) {
+            $script = new Element( 'SCRIPT' );
+            $body[ 0 ]->addChild( $script );
+        } else
+            $script = $script[ 0 ];
+
+        $script->addChild( new TextNode( $js ) );
+
+        return $script;
     }
 }

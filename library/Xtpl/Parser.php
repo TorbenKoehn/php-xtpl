@@ -81,8 +81,9 @@ class Parser {
         foreach( $namespaces as $ns ) {
 
             $nsClassName = "$ns\\$className";
-            if( class_exists( "$ns\\$className" ) )
+            if( class_exists( $nsClassName ) ) {
                 $el = new $nsClassName( $attributes );
+            }
         }
 
         if( !$el )

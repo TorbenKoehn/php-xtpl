@@ -23,12 +23,12 @@ class Renderer {
 
     public function render( $string, $nice = false ) {
 
-        return $this->compiler->compile( $string )->render( $nice );
+        return $this->compiler->compile( $string )->process()->render( $nice );
     }
 
     public function renderFile( $path, $nice = false ) {
 
-        return $this->compiler->compileFile( $path )->render( $nice );
+        return $this->compiler->compileFile( $path )->process()->render( $nice );
     }
 
     public function renderToFile( $string, $file, $nice = false ) {

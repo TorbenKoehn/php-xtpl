@@ -9,6 +9,7 @@ abstract class Node {
     protected $children = array();
     protected $parent = null;
     protected $compiled = false;
+    protected $processed = false;
     protected $uniqueId;
 
     public function hasParent() {
@@ -29,6 +30,11 @@ abstract class Node {
     public function isCompiled() {
 
         return $this->compiled;
+    }
+
+    public function isProcessed() {
+
+        return $this->processed;
     }
 
     public function getRoot() {
@@ -202,6 +208,15 @@ abstract class Node {
 
         //Nodes only render their children, not themself
         return $this->renderChildren( $nice, $level );
+    }
+
+    public function process() {
+
+        foreach( $this->children as $child )
+            $child->process();
+
+        $this->processed = true;
+        return $this;
     }
 
     public function compile( \Xtpl\Compiler $compiler, $cwd ) {

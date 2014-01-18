@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <h1>Bootstrap Extensions</h1>
+
+            <h2>Buttons <small>(<code>&lt;button&gt;</code>)</small></h2>
+
+            <h3>Themes <small>(<code>theme="default|danger|success|info|warning|link"</code>)</small></h3>
+            <div>
+                <button>No theme</button>
+                <button theme="primary">Primary</button>
+                <button theme="default">Default</button>
+                <button theme="danger">Danger</button>
+                <button theme="success">Success</button>
+                <button theme="info">Info</button>
+                <button theme="warning">Warning</button>
+                <button theme="link">Link</button>
+            </div>
+
+
+            <h3>Sizes <small>(<code>size="extra-small|small|large"</code>)</small></h3>
+            <div>
+                <button theme="primary" size="extra-small">Extra Small</button>
+                <button theme="default" size="extra-small">Extra Small</button><br />
+                <button theme="primary" size="small">Small</button>
+                <button theme="default" size="small">Small</button><br />
+                <button theme="primary">Normal</button>
+                <button theme="default">Normal</button><br />
+                <button theme="primary" size="large">Large</button>
+                <button theme="default" size="large">Large</button>
+            </div>
+
+            <h3>Block <small>(<code>block="true"</code>)</small></h3>
+            <div>
+                <button theme="primary" block="true">Block Button</button>
+                <button theme="default" block="true">Block Button</button>
+                <button theme="primary" size="large" block="true">Large Block Button</button>
+                <button theme="default" size="large" block="true">Large Block Button</button>
+            </div>
+
+            <h3>Anchors <small>(<code>href="http://google.com"</code>)</small></h3>
+            <div>
+                <button href="http://google.com" theme="primary" block="true">Block Button</button>
+                <button href="http://google.com" theme="default" block="true">Block Button</button>
+                <button href="http://google.com" theme="primary" size="large" block="true">Large Block Button</button>
+                <button href="http://google.com" theme="default" size="large" block="true">Large Block Button</button>
+            </div>
+
+            <h2>Utils</h2>
+
+            <h3>Pulling <small>(All Extension Elements)(<code>pull="left|center|right"</code>)</small></h3>
+            <div>
+                <button theme="primary" pull="left">Left</button>
+                <button theme="primary" pull="center">Center</button>
+                <button theme="primary" pull="right">Right</button>
+            </div>
+
+            <h3>Responsive Utilities <small>(All Extension Elements)</small></h3>
+            <div>
+
+                <div visible="xs" /><div visible="xs sm" /><div visible="xs sm md" /><div visible="md lg print" />
+                <div hidden="xs" /><div hidden="xs sm" /><div hidden="xs sm md" /><div hidden="md lg print" />
+
+            </div>
+
+            <h2>Grid</h2>
+
+            <h3>Containers <small>(<code>&lt;container&gt; the rows &lt;/container&gt;</code>)</small></h3>
+            <h3>Rows <small>(<code>&lt;row&gt; the columns &lt;/row&gt;</code>)</small></h3>
+            <h3>Columns <small>(<code>&lt;col&gt; the content &lt;/col&gt;</code>)</small></h3>
+
+            <h3>A grid</h3>
+
+            <div>
+
+                <p>
+                    Possible attributes:
+                    <ul>
+                        <li><strong>xs|phone</strong>: [width 1-12]</li>
+                        <li><strong>sm|tablet</strong>: [width 1-12]</li>
+                        <li><strong>md|desktop</strong>: [width 1-12]</li>
+                        <li><strong>lg|tv</strong>: [width 1-12]</li>
+                        <li><strong>offset-xs|offset-phone</strong>: [width 1-12]</li>
+                        <li><strong>offset-sm|offset-tablet</strong>: [width 1-12]</li>
+                        <li><strong>offset-md|offset-desktop</strong>: [width 1-12]</li>
+                        <li><strong>offset-lg|offset-tv</strong>: [width 1-12]</li>
+                    </ul>
+                </p>
+
+                <container>
+                    <row>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                        <col md="1" style="border: 1px solid black; height: 30px;">md="1"</col>
+                    </row>
+                    <row>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                    </row>
+                    <row>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                        <col md="3" style="border: 1px solid black; height: 30px;">md="3"</col>
+                    </row>
+                    <row>
+                        <col md="4" style="border: 1px solid black; height: 30px;">md="4"</col>
+                        <col md="4" style="border: 1px solid black; height: 30px;">md="4"</col>
+                        <col md="4" style="border: 1px solid black; height: 30px;">md="4"</col>
+                    </row>
+                    <row>
+                        <col md="5" style="border: 1px solid black; height: 30px;">md="5"</col>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                        <col md="5" style="border: 1px solid black; height: 30px;">md="5"</col>
+                    </row>
+                    <row>
+                        <col md="6" style="border: 1px solid black; height: 30px;">md="6"</col>
+                        <col md="6" style="border: 1px solid black; height: 30px;">md="6"</col>
+                    </row>
+                    <row>
+                        <col md="12" style="border: 1px solid black; height: 30px;">md="12"</col>
+                    </row>
+                </container>
+
+                <container>
+                    <row>
+                        <col md="2" style="border: 1px solid black; height: 30px;">md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="2" md="2" style="border: 1px solid black; height: 30px;">offset-md="2", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="4" md="2" style="border: 1px solid black; height: 30px;">offset-md="4", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="6" md="2" style="border: 1px solid black; height: 30px;">offset-md="6", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="8" md="2" style="border: 1px solid black; height: 30px;">offset-md="8", md="2"</col>
+                    </row>
+                    <row>
+                        <col offset-md="10" md="2" style="border: 1px solid black; height: 30px;">offset-md="10", md="2"</col>
+                    </row>
+                </container>
+
+                <container>
+                    <row>
+                        <col desktop="9" push-desktop="3" style="border: 1px solid black; height: 30px;">desktop="9" push-desktop="9"</col>
+                        <col desktop="3" pull-desktop="9" style="border: 1px solid black; height: 30px;">desktop="3" pull-desktop="9"</col>
+                    </row>
+                </container>
+
+            </div>
+
+
+            <h3>Lead Paragraph <small>(<code>&lt;lead&gt;</code>)</small></h3>
+            <lead>
+                This is a lead text.
+            </lead>
+
+            <h3>Text Themes <small>(All Extension Elements)(<code>text-theme="muted|primary|success|info|warning|danger"</code>)</small></h3>
+            <div>
+                <p text-theme="muted">This is muted.</p>
+                <p text-theme="primary">This is primary</p>
+                <p text-theme="success">This is primary</p>
+                <p text-theme="info">This is primary</p>
+                <p text-theme="warning">This is primary</p>
+                <p text-theme="danger">This is primary</p>
+            </div>
+
+            <h3>Text Align <small>(All Extension Elements)(<code>text-align="left|center|right"</code>)</small></h3>
+            <div>
+                <p text-align="left">This is left</p>
+                <p text-align="center">This is center</p>
+                <p text-align="right">This is right</p>
+            </div>
+
+            <h3>Lists <small>(<code>type="ordered|unstyled|inline"</code>)</small></h3>
+            <div>
+                <list>
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+                <list type="ordered">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+                <list type="unstyled">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+                <list type="inline">
+                    <li>First</li>
+                    <li>Second</li>
+                    <li>Third</li>
+                    <li>Fourth</li>
+                </list>
+            </div>
+
+            <h3>Table Themes<small>(<code>theme="default|striped|bordered|hover|condensed"</code>)</small></h3>
+            <h3>Table Element Themes<small>(tr, td, th)(<code>theme="active|warning|success|danger"</code>)</small></h3>
+            <div>
+                <table theme="default">
+                    <!-- Col Test -->
+                    <col style="width: 300px" />
+                    <tr><th theme="danger">Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td theme="warning">Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td theme="active">Data 9</td></tr>
+                </table>
+                <table theme="bordered">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr theme="success"><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr theme="danger"><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+                <table theme="striped bordered">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr theme="active"><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+                <table theme="condensed">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+                <table theme="bordered striped hover">
+                    <tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+                    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+                </table>
+            </div>
+
+            <h3>Responsive Table<small>(<code>&lt;table-responsive&gt;</code>)</small></h3>
+            <div>
+                <table-responsive>
+                    <table theme="default">
+                        <tr><th theme="danger">Col 1</th><th>Col 2</th><th>Col 3</th></tr>
+                        <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+                        <tr><td>Data 4</td><td theme="warning">Data 5</td><td>Data 6</td></tr>
+                        <tr><td>Data 7</td><td>Data 8</td><td theme="active">Data 9</td></tr>
+                    </table>
+                </table-responsive>
+            </div>
+
+            <h3>Horizontal Definition List <small>(<code>&lt;hdl&gt;</code>)</small></h3>
+            <hdl>
+                <dt>Description lists</dt>
+                    <dd>A description list is perfect for defining terms.</dd>
+                <dt>Euismod</dt>
+                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                <dt>Malesuada porta</dt>
+                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                <dt>Felis euismod semper eget lacinia</dt>
+                    <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+            </hdl>
+
+            <h3>Form <small>(<code>&lt;form-group&gt;, &lt;form-control&gt;, &lt;checkbox&gt;</code>)</small></h3>
+            <div>
+                <form>
+                    <form-group>
+                        <label for="email">Email address</label>
+                        <form-control type="email" id="email" placeholder="Enter email" />
+                    </form-group>
+                    <form-group>
+                        <label for="password">Password</label>
+                        <form-control type="password" id="password" placeholder="Password" />
+                    </form-group>
+                    <form-group>
+                        <label for="file">File input</label>
+                        <input type="file" id="file" />
+                        <help-block>Example block-level help text here.</help-block>
+                    </form-group>
+                    <checkbox>
+                        <label>
+                            <input type="checkbox" /> Check me out
+                        </label>
+                    </checkbox>
+                    <button type="submit" theme="default">Submit</button>
+                </form>
+
+                <form type="horizontal">
+                    <form-group>
+                        <label md="3" offset-md="2" for="email">Email address</label>
+                        <col md="5">
+                            <form-control type="email" id="email" placeholder="Enter email" />
+                        </col>
+                    </form-group>
+                    <form-group>
+                        <label md="3" offset-md="2" for="password">Password</label>
+                        <col md="5">
+                            <form-control type="password" id="password" placeholder="Password" />
+                        </col>
+                    </form-group>
+                    <form-group>
+                        <col md="5" offset-md="5">
+                            <checkbox>
+                                <label>
+                                    <input type="checkbox" /> Check me out
+                                </label>
+                            </checkbox>
+                        </col>
+                    </form-group>
+                    <form-group>
+                        <col md="5" offset-md="5">
+                            <button type="submit" theme="default">Submit</button>
+                        </col>
+                    </form-group>
+                </form>
+
+                <form type="inline">
+                    <form-group>
+                        <label for="email">Email address</label>
+                        <form-control type="email" id="email" placeholder="Enter email" />
+                    </form-group>
+                    <form-group>
+                        <label for="password">Password</label>
+                        <form-control type="password" id="password" placeholder="Password" />
+                    </form-group>
+                    <form-group>
+                        <label for="file">File input</label>
+                        <input type="file" id="file" />
+                        <help-block>Example block-level help text here.</help-block>
+                    </form-group>
+                    <checkbox>
+                        <label>
+                            <input type="checkbox" /> Check me out
+                        </label>
+                    </checkbox>
+                    <button type="submit" theme="default">Submit</button>
+                </form>
+
+                <checkbox type="inline">
+                    <label>
+                        <input type="checkbox" /> Yes
+                    </label>
+                    <label>
+                        <input type="checkbox" /> No
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Maybe
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Rather not
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Okay, good
+                    </label>
+                </checkbox>
+
+                <radio type="inline">
+                    <label>
+                        <input type="radio" /> Yes
+                    </label>
+                    <label>
+                        <input type="radio" /> No
+                    </label>
+                    <label>
+                        <input type="radio" /> Maybe
+                    </label>
+                    <label>
+                        <input type="radio" /> Rather not
+                    </label>
+                    <label>
+                        <input type="radio" /> Okay, good
+                    </label>
+                </radio>
+
+
+                <form>
+                    <form-group theme="success">
+                        <label for="inputSuccess">Input with success</label>
+                        <form-control type="text" id="inputSuccess" />
+                    </form-group>
+                    <form-group theme="warning">
+                        <label for="inputWarning">Input with warning</label>
+                        <form-control type="text" id="inputWarning" />
+                    </form-group>
+                    <form-group theme="error">
+                        <label for="inputError">Input with error</label>
+                        <form-control type="text" class="form-control" id="inputError" />
+                    </form-group>
+                </form>
+
+                <form role="form">
+                    <form-control size="large" type="text" placeholder="size=&quot;large|lg&quot;" />
+                    <form-control type="text" placeholder="Default input" />
+                    <form-control size="small" type="text" placeholder="size=&quot;small|sm&quot;" />
+                    <form-control size="large">
+                        <option value="">size=&quot;large|lg&quot;</option>
+                    </form-control>
+                    <form-control>
+                        <option value="">Default select</option>
+                    </form-control>
+                    <form-control size="small">
+                        <option value="">size=&quot;small|sm&quot;</option>
+                    </form-control>
+                </form>
+
+            </div>
+
+
+
+        </container>
+
+    </block>
+</xtpl>

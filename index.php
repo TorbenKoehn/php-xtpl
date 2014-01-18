@@ -19,8 +19,11 @@ $xtpl = new Xtpl\Renderer( __DIR__.'/cache' );
 
 //Just for demonstration, we actually disable caching.
 $xtpl->setCacheInterval( 0 );
-$xtpl->setBaseDirectory( __DIR__.'/templates' );
 
+//Map bootstrap extensions!!
+$xtpl->getCompiler()->getParser()->addElementNamespace( 'Xtpl\\Extensions\\Bootstrap' );
+
+$xtpl->setBaseDirectory( __DIR__.'/templates' );
 
 $xtpl->menu = array(
     'Features' => array(
@@ -36,6 +39,10 @@ $xtpl->menu = array(
     ),
     'Examples' => array(
         'Blog' => 'index.php?m=examples&a=blog'
+    ),
+    'Extensions' => array(
+        'Extensions Mapping' => 'index.php?m=extensions&a=extension-mapping',
+        'Bootstrap' => 'index.php?m=extensions&a=bootstrap'
     )
 );
 
