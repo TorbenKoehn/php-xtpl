@@ -4,15 +4,6 @@ error_reporting( E_ALL | E_STRICT );
 
 require( 'vendor/autoload.php' );
 
-if( extension_loaded( 'mbstring' ) ) {
-            
-    mb_internal_encoding( 'UTF-8' );
-    mb_http_output( 'UTF-8' );
-    mb_http_input( 'UTF-8' );
-    mb_language( 'uni' );
-    mb_regex_encoding( 'UTF-8' );
-}
-
 //Initialize XTPL renderer
 $xtpl = new Xtpl\Renderer( __DIR__.'/cache' );
 
@@ -63,13 +54,3 @@ $module = empty( $_GET[ 'm' ] ) ? 'features' : $_GET[ 'm' ];
 $action = empty( $_GET[ 'a' ] ) ? 'includes' : $_GET[ 'a' ];
 
 include "examples/$module/$action.php";
-/*
-$tbl = get_html_translation_table( HTML_ENTITIES );
-$table = array();
-foreach( $tbl as $c => $ent ) {
-    list(, $ord) = unpack( 'N', mb_convert_encoding( $c, 'UCS-4BE', 'UTF-8' ) );
-    $table[ $ent ] = '&#'.$ord.';';
-}
-
-var_export( $table );
-*/
