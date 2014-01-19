@@ -1,0 +1,7 @@
+/examples export-ignore
+/cache export-ignore
+/templates export-ignore
+/vendor export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+index.php export-ignore
