@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <page-header>
+                <h1>Bootstrap Extensions</h1>
+            </page-header>
+
+            <panel theme="default">
+                <header>
+                    <title>Modals</title>
+                </header>
+                <body>
+
+                    <button open-modal="modal-1" theme="primary">Open modal 1</button>
+
+                    <modal name="modal-1">
+                        <header>
+                            <close-button />
+                            Modal 1 Header
+                        </header>
+                        <body>
+                            Modal 1 Body
+                        </body>
+                        <footer>
+                            <close-button pull="right" theme="info">Close</close-button>
+                        </footer>
+                    </modal>
+
+
+                </body>
+            </panel>
+
+        </container>
+
+    </block>
+</xtpl>

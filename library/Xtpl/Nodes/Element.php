@@ -137,7 +137,7 @@ class Element extends Node {
                     if( !empty( $attributes ) )
                         //attributes check
                         foreach( $attributes as $key => $value ) 
-                            if( !$child->hasAttribute( $key ) || ( $value !== true && $child->getAttribute( $key ) != $value ) )
+                            if( ( !$child->hasAttribute( $key ) && $value !== false ) || ( $value !== true && $child->getAttribute( $key ) != $value ) )
                                 continue 2;
                            
                     $results[] = $child;
@@ -287,13 +287,15 @@ class Element extends Node {
         if( empty( $body ) )
             throw new \Exception( "Cant automatically add JavaScript: Body-element not found" );
 
-        $script = $body[ 0 ]->find( 'SCRIPT' );
+        $body = end( $body );
+        $script = $body->findAll( 'SCRIPT', array( 'SRC' => false, 'ID' => false ) );
 
-        if( empty( $script ) || $script[ 0 ]->hasAttribute( 'SRC' ) ) {
+        if( empty( $script ) ) {
             $script = new Element( 'SCRIPT' );
-            $body[ 0 ]->addChild( $script );
+            $body->addChild( $script );
         } else
             $script = $script[ 0 ];
+
 
         $script->addChild( new TextNode( $js ) );
 

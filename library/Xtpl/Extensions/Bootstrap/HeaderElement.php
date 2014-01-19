@@ -18,11 +18,11 @@ class HeaderElement extends Element {
             }
 
             if( $this->getParent() instanceof NavbarElement ) {
-                $this->setTagName( 'DIV' );
                 $this->addClass( 'navbar-header' );
             }
 
-            if( $this->getParent() instanceof Media\BodyElement ) {
+            if( $this->getParent()->hasClass( 'media-body' ) ) {
+
                 $size = 4;
                 if( $this->hasAttribute( 'SIZE' ) ) {
                     $this->ignoreAttribute( 'SIZE' );
@@ -47,6 +47,11 @@ class HeaderElement extends Element {
             if( $this->getParent() instanceof PanelElement ) {
 
                 $this->addClass( 'panel-heading' );
+            }
+
+            if( $this->getParent()->hasClass( 'modal-content' ) ) {
+
+                $this->addClass( 'modal-header' );
             }
         }
 

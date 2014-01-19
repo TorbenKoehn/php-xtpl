@@ -28,4 +28,14 @@ class TitleElement extends Element {
 
         return parent::process();
     }
+
+    public function render( $nice = false, $level = 0 ) {
+
+        if( $this->getParent()->hasAttribute( 'DATA-TOGGLE' ) && $this->getParent()->getAttribute( 'DATA-TOGGLE' ) == 'tab' ) {
+
+            return $this->renderChildren( $nice, $level );
+        }
+
+        return parent::render( $nice, $level );
+    }
 }

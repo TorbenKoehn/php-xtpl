@@ -50,7 +50,10 @@ $xtpl->menu = array(
         'Grids' => 'index.php?m=bootstrap-extension&a=grids',
         'Misc' => 'index.php?m=bootstrap-extension&a=misc',
         'Navs' => 'index.php?m=bootstrap-extension&a=navs',
-        'Navbars' => 'index.php?m=bootstrap-extension&a=navbars'
+        'Navbars' => 'index.php?m=bootstrap-extension&a=navbars',
+        'Modals' => 'index.php?m=bootstrap-extension&a=modals',
+        'Tabs' => 'index.php?m=bootstrap-extension&a=tabs',
+        'Tooltips' => 'index.php?m=bootstrap-extension&a=tooltips'
     )
 );
 

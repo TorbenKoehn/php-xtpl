@@ -103,6 +103,13 @@ class Element extends \Xtpl\Nodes\Element {
                     break;
             }
         }
+
+        if( $this->hasAttribute( 'OPEN-MODAL' ) ) {
+
+            $this->ignoreAttribute( 'OPEN-MODAL' );
+            $this->setAttribute( 'DATA-TOGGLE', 'modal' );
+            $this->setAttribute( 'DATA-TARGET', '#xtpl-bootstrap-modal-'.$this->getAttribute( 'OPEN-MODAL' ) );
+        }
     }
 
     public function process() {
@@ -153,7 +160,8 @@ class Element extends \Xtpl\Nodes\Element {
                 throw new \Exception( "Bootstrap extension requires a body element in your document" );
 
             //Find the last script element in the body
-            $scripts = $body[ 0 ]->find( 'SCRIPT', array(), false );
+            $i = count( $body ) - 1;
+            $scripts = $body[ $i ]->find( 'SCRIPT', array(), false );
 
             $jQuery[ 0 ] = new \Xtpl\Nodes\Element( 'SCRIPT', array(
                 'ID' => $jQueryId,
@@ -161,9 +169,9 @@ class Element extends \Xtpl\Nodes\Element {
             ) );
 
             if( empty( $scripts ) )
-                $body[ 0 ]->addChild( $jQuery[ 0 ] );
+                $body[ $i ]->addChild( $jQuery[ 0 ] );
             else
-                $body[ 0 ]->insertBefore( $scripts[ 0 ], $jQuery[ 0 ] );
+                $body[ $i ]->insertBefore( $scripts[ 0 ], $jQuery[ 0 ] );
         }
 
         if( empty( $script ) ) {

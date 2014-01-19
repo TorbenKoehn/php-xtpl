@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <page-header>
+                <h1>Bootstrap Extensions</h1>
+            </page-header>
+
+            <panel theme="default">
+                <header>
+                    <title>Tabs</title>
+                </header>
+                <body>
+
+                    <tabs>
+                        <tab class="active">
+                            <title>Test 1</title>
+                            <body>
+                                Test 1 Tab Content
+                            </body>
+                        </tab>
+                        <tab>
+                            <title>Test 2</title>
+                            <body>
+                                Test 2 Tab Content
+                            </body>
+                        </tab>
+                        <tab>
+                            <title>Test 3</title>
+                            <body>
+                                Test 3 Tab Content
+                            </body>
+                        </tab>
+                    </tabs>
+
+                    <tabs class="fade">
+                        <tab class="active">
+                            <title>Test 1</title>
+                            <body>
+                                Test 1 Tab Content
+                            </body>
+                        </tab>
+                        <tab>
+                            <title>Test 2</title>
+                            <body>
+                                Test 2 Tab Content
+                            </body>
+                        </tab>
+                        <tab>
+                            <title>Test 3</title>
+                            <body>
+                                Test 3 Tab Content
+                            </body>
+                        </tab>
+                    </tabs>
+
+                </body>
+            </panel>
+
+        </container>
+
+    </block>
+</xtpl>

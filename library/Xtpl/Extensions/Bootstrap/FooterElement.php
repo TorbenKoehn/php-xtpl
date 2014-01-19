@@ -16,6 +16,11 @@ class FooterElement extends Element {
 
                 $this->addClass( 'panel-footer' );
             }
+
+            if( $this->getParent()->hasClass( 'modal-content' ) ) {
+
+                $this->addClass( 'modal-footer' );
+            }
         }
 
         return parent::process();

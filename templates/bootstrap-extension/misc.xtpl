@@ -349,19 +349,19 @@
                         <a href="#" pull="left">
                             <media-object width="64" height="64" src="{{imgData}}" />
                         </a>
-                        <media-body>
+                        <body>
                             <header>My Heading</header>
                             <p>
                                 My Media Content<br />
                                 <a href="#">Read more...</a>
                             </p>
-                        </media-body>
+                        </body>
                     </media>
                     <media>
                         <a href="#" pull="left">
                             <media-object width="64" height="64" src="{{imgData}}" />
                         </a>
-                        <media-body>
+                        <body>
                             <header>My Heading</header>
                             <p>
                                 My Media Content<br />
@@ -371,19 +371,19 @@
                                 <a href="#" pull="left">
                                     <media-object width="64" height="64" src="{{imgData}}" />
                                 </a>
-                                <media-body>
+                                <body>
                                     <header>My Heading</header>
                                     <p>
                                         My Media Content<br />
                                         <a href="#">Read more...</a>
                                     </p>
-                                </media-body>
+                                </body>
                             </media>
                             <media>
                                 <a href="#" pull="left">
                                     <media-object width="64" height="64" src="{{imgData}}" />
                                 </a>
-                                <media-body>
+                                <body>
                                     <header>My Heading</header>
                                     <p>
                                         My Media Content<br />
@@ -393,41 +393,41 @@
                                         <a href="#" pull="left">
                                             <media-object width="140" height="140" src="{{imgData}}" />
                                         </a>
-                                        <media-body>
+                                        <body>
                                             <header>My Heading</header>
                                             <p>
                                                 My Media Content<br />
                                                 <a href="#">Read more...</a>
                                             </p>
-                                        </media-body>
+                                        </body>
                                     </media>
-                                </media-body>
+                                </body>
                             </media>
-                        </media-body>
+                        </body>
                     </media>
                     <media>
                         <a href="#" pull="right">
                             <media-object width="64" height="64" src="{{imgData}}" />
                         </a>
-                        <media-body>
+                        <body>
                             <header>My Heading</header>
                             <p>
                                 My Media Content<br />
                                 <a href="#">Read more...</a>
                             </p>
-                        </media-body>
+                        </body>
                     </media>
                     <media>
                         <a href="#" pull="left">
                             <media-object width="64" height="64" src="{{imgData}}" />
                         </a>
-                        <media-body>
+                        <body>
                             <header>My Heading</header>
                             <p>
                                 My Media Content<br />
                                 <a href="#">Read more...</a>
                             </p>
-                        </media-body>
+                        </body>
                     </media>
                 </media-list>
             </div>
@@ -486,9 +486,9 @@
                             <header>
                                 Panel Heading
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 Panel Footer
                             </footer>
@@ -501,9 +501,9 @@
                             <header>
                                 <title>Panel Heading</title>
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 <title>Panel Footer</title>
                             </footer>
@@ -519,9 +519,9 @@
                             <header>
                                 Panel Heading
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 Panel Footer
                             </footer>
@@ -534,9 +534,9 @@
                             <header>
                                 <title>Panel Heading</title>
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 <title>Panel Footer</title>
                             </footer>
@@ -552,9 +552,9 @@
                             <header>
                                 Panel Heading
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 Panel Footer
                             </footer>
@@ -567,9 +567,9 @@
                             <header>
                                 <title>Panel Heading</title>
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 <title>Panel Footer</title>
                             </footer>
@@ -585,9 +585,9 @@
                             <header>
                                 Panel Heading
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 Panel Footer
                             </footer>
@@ -600,9 +600,9 @@
                             <header>
                                 <title>Panel Heading</title>
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 <title>Panel Footer</title>
                             </footer>
@@ -618,9 +618,9 @@
                             <header>
                                 Panel Heading
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 Panel Footer
                             </footer>
@@ -633,9 +633,9 @@
                             <header>
                                 <title>Panel Heading</title>
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 <title>Panel Footer</title>
                             </footer>
@@ -651,9 +651,9 @@
                             <header>
                                 Panel Heading
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 Panel Footer
                             </footer>
@@ -666,9 +666,9 @@
                             <header>
                                 <title>Panel Heading</title>
                             </header>
-                            <panel-body>
+                            <body>
                                 Some panel content
-                            </panel-body>
+                            </body>
                             <footer>
                                 <title>Panel Footer</title>
                             </footer>

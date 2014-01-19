@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <container>
+            <page-header>
+                <h1>Bootstrap Extensions</h1>
+            </page-header>
+
+            <panel theme="default">
+                <header>
+                    <title>Tooltips</title>
+                </header>
+                <body>
+
+                    <button theme="primary">
+                        Trigger tooltip
+                        <tooltip placement="top">
+                            Top placed tooltip
+                        </tooltip>
+                    </button>
+                    <button theme="info">
+                        Trigger tooltip
+                        <tooltip placement="bottom">
+                            Bottom placed tooltip<br />
+                            <strong>This can contain html</strong>
+                        </tooltip>
+                    </button>
+                    <button theme="danger">
+                        Trigger tooltip
+                        <tooltip placement="left">
+                            Left placed tooltip
+                        </tooltip>
+                    </button>
+                    <button theme="warning">
+                        Trigger tooltip
+                        <tooltip placement="right">
+                            Right placed tooltip
+                        </tooltip>
+                    </button>
+
+                    <br repeat="3" />
+                    <button-group>
+                        <button theme="primary">
+                            Trigger tooltip
+                            <tooltip placement="top">
+                                Top placed tooltip
+                            </tooltip>
+                        </button>
+                        <button theme="info">
+                            Trigger tooltip
+                            <tooltip placement="bottom">
+                                Bottom placed tooltip
+                            </tooltip>
+                        </button>
+                        <button theme="danger">
+                            Trigger tooltip
+                            <tooltip placement="left">
+                                Left placed tooltip
+                            </tooltip>
+                        </button>
+                        <button theme="warning">
+                            Trigger tooltip
+                            <tooltip placement="right">
+                                Right placed tooltip
+                            </tooltip>
+                        </button>
+                    </button-group>
+
+                </body>
+            </panel>
+
+            <panel theme="default">
+                <header>
+                    <title>Popovers</title>
+                </header>
+                <body>
+
+                    <button theme="primary">
+                        Click for popover
+                        <popover title="Top popover title" placement="top">
+                            Top popover content
+                            <panel theme="primary">
+                                <header>
+                                    <title>This can contain HTML</title>
+                                </header>
+                                <body>
+                                    ANY HTML
+                                </body>
+                            </panel>
+                        </popover>
+                    </button>
+
+                    <button theme="info">
+                        Click for popover
+                        <popover title="Top popover title" placement="left">
+                            Left popover content
+                        </popover>
+                    </button>
+
+                    <button theme="danger">
+                        Click for popover
+                        <popover title="Top popover title" placement="right">
+                            Right popover content
+                        </popover>
+                    </button>
+
+                    <button theme="warning">
+                        Click for popover
+                        <popover title="Top popover title" placement="bottom">
+                            Bottom popover content
+                        </popover>
+                    </button>
+
+                    <button-group>
+                        <button theme="primary">
+                            Click for popover
+                            <popover title="Top popover title" placement="top">
+                                Top popover content
+                            </popover>
+                        </button>
+
+                        <button theme="info">
+                            Click for popover
+                            <popover title="Top popover title" placement="left">
+                                Left popover content
+                            </popover>
+                        </button>
+
+                        <button theme="danger">
+                            Click for popover
+                            <popover title="Top popover title" placement="right">
+                                Right popover content
+                            </popover>
+                        </button>
+
+                        <button theme="warning">
+                            Click for popover
+                            <popover title="Top popover title" placement="bottom">
+                                Bottom popover content
+                            </popover>
+                        </button>
+                    </button-group>
+
+                </body>
+            </panel>
+
+        </container>
+
+    </block>
+</xtpl>
