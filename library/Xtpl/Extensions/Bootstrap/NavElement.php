@@ -10,7 +10,10 @@ class NavElement extends Element {
         //Normally, this is a <nav> element, but when you set a type="", it's a <ul> element
         $this->ignoreAttribute( 'TYPE' );
 
-        $types = explode( ' ', $this->getAttribute( 'TYPE' ) );
+        $types = array_filter( explode( ' ', $this->getAttribute( 'TYPE' ) ), function( $value ) {
+
+            return !empty( $value );
+        } );
 
         if( !empty( $types ) ) {
 
@@ -43,9 +46,22 @@ class NavElement extends Element {
         if( !$this->isProcessed() ) {
 
             if( $this->getParent() instanceof NavbarElement 
-             || ( $this->getParent() instanceof CollapseElement && $this->getParent()->getParent() instanceof NavbarElement ) ) {
+             || ( ( $this->getParent() instanceof CollapseElement || $this->getParent() instanceof HeaderElement )
+                && $this->getParent()->getParent() instanceof NavbarElement ) ) {
+                
+                $this->setTagName( 'UL' );
+                $this->addClass( 'nav navbar-nav' );
 
-                $this->addClass( 'navbar-nav' );
+                if( $this->hasAttribute( 'ALIGN' ) ) {
+                    $this->ignoreAttribute( 'ALIGN' );
+                    switch( $this->getAttribute( 'ALIGN' ) ) {
+                        case 'left':
+                            $this->addClass( 'navbar-left' );
+                            break;
+                        case 'right':
+                            $this->addClass( 'navbar-right' );
+                    }
+                }
             }
         }
 

@@ -7,6 +7,7 @@ class NavbarElement extends NavElement {
     public function __construct( array $attributes = array() ) {
         parent::__construct( $attributes );
 
+        $this->ignoreAttribute( 'THEME' );
         switch( $this->getAttribute( 'THEME' ) ) {
             default:
             case 'default':
@@ -19,26 +20,16 @@ class NavbarElement extends NavElement {
 
         if( $this->hasAttribute( 'FIXED' ) ) {
 
-            switch( $this->getAttribute( 'FIXED' ) ) {
-                case 'top':
-                    $this->addClass( 'navbar-fixed-top' );
-                    break;
-                case 'bottom':
-                    $this->addClass( 'navbar-fixed-bottom' );
-                    break;
-            }
+            //Interpolation doesn't work generally this way.
+            //Better like this?
+            $this->ignoreAttribute( 'FIXED' );
+            $this->addClass( 'navbar-fixed-'.$this->getAttribute( 'FIXED' ) );
         }
 
         if( $this->hasAttribute( 'STATIC' ) ) {
 
-            switch( $this->getAttribute( 'STATIC' ) ) {
-                case 'top':
-                    $this->addClass( 'navbar-static-top' );
-                    break;
-                case 'bottom':
-                    $this->addClass( 'navbar-static-bottom' );
-                    break;
-            }
+            $this->ignoreAttribute( 'STATIC' );
+            $this->addClass( 'navbar-static-'.$this->getAttribute( 'FIXED' ) );
         }
     }
 

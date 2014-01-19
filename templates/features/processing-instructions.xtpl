@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xtpl extends="../one-column">
+
+    <block name="content">
+
+        <?js
+
+            //some inline javascript
+            var var1 = 0,
+                var2 = 1,
+                var3 = 2,
+                var4 = 3;
+
+            function render() {
+
+                console.log( 'render' );
+            }
+        ?>
+
+        <?php
+
+            $var = 'Some php variable content';
+
+            //this is some inline php
+
+            echo $var;
+        ?>
+
+        <?js
+
+            //some inline javascript
+            var var1 = 0,
+                var2 = 1,
+                var3 = 2,
+                var4 = 3;
+
+            function render() {
+
+                console.log( 'render' );
+            }
+        ?>
+
+        <?css
+
+            //this is some inline css
+            body, html { width: 100%; height: 100%; }
+
+            .some-class {
+                some-property: some-value;
+            }
+
+        ?>
+    </block>
+</xtpl>

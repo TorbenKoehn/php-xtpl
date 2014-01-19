@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xtpl>
 
-    <navbar>
+    <navbar theme="inverse" fixed="[[position]]">
         <header>
             <toggle>
                 <icon type="bar" />
@@ -22,7 +22,6 @@
                                 </for>
                             </dropdown>
                         </a>
-                        
                     </li>
                 </for>
             </nav>

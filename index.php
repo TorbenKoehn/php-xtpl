@@ -11,7 +11,7 @@ $xtpl = new Xtpl\Renderer( __DIR__.'/cache' );
 $xtpl->setCacheInterval( 0 );
 
 //Map bootstrap extensions!!
-$xtpl->getCompiler()->getParser()->addElementNamespace( 'Xtpl\\Extensions\\Bootstrap' );
+$xtpl->addXtplExtension( 'Bootstrap' );
 
 $xtpl->setBaseDirectory( __DIR__.'/templates' );
 
@@ -25,7 +25,8 @@ $xtpl->menu = array(
         'Inline PHP' => 'index.php?m=features&a=inline-php',
         'Loops' => 'index.php?m=features&a=loops',
         'Conditions' => 'index.php?m=features&a=conditions',
-        'Custom Elements / Plugins' => 'index.php?m=features&a=custom-elements'
+        'Custom Elements / Plugins' => 'index.php?m=features&a=custom-elements',
+        'Processing Instructions' => 'index.php?m=features&a=processing-instructions'
     ),
     'Examples' => array(
         'Blog' => 'index.php?m=examples&a=blog'
@@ -39,7 +40,8 @@ $xtpl->menu = array(
         'Forms' => 'index.php?m=bootstrap-extension&a=forms',
         'Grids' => 'index.php?m=bootstrap-extension&a=grids',
         'Misc' => 'index.php?m=bootstrap-extension&a=misc',
-        'Navs' => 'index.php?m=bootstrap-extension&a=navs'
+        'Navs' => 'index.php?m=bootstrap-extension&a=navs',
+        'Navbars' => 'index.php?m=bootstrap-extension&a=navbars'
     )
 );
 

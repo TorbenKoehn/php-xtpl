@@ -2,10 +2,10 @@
 
 namespace Xtpl\Extensions\Bootstrap;
 
-class HeaderElement extends SpanElement {
+class HeaderElement extends Element {
 
     public function __construct( array $attributes = array() ) {
-        parent::__construct( $attributes );
+        parent::__construct( 'HEADER', $attributes );
     }
 
     public function process() {

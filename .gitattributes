@@ -2,6 +2,6 @@
 /cache export-ignore
 /templates export-ignore
 /vendor export-ignore
+/index.php export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
-index.php export-ignore

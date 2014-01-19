@@ -113,6 +113,16 @@ class Renderer {
         include $path;
     }
 
+    public function addExtension( $extension ) {
+
+        $this->getCompiler()->getParser()->addElementNamespace( $extension );
+    }
+
+    public function addXtplExtension( $extension ) {
+
+        $this->addExtension( "Xtpl\\Extensions\\$extension" );
+    }
+
     public function __get( $key ) {
 
         return $this->vars[ $key ];

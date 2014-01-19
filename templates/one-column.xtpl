@@ -6,7 +6,7 @@
         <div class="grid grid-main">
             <header>
 
-                <include file="navigation" position="header" />
+                <include file="navigation" position="top" />
 
             </header>
 
@@ -14,7 +14,7 @@
 
             <footer>
 
-                <include file="navigation" position="footer" />
+                <include file="navigation" position="bottom" />
 
             </footer>
         </div>

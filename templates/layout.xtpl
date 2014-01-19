@@ -8,7 +8,9 @@
             </title>
 
             <block name="styleSheets" />
-
+            <style>
+                body { padding-top: 80px; padding-bottom: 80px; }
+            </style>
             <block name="javaScripts" />
         </head>
         <body>

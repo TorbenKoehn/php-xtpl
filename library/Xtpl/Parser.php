@@ -32,7 +32,7 @@ class Parser {
 
         $this->currentNode = null;
         $xp = $this->createXmlParser();
-        $success = xml_parse( $xp, $string, true );
+        $success = xml_parse( $xp, $this->parseEntities( $string ), true );
 
         if( !$success ) {
 
@@ -61,6 +61,7 @@ class Parser {
         xml_set_object( $xp, $this );
         xml_set_element_handler( $xp, 'handleElementStart', 'handleElementEnd' );
         xml_set_character_data_handler( $xp, 'handleCharacterData' );
+        xml_set_processing_instruction_handler( $xp, 'handleProcessingInstruction' );
 
         return $xp;
     }
@@ -109,6 +110,45 @@ class Parser {
 
         $this->currentNode->addChild( new TextNode( $cdata ) );
     }
+
+    protected function handleProcessingInstruction( $parser, $type, $string ) {
+
+        $elements = array(
+            'php' => 'PHP',
+            'js' => 'SCRIPT',
+            'css' => 'STYLE'
+        );
+
+        if( array_key_exists( $type, $elements ) ) {
+            $tag = $elements[ $type ];
+
+            $this->handleElementStart( $parser, $tag, array() );
+            $this->handleCharacterData( $parser, $string );
+            $this->handleElementEnd( $parser, $tag );
+        }
+    }
+
+    protected function parseEntities( $string, $reverse = false ) {
+
+        static $table;
+
+        if( empty( $table ) ) {
+            $tbl = get_html_translation_table( HTML_ENTITIES );
+            $table = array();
+            foreach( $tbl as $c => $ent ) {
+
+                if( strpos( '&"<>', $c ) !== false )
+                    continue;
+
+                $table[ $ent ] = '&#'.ord( $c ).';';
+            }
+        }
+
+        if( $reverse )
+            return strtr( $string, array_flip( $table ) );
+        
+        return strtr( $string, $table );
+      }
 
     public static function fromString( $string ) {
 

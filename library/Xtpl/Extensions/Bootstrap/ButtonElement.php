@@ -81,6 +81,24 @@ class ButtonElement extends Element {
                 $this->getParent()->insertBefore( $this, $span );
                 $span->addChild( $this );
             }
+
+            if( $this->getParent() instanceof NavbarElement 
+             || ( ( $this->getParent() instanceof CollapseElement || $this->getParent() instanceof HeaderElement )
+                && $this->getParent()->getParent() instanceof NavbarElement ) ) {
+                
+                $this->addClass( 'navbar-btn' );
+
+                if( $this->hasAttribute( 'ALIGN' ) ) {
+                    $this->ignoreAttribute( 'ALIGN' );
+                    switch( $this->getAttribute( 'ALIGN' ) ) {
+                        case 'left':
+                            $this->addClass( 'navbar-left' );
+                            break;
+                        case 'right':
+                            $this->addClass( 'navbar-right' );
+                    }
+                }
+            }
         }
 
         return parent::process();
