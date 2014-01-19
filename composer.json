@@ -3,7 +3,7 @@
     "description": "A Template Engine for PHP",
     "type": "library",
     "keywords": [
-        "template"
+        "template",
         "renderer"
     ],
     "license": "LGPL",
