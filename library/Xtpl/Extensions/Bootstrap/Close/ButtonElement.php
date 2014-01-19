@@ -10,4 +10,19 @@ class ButtonElement extends \Xtpl\Extensions\Bootstrap\ButtonElement {
         $this->addClass( 'close' );
         $this->addChild( new \Xtpl\Nodes\TextNode( '&times;' ) );
     }
+
+    public function process() {
+
+        if( !$this->isProcessed() ) {
+
+            if( $this->getParent() instanceof \Xtpl\Extensions\Bootstrap\AlertElement ) {
+
+                $this->setAttribute( 'DATA-DISMISS', 'alert' );
+                $this->setAttribute( 'ARIA-HIDDEN', 'true' );
+                $this->getParent()->addClass( 'alert-dismissable' );
+            }
+        }
+
+        return parent::process();
+    }
 }

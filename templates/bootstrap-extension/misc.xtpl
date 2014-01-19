@@ -3,8 +3,16 @@
 
     <block name="content">
 
+        <php><![CDATA[
+
+            $imgData = "data:image/png;base64,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";
+
+        ]]></php>
+
         <container>
-            <h1>Bootstrap Extensions</h1>
+            <page-header>
+                <h1>Bootstrap Extensions</h1>
+            </page-header>
 
             <h2>Utils</h2>
 
@@ -138,11 +146,11 @@
             <h3>Images</h3>
             <div>
 
-                <img type="rounded" style="width: 140px; height: 140px;" src="data:image/png;base64,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" />
+                <img type="rounded" style="width: 140px; height: 140px;" src="{{imgData}}" />
 
-                <img type="circle" style="width: 140px; height: 140px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAEYCAYAAACHjumMAAAOBklEQVR4Xu3c94/kZBIGYC8ZBIic4UdyEEEiw79OzkkgsoQIuyShJYoMeypL7usxE/q9o1gz/Vg6iduurbEfV7+yP3v2yPHjx08MNgIECDQIHBEwDapaEiAwCggYg0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAgYM0CAQJuAgGmj1ZgAAQFjBggQaBMQMG20GhMgIGDMAAECbQICpo1WYwIEBIwZIECgTUDAtNFqTICAgDEDBAi0CQiYNlqNCRAQMGaAAIE2AQHTRqsxAQICxgwQINAmIGDaaDUmQEDAmAECBNoEBEwbrcYECAiYhc3A8ePHhy+++GI45ZRThrPPPnu47rrrNtrDTz/9dPj9999XtZdeeun49+fbd999N3z++efDjz/+OH50+umnD1Vb/zty5MhGPyspOmzHkxy72mEQMAubgldeeWWoL2Vtp5122vDII4+MYbPfduzYseHtt9/eUXLzzTcPV1111erPTpw4Mbz66qur3vN+p5566nD//fcPZ5111t8qctiO52/F2YJmAmZBJ/no0aPDO++8s9qjM844Y3j44Yf3vbKoq5Ynnnhi+PPPP3ccyS233DJceeWVqz+rvtV/v61+3kMPPXRgoG1KdtiOZ9PjVvdfAQFzEqehQqG++L/99tvw7bffDr/++uuOvdkkYN54443xlmq+rQfML7/8Mjz99NM7Qqhun84888zhm2++2ffKJ+E5bMeTHLva3QUEzEmcjAqUp5566i9XH9MuHRQwFQ4vvfTSeMWx3xXM/BbqggsuGO65557xx3z00UfD+++/v1K48MILhzvvvHNH8NTt1XnnnTfU/kzb119/PdSf1zZ9Xv+9xOO5++67T+JZ3u4fLWBO4vn/fwKmvtTPPPPM8NNPP41HcM4556wWbuv/r1/BvPzyy0MFwrTdcccd46JubfNbrAqrWot59tlnd4RWrc08+OCD4+3aZ599Nrz55pt/ufK55JJL/ueA6TyeWseq9SzbPy8gYP558x0/8fvvvx+/yPXFrVul1157bXVlsN8VzCeffDK8++67Y6+qq0Xd+rvTth4wzz333PDDDz+MH9XPqaBYX8ydf/7AAw+MgfTWW2/t2NcbbrhhuOaaa4bHHnts+OOPP1afrV8RLfV4dnuidpJP/Vb8eAGzoNM8v5rYK2DmVz51RVK1L7744kYBUwvH67c7ewXQ/MqnnjRddtll4xXMtNUVT/Wrx93zbWnHs6BTvTW7ImAWdKo3/UK+/vrrw5dffjnuea2N3HvvvePj53okPL+CqZ5PPvnk6opj/VZnqp0HTN0i1S3XQbdw9ffnT6vWOZd2PAs61VuzKwJmQad6ky9k3brUlcV0u1Phcu655+4ZMPOQOChgqu+tt946XHHFFePP2O0dm4nsoosuGu666649BZd4PAs63VuxKwJmQaf5oC9kLYTWU5p67Fzb1VdfPdx0003jf8+vYG677bbh8ssvH9d36j2Z6S3fTdZg5ms06y/LTVx1u1S3Rvstni71eBZ0yg/9rgiYBZ3ig76Q86uRCou6IqngqQXi9YXXWhupz2t95r333tuxyFuLuOuLngctAn/88cdjj/WtbqGqz37bUo9nQaf80O+KgFnQKT7oC7nXW7v7HUI9Xfrwww9Xj7ArdOpt3XrJrrb54+H6fD2AdntJb/p5119//b6/K7XE41nQ6d6KXREwCzrNB30hN1l0nR9OBcxXX321WhSuz9fXWCpA6rZremmubn0effTR1a8LvPDCC0P9guRu2263W+t1SzyeBZ3urdgVAbOg03zQF7J2tRZ552/t1he93ur94IMPVkdT6zO1BnP++eeP6zP15Gna6hH1fffdNz6qXn8iVZ/XY+jbb799LF1/12YvplpgroXm3X4Te2nHs6BTvTW7ImAWdKo3+ULutbvTrw1Mn1dIVFjUVoH0+OOP71ijqT+vUJiuXKa/V0+F6ulQvSE8f5v32muvHS6++OIdL/TV39vrVmlJx7Og07xVuyJgFnS6d/tCbvrbzXu9BzMd3n6Pm6ea6bFzhc7zzz+/Whiuz2vReHrlfn1ReAqq6d2Zdc6lHM+CTvHW7YqAWdApn78UV09q6ou7yT8ENQ+Y9SuY6RDraVD9YuP8qmW6NapH2/Wz1t+1mf7ujTfeOP6aQG21JlNvDa/3qX8aol66mwfM+kt+J+t4FnSKt25XBMyWnfK6Xap/GuLnn38eA6KeJtU6zW6v+v8baA7b8fwbzJN9FDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQiAQETcSkmQCAREDCJlloCBCIBARNxKSZAIBEQMImWWgIEIgEBE3EpJkAgERAwiZZaAgQigf8AnqsReK9jSlgAAAAASUVORK5CYII=" />
+                <img type="circle" style="width: 140px; height: 140px;" src="{{imgData}}" />
 
-                <img type="thumbnail" style="width: 140px; height: 140px;" src="data:image/png;base64,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" />
+                <img type="thumbnail" style="width: 140px; height: 140px;" src="{{imgData}}" />
             </div>
 
             <h3>Caret</h3>
@@ -164,7 +172,529 @@
                 <icon type="up" />
 
             </div>
+
+            <h3>Breadcrumbs</h3>
+            <div>
+                <breadcrumb>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li class="active">Current Page</li>
+                </breadcrumb>
+            </div>
+
+            <h3>Paginations</h3>
+            <div>
+                <pagination size="small">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </pagination>
+                <pagination>
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </pagination>
+                <pagination size="large">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </pagination>
+            </div>
+
+            <h3>Pagers</h3>
+            <div>
+                <pager>
+                    <li class="previous"><a href="#">&laquo; Previous</a></li>
+                    <li class="next"><a href="#">Next &raquo;</a></li>
+                </pager>
+                <pager>
+                    <li><a href="#">&laquo; Previous</a></li>
+                    <li><a href="#">Next &raquo;</a></li>
+                </pager>
+                <pager>
+                    <li class="previous"><a href="#">&laquo; Previous</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li class="next"><a href="#">Next &raquo;</a></li>
+                </pager>
+            </div>
+
+            <h3>Labels</h3>
+            <div>
+                <label theme="default">Default</label>
+                <label theme="primary">Primary</label>
+                <label theme="success">Success</label>
+                <label theme="info">Info</label>
+                <label theme="warning">Warning</label>
+                <label theme="danger">Danger</label>
+            </div>
+
+            <h3>Badges</h3>
+            <div>
+                <badge>345</badge>
+
+                <nav type="pills stacked">
+                    <li><a href="#">Test<badge pull="right">424</badge></a></li>
+                    <li class="active"><a href="#">Test<badge pull="right">12</badge></a></li>
+                    <li><a href="#">Test<badge pull="right">32</badge></a></li>
+                </nav>
+            </div>
             
+            <h3>Jumbotrons</h3>
+            <div>
+                <jumbotron>
+                    <h1>Hello World!</h1>
+                    <p>
+                        This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+                    </p>
+                    <p>
+                        <button theme="primary" size="large">Learn more</button>
+                    </p>
+                </jumbotron>
+            </div>
+
+            <h3>Alerts</h3>
+            <div>
+                <alert theme="info">
+                    <strong>Info!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="success">
+                    <strong>Success!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="warning">
+                    <strong>Warning!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="danger">
+                    <strong>Danger!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="info">
+                    <close-button />
+                    <strong>Info!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="success">
+                    <close-button />
+                    <strong>Success!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="warning">
+                    <close-button />
+                    <strong>Warning!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+
+                <alert theme="danger">
+                    <close-button />
+                    <strong>Danger!</strong>
+                    Some Info Text!
+                    <a href="#">Some Link</a>
+                </alert>
+            </div>
+
+            <h3>Progressbars</h3>
+            <div>
+                <progress-bar value="50" />
+                <progress-bar theme="danger" value="25" />
+                <progress-bar theme="warning" min="50" max="150" value="50" />
+                <progress-bar theme="info" max="200" value="50" />
+
+                <progress theme="striped">
+                    <progress-bar value="25" />
+                    <progress-bar theme="danger" value="10" />
+                    <progress-bar theme="warning" class="active" value="17" />
+                </progress>
+
+                <progress theme="striped active">
+                    <progress-bar value="33" />
+                    <progress-bar theme="danger" value="50" />
+                    <progress-bar theme="warning" class="active" value="10" />
+                </progress>
+            </div>
+
+            <h3>Media Elements</h3>
+            <div>
+                <media-list>
+                    <media>
+                        <a href="#" pull="left">
+                            <media-object width="64" height="64" src="{{imgData}}" />
+                        </a>
+                        <media-body>
+                            <header>My Heading</header>
+                            <p>
+                                My Media Content<br />
+                                <a href="#">Read more...</a>
+                            </p>
+                        </media-body>
+                    </media>
+                    <media>
+                        <a href="#" pull="left">
+                            <media-object width="64" height="64" src="{{imgData}}" />
+                        </a>
+                        <media-body>
+                            <header>My Heading</header>
+                            <p>
+                                My Media Content<br />
+                                <a href="#">Read more...</a>
+                            </p>
+                            <media>
+                                <a href="#" pull="left">
+                                    <media-object width="64" height="64" src="{{imgData}}" />
+                                </a>
+                                <media-body>
+                                    <header>My Heading</header>
+                                    <p>
+                                        My Media Content<br />
+                                        <a href="#">Read more...</a>
+                                    </p>
+                                </media-body>
+                            </media>
+                            <media>
+                                <a href="#" pull="left">
+                                    <media-object width="64" height="64" src="{{imgData}}" />
+                                </a>
+                                <media-body>
+                                    <header>My Heading</header>
+                                    <p>
+                                        My Media Content<br />
+                                        <a href="#">Read more...</a>
+                                    </p>
+                                    <media>
+                                        <a href="#" pull="left">
+                                            <media-object width="140" height="140" src="{{imgData}}" />
+                                        </a>
+                                        <media-body>
+                                            <header>My Heading</header>
+                                            <p>
+                                                My Media Content<br />
+                                                <a href="#">Read more...</a>
+                                            </p>
+                                        </media-body>
+                                    </media>
+                                </media-body>
+                            </media>
+                        </media-body>
+                    </media>
+                    <media>
+                        <a href="#" pull="right">
+                            <media-object width="64" height="64" src="{{imgData}}" />
+                        </a>
+                        <media-body>
+                            <header>My Heading</header>
+                            <p>
+                                My Media Content<br />
+                                <a href="#">Read more...</a>
+                            </p>
+                        </media-body>
+                    </media>
+                    <media>
+                        <a href="#" pull="left">
+                            <media-object width="64" height="64" src="{{imgData}}" />
+                        </a>
+                        <media-body>
+                            <header>My Heading</header>
+                            <p>
+                                My Media Content<br />
+                                <a href="#">Read more...</a>
+                            </p>
+                        </media-body>
+                    </media>
+                </media-list>
+            </div>
+
+            <h3>List Groups</h3>
+            <div>
+                
+                <listgroup>
+                    <li>Cras justo odio</li>
+                    <li>Dapibus ac facilisis in</li>
+                    <li>Morbi leo risus</li>
+                    <li>Porta ac consectetur ac <badge>13</badge></li>
+                    <li>Vestibulum at eros</li>
+                </listgroup>
+
+                <listgroup>
+                    <a href="#">Cras justo odio</a>
+                    <a href="#" class="active">Dapibus ac facilisis in <badge>27</badge></a>
+                    <a href="#">Morbi leo risus</a>
+                    <a href="#">Porta ac consectetur ac <badge>13</badge></a>
+                    <a href="#">Vestibulum at eros</a>
+                </listgroup>
+
+                <listgroup>
+                    <a href="#">
+                        <header>Item 1</header>
+                        <p>Cras justo odio</p>
+                    </a>
+                    <a href="#" class="active">
+                        <header>Item 2</header>
+                        <p>Dapibus ac facilisis in <badge>27</badge></p>
+                    </a>
+                    <a href="#">
+                        <header>Item 3</header>
+                        <p>Morbi leo risus</p>
+                    </a>
+                    <a href="#">
+                        <header>Item 4</header>
+                        <p>Porta ac consectetur ac <badge>13</badge></p>
+                    </a>
+                    <a href="#">
+                        <header>Item 5</header>
+                        <p>Vestibulum at eros</p>
+                    </a>
+                </listgroup>
+
+            </div>
+
+            <h3>Panels</h3>
+            <div>
+                
+                <row>
+                    <col md="6">
+
+                        <panel theme="default">
+                            <header>
+                                Panel Heading
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                Panel Footer
+                            </footer>
+                        </panel>
+
+                    </col>
+                    <col md="6">
+
+                        <panel theme="default">
+                            <header>
+                                <title>Panel Heading</title>
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                <title>Panel Footer</title>
+                            </footer>
+                        </panel>
+
+                    </col>
+                </row>
+
+                <row>
+                    <col md="6">
+
+                        <panel theme="primary">
+                            <header>
+                                Panel Heading
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                Panel Footer
+                            </footer>
+                        </panel>
+
+                    </col>
+                    <col md="6">
+
+                        <panel theme="primary">
+                            <header>
+                                <title>Panel Heading</title>
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                <title>Panel Footer</title>
+                            </footer>
+                        </panel>
+
+                    </col>
+                </row>
+
+                <row>
+                    <col md="6">
+
+                        <panel theme="info">
+                            <header>
+                                Panel Heading
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                Panel Footer
+                            </footer>
+                        </panel>
+
+                    </col>
+                    <col md="6">
+
+                        <panel theme="info">
+                            <header>
+                                <title>Panel Heading</title>
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                <title>Panel Footer</title>
+                            </footer>
+                        </panel>
+
+                    </col>
+                </row>
+
+                <row>
+                    <col md="6">
+
+                        <panel theme="success">
+                            <header>
+                                Panel Heading
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                Panel Footer
+                            </footer>
+                        </panel>
+
+                    </col>
+                    <col md="6">
+
+                        <panel theme="success">
+                            <header>
+                                <title>Panel Heading</title>
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                <title>Panel Footer</title>
+                            </footer>
+                        </panel>
+
+                    </col>
+                </row>
+
+                <row>
+                    <col md="6">
+
+                        <panel theme="warning">
+                            <header>
+                                Panel Heading
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                Panel Footer
+                            </footer>
+                        </panel>
+
+                    </col>
+                    <col md="6">
+
+                        <panel theme="warning">
+                            <header>
+                                <title>Panel Heading</title>
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                <title>Panel Footer</title>
+                            </footer>
+                        </panel>
+
+                    </col>
+                </row>
+
+                <row>
+                    <col md="6">
+
+                        <panel theme="danger">
+                            <header>
+                                Panel Heading
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                Panel Footer
+                            </footer>
+                        </panel>
+
+                    </col>
+                    <col md="6">
+
+                        <panel theme="danger">
+                            <header>
+                                <title>Panel Heading</title>
+                            </header>
+                            <panel-body>
+                                Some panel content
+                            </panel-body>
+                            <footer>
+                                <title>Panel Footer</title>
+                            </footer>
+                        </panel>
+
+                    </col>
+                </row>
+            </div>
+
+            <h3>Wells</h3>
+            <div>
+                
+                <well size="small">
+                    A small well
+                </well>
+
+                <well>
+                    A normal well
+                </well>
+
+                <well size="large">
+                    A large well
+                </well>
+
+            </div>
+
         </container>
 
     </block>

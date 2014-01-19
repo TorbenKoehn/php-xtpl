@@ -2,19 +2,21 @@
 
 namespace Xtpl\Extensions\Bootstrap;
 
-class LiElement extends Element {
+class MediaElement extends Element {
 
     public function __construct( array $attributes = array() ) {
-        parent::__construct( 'LI', $attributes );
+        parent::__construct( 'DIV', $attributes );
+
+        $this->addClass( 'media' );
     }
 
     public function process() {
 
         if( !$this->isProcessed() ) {
 
-            if( $this->getParent() instanceof ListgroupElement ) {
-                
-                $this->addClass( 'list-group-item' );
+            if( $this->getParent() instanceof Media\ListElement ) {
+
+                $this->setTagName( 'LI' );
             }
         }
 

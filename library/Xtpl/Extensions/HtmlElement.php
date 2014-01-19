@@ -1,15 +1,13 @@
 <?php
 
-namespace Xtpl\Nodes;
+namespace Xtpl\Extensions;
 
-class HtmlElement extends Element {
+class HtmlElement extends \Xtpl\Nodes\Element {
 
     protected $version;
 
     public function __construct( array $attributes = array() ) {
         parent::__construct( 'HTML', $attributes );
-
-        $this->ignoreAttribute( 'VERSION' );
     }
 
     public function render( $nice = false, $level = 0 ) {
@@ -17,6 +15,8 @@ class HtmlElement extends Element {
         $html = '';
 
         if( $this->hasAttribute( 'VERSION' ) ) {
+
+            $this->ignoreAttribute( 'VERSION' );
             //Doctype implementations
             switch( $this->getAttribute( 'VERSION' ) ) {
                 default:

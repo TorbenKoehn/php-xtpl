@@ -78,29 +78,7 @@
                         <p align="right">My Navbar Text <a href="#">Some Link</a></p>
                     </collapse>
                 </navbar>
-            </div>
-
-            <h3>Breadcrumbs</h3>
-            <div>
-                <breadcrumb>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li class="active">Current Page</li>
-                </breadcrumb>
-            </div>
-
-            <h3>Paginations</h3>
-            <div>
-                <pagination>
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </pagination>
-            </div>
+            </div>            
 
             <br repeat="5" />
         </container>

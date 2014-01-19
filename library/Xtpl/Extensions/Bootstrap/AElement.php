@@ -16,6 +16,17 @@ class AElement extends Element {
 
                 $this->addClass( 'navbar-link' );
             }
+
+            if( $this->getParent() instanceof AlertElement ) {
+
+                $this->addClass( 'alert-link' );
+            }
+
+            if( $this->getParent() instanceof ListgroupElement ) {
+
+                $this->addClass( 'list-group-item' );
+                $this->getParent()->setTagName( 'DIV' );
+            }
         }
 
         return parent::process();

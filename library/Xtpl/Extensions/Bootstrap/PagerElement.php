@@ -2,11 +2,11 @@
 
 namespace Xtpl\Extensions\Bootstrap;
 
-class PaginationElement extends ListElement {
+class PagerElement extends ListElement {
 
     public function __construct( array $attributes = array() ) {
         parent::__construct( $attributes );
 
-        $this->addClass( 'pagination' );
+        $this->addClass( 'pager' );
     }
 }

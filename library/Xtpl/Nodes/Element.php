@@ -137,7 +137,7 @@ class Element extends Node {
                     if( !empty( $attributes ) )
                         //attributes check
                         foreach( $attributes as $key => $value ) 
-                            if( !$child->hasAttribute( $key ) || $child->getAttribute( $key ) != $value )
+                            if( !$child->hasAttribute( $key ) || ( $value !== true && $child->getAttribute( $key ) != $value ) )
                                 continue 2;
                            
                     $results[] = $child;

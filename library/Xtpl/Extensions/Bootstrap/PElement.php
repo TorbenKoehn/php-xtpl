@@ -29,6 +29,11 @@ class PElement extends Element {
                     }
                 }
             }
+
+            if( $this->getParent()->hasClass( 'list-group-item' ) ) {
+
+                $this->addClass( 'list-group-item-text' );
+            }
         }
 
         return parent::process();

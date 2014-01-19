@@ -2,19 +2,19 @@
 
 namespace Xtpl\Extensions\Bootstrap;
 
-class LiElement extends Element {
+class FooterElement extends Element {
 
     public function __construct( array $attributes = array() ) {
-        parent::__construct( 'LI', $attributes );
+        parent::__construct( 'FOOTER', $attributes );
     }
 
     public function process() {
 
         if( !$this->isProcessed() ) {
 
-            if( $this->getParent() instanceof ListgroupElement ) {
-                
-                $this->addClass( 'list-group-item' );
+            if( $this->getParent() instanceof PanelElement ) {
+
+                $this->addClass( 'panel-footer' );
             }
         }
 

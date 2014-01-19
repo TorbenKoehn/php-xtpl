@@ -21,6 +21,33 @@ class HeaderElement extends Element {
                 $this->setTagName( 'DIV' );
                 $this->addClass( 'navbar-header' );
             }
+
+            if( $this->getParent() instanceof Media\BodyElement ) {
+                $size = 4;
+                if( $this->hasAttribute( 'SIZE' ) ) {
+                    $this->ignoreAttribute( 'SIZE' );
+                    $size = intval( $this->getAttribute( 'SIZE' ) );
+                }
+                $this->setTagName( "H$size" );
+                $this->addClass( 'media-heading' );
+            }
+
+            if( $this->getParent()->hasClass( 'list-group-item' ) ) {
+
+                $size = 4;
+                if( $this->hasAttribute( 'SIZE' ) ) {
+                    $this->ignoreAttribute( 'SIZE' );
+                    $size = intval( $this->getAttribute( 'SIZE' ) );
+                }
+
+                $this->setTagName( "H$size" );
+                $this->addClass( 'list-group-item-heading' );
+            }
+
+            if( $this->getParent() instanceof PanelElement ) {
+
+                $this->addClass( 'panel-heading' );
+            }
         }
 
         return parent::process();
