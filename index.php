@@ -2,17 +2,7 @@
 
 error_reporting( E_ALL | E_STRICT );
 
-function __autoload( $class ) {
-
-    $path = __DIR__.'/library/'.str_replace( '\\', '/', $class ).'.php';
-
-    if( file_exists( $path ) )
-        include $path;
-
-    return class_exists( $class, false );
-}
-
-
+require( 'vendor/autoload.php' );
 
 //Initialize XTPL renderer
 $xtpl = new Xtpl\Renderer( __DIR__.'/cache' );
