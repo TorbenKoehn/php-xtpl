@@ -1,23 +1,90 @@
 # What is XTPL?
 
 
-XTPL is a **template system for PHP** that tries not to create new fancy language constructs or languages itself.
-XTPL uses **plain HTML tags** to trigger specific template functions, display variables, loop through arrays etc.
+XTPL is a **template system for PHP** that doesn't use any fancy, new syntax, but plain old HTML, or rather, XML.
 
-It is based on XML parsing and requires **strict XML templates**, but allows you to use any **HTML5** tag (or rather, **any** tag). While allowing that, it takes specific elements and enhances them with special functionality.
 
-You can find a list of what can be done with these tags below.
+# How does it work?
 
-This is **server-side processed, enhanced HTML**. It can do a lot of useful stuff.
+The XTPL **Parser** parses the XTPL file and handles specific nodes, if found.
+The node plugins are loaded dynamically, which means features like mapping a whole extension over your HTML code that handle new and existing HTML elements are easily possible.
 
 The output you get is **PHTML** which you can include in PHP.
 PHTML is just **PHP with HTML**, which renders a dynamic, server-side processed HTML page.
 
+If you don't want to handle the PHTML stuff by yourself, XTPL includes a Renderer that also caches for you, if you like.
 
-# What can it do right now?
+# How to install?
 
-Some basic features work already. Many, many, many, many more will follow soon.
+You can install either via downloading the [ZIP from GitHub](https://github.com/TorbenKoehn/php-xtpl/archive/master.zip) or by using [Composer](http://getcomposer.org/)
 
+To install using composer, you need to add the following info in your `composer.json`
+
+```json
+{
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0",
+        "torbenkoehn/php-xtpl": "*"
+    }
+}
+
+```
+
+After that just run
+
+```bash
+$ composer install
+```
+
+to install the XTPL library and make it available for you to use.
+
+
+# How to use?
+
+You can either let the XTPL Renderer handle all the work or you can get your hands dirty and do it with the raw API.
+
+The most easy way:
+```php
+    $xtpl = new Xtpl\Renderer;
+
+    $xtpl->displayFile( 'your/path/to/the/xtpl/file', array(
+        'title' => 'My Page Title',
+        'posts' => array(
+            0 => array(
+                'title' => 'Some post title',
+                'content' => 'bla bla bla bla bla'
+            )
+        )
+    ) );
+```
+
+It doesn't matter if you use the `.xtpl`-Extension or not.
+
+Using display like that will `eval()` the code, and as we all know, eval is evil.
+You better give the renderer a caching directory as the first argument
+
+```php
+    $xtpl = new Xtpl\Renderer( __DIR__.'/cache' );
+```
+
+This directory of course needs to be writable, but this will improve the performance of the system **greatly**.
+
+Using this way, the renderer will handle all the caching on its own, you don't need to do a thing.
+
+If you want to dig in the dirt you can also use the system in a more raw manner, like this:
+
+```php
+    $xtpl = $xtpl->renderFileToFile( 'your/xtpl', './phtml/your/xtpl.phtml' );
+    extract( $yourTemplateArgs );
+    include './phtml/your/xtpl.phtml';
+```
+
+
+**Note:** *For anything else, just look the codes above and in the docs below.*
+
+
+# Basic Features
 
 ## Blocks
 
@@ -465,91 +532,136 @@ Through the XML restrictions you have to put complex code into `<![CDATA[ ... ]]
 	]]></php>
 ```
 
-**More documentation following soon.**
+## Processing Instructions
+
+You've already seen you can do inline PHP with a tag.
+Actually, you can also just use the `<?php ... ?>` syntax in any XTPL file.
+These are handled as **processing instructions** and are directly converted into elements.
+
+The following processing instructions are available right now:
+
+`<?php [your php code ] ?>`
+Renders into a `<php>` element, which renders a real PHP block in the PHTML file.
+
+`<?css [your CSS] ?>`
+Renders into a valid `<style>` element
+
+`<?js [your JavaScript] ?>`
+Renders into a valid `<script>` element
 
 
-# What else can I do with it?
+## Extensions
+
+XTPL can be extended in a really easy way.
+
+The parser takes specific namespaces where it gets its nodes from.
+You can add any namespace you like to provde new or existing, reworked elements to the parser.
+
+Imagine you use a `<my-custom-tag>` tag inside your XTPL file.
+
+The parser goes and looks for a `My\Custom\TagElement` class inside one of its extension namespaces
+If found, it processes it and renders it as a valid XTPL Node.
+
+Since newly added namespaces always get read first, it's easy to remove complete element namespaces this way.
+The Bootstrap Extension you read about in the next chapter will give a good example to that.
+
+The default namespaces are the following
+
+`Xtpl\Nodes`
+`Xtpl\Extensions`
+
+To include a new namespace, you can either call
+`$renderer->addExtension( 'Your\\Extension\\Namespace' );` on the `Xtpl\Renderer`
+or
+`$parser->addElementNamespace( 'Your\\Extension\\Namespace' );` on the `Xtpl\Parser`
+
+To enable a XTPL Extension, you call
+`$renderer->addXtplExtension( 'ExtensionName' )` on the `Xtpl\Renderer`
+or
+`$parser->addElementNamespace( 'Xtpl\\Extensions\\ExtensionName' );` on the `Xtpl\Parser`
+
+Usually you should be working with the `Xtpl\Renderer`, just so you know.
 
 
-You can enhance it. XTPL includes a plugin system with some default extensions.
-Based on the tags you use you can add new tags and classes that handle them.
+## Default Extensions
 
-You might think it just translates XML to HTML, but it actually creates a complete DOM with a bunch of traversing and manipulation methods in the background. This allows you to manipulate any specific point of the DOM from every specific or any other point that gets handled.
-The implementation does **not** use DOMDocument of PHP but an own DOM implementation (that at least uses similar naming) that works different and more efficient for this kind of project.
+While surely you can develop extensions by yourself easily, you don't have to.
+XTPL actually brings a whole set of new elements into HTML.
 
-An example might be Bootstrap-Extensions, that allow you to use bootstrap elements easily (e.g. `<bs-btn type="success">Success!!</bs-btn>`) and you don't even need to include any CSS or JS files by yourself, the elements can check if bootstrap is loaded or not by traversing the `<head>` element, if not, they can just `addChild()` a new `<script>` and `<link>` to it and it will be loaded when it's required. Actually, there is a method called `addCss( $css )` in it that already does that for you :)
-
-The possibilities here are unlimited.
-It works kind of like server-side HTML Custom Elements.
-With enough plugins you don't need a line of plain PHP to get your dynamic website working with pure HTML syntax.
+You can either activate them by calling them by their complete namespace or you can include a single namespace to map them over your existing HTML.
 
 
-To add an element plugin, create a PHP Class that extends from `Xtpl\Nodes\Element`, call it anything with `Element` in the end, put it into some namespace and let the parser know about your element namespace with
+### Single Extensions (`Xtpl\Extensions`)
 
-```php
-$xtpl->getCompiler()->getParser()->addElementNamespace( 'Your\\Element\\Namespace' );
-```
+Single Extensions are simple, single elements that just provide some utility features.
 
-Then just go on rendering normally.
+#### Email
 
-What will happen is that the parser will inflect the name of the HTML tag it processes and find a class that fits it.
-e.g. an element like `<my-custom-tag>` will search for a class called `MyCustomTagElement` in the element namespaces of the parser. The DOM will then receive a new instance of this class instead of a plain `Element`-instance and allows you to modify the compiling and rendering process of that element.
+The tag `<email>someone@example.com</email>` will be converted into `<a href="mailto:someone@example.com">someone@example.com</a>`
 
-In your class you have a bunch of DOM utilities to make your elements as mighty as possible.
-Just take a look at the `Xtpl\Extensions` or the `Xtpl\Nodes` element namespaces to get a feeling for it.
+#### Html
 
+The `<html>` tag has a new attribute called `version`.
+Right now it only supports the value `5`, which makes it automatically add
+`<!doctype html>` in front of your `<html>`-tag.
 
-# Planned features
+#### Head
 
-- [ ] Less and CoffeeScript integration
-- [ ] If-statements
-- [ ] Medium-sized standard library
-- [ ] Twitter Bootstrap elements
-- [ ] Fancy filters (Markdown?)
+The `<head>` Extension actually just adds the UTF-8 charset by default, if you didn't add one manually.
 
+#### Br
 
-# How does the compilation work?
+The `<br>`-tag provides a new attribute `repeat`, that does exactly what you think it does.
+`<br repeat="5" />` will render to `<br><br><br><br><br>`
 
-You can either let the XTPL Renderer handle all the work or you can get your hands dirty and do it with the raw API.
-
-The most easy way:
-```php
-    $xtpl = new \Xtpl\Renderer;
-
-    $xtpl->displayFile( 'your/path/to/the/xtpl/file', array(
-    	'title' => 'My Page Title',
-    	'posts' => array(
-    		0 => array(
-    			'title' => 'Some post title',
-    			'content' => 'bla bla bla bla bla'
-    		)
-    	)
-    ) );
-```
-
-It doesn't matter if you use the xtpl Extension or not.
-
-Using display like that will `eval()` the code, and as we all know, eval is evil.
-You better give the renderer a caching directory as the first argument
-
-```php
-	$xtpl = new \Xtpl\Renderer( __DIR__.'/cache' );
-```
-
-This directory of course needs to be writable, but this will improve the performance of the system **greatly**.
-
-Using this way, the renderer will handle all the caching on its own, you don't need to do a thing.
-
-If you want to dig in the dirt you can also use the system in a more raw manner, like this:
-
-```php
-	$xtpl = $xtpl->renderFileToFile( 'your/xtpl', './phtml/your/xtpl.phtml' );
-	extract( $yourTemplateArgs );
-	include './phtml/your/xtpl.phtml';
-```
+This is useful for layouts more often than one might think.
 
 
-**For anything else, just look the codes above.**
+### The Bootstrap Extension (`Xtpl\Extensions\Bootstrap`)
+
+The Bootstrap Extension is a full set of new HTML elements that provide the whole functionality of Twitter's Bootstrap framework with the easiest markup you've ever seen.
+
+**Note:** *You don't have to load bootstrap by yourself! XTPl actually takes care of that and handles script and CSS requirements for bootstrap automatically. This means, you also got jQuery once you have one bootstrap element in your code. Watch the generated DOM!*
+
+There are two ways to use the bootstrap-extension.
+
+#### Direct Calling
+
+You can directly call bootstrap extensions by using their namespace. Remember, the `Xtpl\Extensions` namespace is always loaded.
+With `<bootstrap-button theme="primary">My shiny button!</bootstrap-button>` you get a fully working Bootstrap-Button that automatically handles anything you do with it.
+
+#### Extension Mapping
+
+If you use Bootstrap for your whole project anyways, you can also just map the whole extension namespace over your XTPL file.
+You can do this by enabling the Bootstrap Extension.
+Just call `$renderer->addXtplExtension( 'Bootstrap' );` on your `Xtpl\Renderer`
+
+The Bootstrap Extension brings **78 new elements** into your XTPL templates.
+To see what they can you, you should better check out the following XTPL Templates
+
+[https://github.com/TorbenKoehn/php-xtpl/tree/master/templates/bootstrap-extension](Bootstrap Extension Example Templates)
+
+## Develop your own extensions
+
+There actually is no documentation on how extension elements work right now.
+You may just look at the existing Bootstrap-Extension to get a full view of how they are made.
+
+[Boostrap Extension PHP Files](https://github.com/TorbenKoehn/php-xtpl/tree/master/library/Xtpl/Extensions/Bootstrap)
+
+# Planned features and fixes
+
+- Less and CoffeeScript integration
+- Markdown Integration
+- More dynamic processing instructions
+- Improved DOM management in Nodes
+- Improved interpolation on fixed value attributes (e.g. `<boostrap-button theme="{{theme}}" />` doesn't work right now)
+- Twitter Bootstrap Collapse (Accordion), Carousel and Affix
+- More Doc-Types
+- More intelligent encoding detection and auto-generation
+- More intelligent and nifty single extension elements
+
+
+
 
 
 # Why is it called XTPL?
