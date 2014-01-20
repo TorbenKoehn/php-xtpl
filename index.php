@@ -7,6 +7,9 @@ require( 'vendor/autoload.php' );
 //Initialize XTPL renderer
 $xtpl = new Xtpl\Renderer( __DIR__.'/cache' );
 
+//Small debug function
+function dump( $n ) { global $xtpl; return $xtpl->getCompiler()->dump( $n ); }
+
 //Just for demonstration, we actually disable caching.
 $xtpl->setCacheInterval( 0 );
 
@@ -44,7 +47,8 @@ $xtpl->menu = array(
         'Navbars' => 'index.php?m=bootstrap-extension&a=navbars',
         'Modals' => 'index.php?m=bootstrap-extension&a=modals',
         'Tabs' => 'index.php?m=bootstrap-extension&a=tabs',
-        'Tooltips' => 'index.php?m=bootstrap-extension&a=tooltips'
+        'Tooltips' => 'index.php?m=bootstrap-extension&a=tooltips',
+        'Panels' => 'index.php?m=bootstrap-extension&a=panels'
     )
 );
 

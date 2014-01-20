@@ -13,7 +13,7 @@ class TitleElement extends Element {
         if( !$this->isProcessed() ) {
 
             if( ( $this->getParent() instanceof HeaderElement || $this->getParent() instanceof FooterElement )
-               && $this->getParent()->getParent() instanceof PanelElement ) {
+               && $this->getParent( 2 ) instanceof PanelElement ) {
 
                 $size = 4;
                 if( $this->hasAttribute( 'SIZE' ) ) {

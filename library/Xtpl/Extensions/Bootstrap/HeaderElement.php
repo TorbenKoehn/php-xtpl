@@ -8,6 +8,35 @@ class HeaderElement extends Element {
         parent::__construct( 'HEADER', $attributes );
     }
 
+    public function compile( \Xtpl\Compiler $compiler, $cwd ) {
+
+        if( !$this->isCompiled() ) {
+
+            if( $this->getParent() instanceof PanelElement ) {
+
+                if( $this->hasAttribute( 'SIZE' ) || $this->getParent( 2 ) instanceof AccordionElement ) {
+                    $this->ignoreAttribute( 'SIZE' );
+                    $size = $this->hasAttribute( 'SIZE' ) ? intval( $this->getAttribute( 'SIZE' ) ) : 4;
+                    $h = $this->wrapInner( new TitleElement( array( 'SIZE' => $size ) ) );
+
+                    if( $this->getParent( 2 ) instanceof AccordionElement ) {
+
+                        $a = new AElement( array(
+                            'DATA-TOGGLE' => 'collapse',
+                            'DATA-PARENT' => '#'.$this->getParent( 2 )->getAttribute( 'ID' )
+                        ) );
+
+                        $h->wrapInner( $a );
+                    }
+                }
+                $this->setTagName( 'DIV' );
+                $this->addClass( 'panel-heading' );
+            }
+        }
+
+        return parent::compile( $compiler, $cwd );
+    }
+
     public function process() {
 
         if( !$this->isProcessed() ) {
@@ -42,11 +71,6 @@ class HeaderElement extends Element {
 
                 $this->setTagName( "H$size" );
                 $this->addClass( 'list-group-item-heading' );
-            }
-
-            if( $this->getParent() instanceof PanelElement ) {
-
-                $this->addClass( 'panel-heading' );
             }
 
             if( $this->getParent()->hasClass( 'modal-content' ) ) {

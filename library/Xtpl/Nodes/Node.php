@@ -22,9 +22,18 @@ abstract class Node {
         $this->parent = $parent;
     }
 
-    public function getParent() {
+    public function getParent( $amount = 1 ) {
 
-        return $this->parent;
+        if( !$this->hasParent() )
+            return null;
+
+        $current = $this->parent;
+        while( --$amount ) {
+            if( $current->hasParent() )
+                $current = $current->getParent();
+        }
+
+        return $current;
     }
 
     public function isCompiled() {
@@ -60,7 +69,30 @@ abstract class Node {
         if( $offset < 0 )
             $offset = count( $this->children ) - $offset;
 
+        if( !array_key_exists( $offset, $this->children ) )
+            throw new \Exception( "There's no child at offset $offset" );
+
         return $this->children[ $offset ];
+    }
+
+    public function getSibling( $offset = 1 ) {
+
+        $parent = $this->getParent();
+
+        if( !$parent )
+            throw new \Exception( "Cant find sibling when you got no parent" );
+
+        return $parent->getChild( $parent->indexOf( $this ) + $offset );
+    }
+
+    public function getNext( $amount = 1 ) {
+
+        return $this->getSibling( $amount );
+    }
+
+    public function getPrevious( $amount = 1 ) {
+
+        return $this->getSibling( -$amount );
     }
 
     public function hasChild( $child ) {
@@ -193,6 +225,23 @@ abstract class Node {
         }
 
         array_splice( $this->children, intval( $i + 1 ), 0, is_array( $newChildren ) ? $newChildren : array( $newChildren ) );
+    }
+
+    public function wrap( Node $node ) {
+
+        $this->getParent()->insertBefore( $this, $node );
+        $node->addChild( $this );
+
+        return $node;
+    }
+
+    public function wrapInner( Node $node ) {
+
+        foreach( $this->children as $child )
+            $node->addChild( $child );
+        $this->addChild( $node );
+
+        return $node;
     }
 
     public function renderChildren( $nice = false, $level = 0 ) {
