@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>XTPL</h1>
+        <h1>Php-xtpl</h1>
         <p>A PHP Template System that uses HTML (or rather, XML) instead of a new template &quot;language&quot; you have to learn.</p>
 
         <p class="view"><a href="https://github.com/TorbenKoehn/php-xtpl">View the Project on GitHub <small>TorbenKoehn/php-xtpl</small></a></p>
@@ -26,35 +26,91 @@
           <li><a href="https://github.com/TorbenKoehn/php-xtpl/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/TorbenKoehn/php-xtpl">View On <strong>GitHub</strong></a></li>
         </ul>
-        
-        You like this project? Spend me a coffee via PayPal!
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-          <input name="cmd" type="hidden" value="_s-xclick" />
-          <input name="hosted_button_id" type="hidden" value="E9LVM4VM2DKH4" />
-          <input alt="PayPal - The safer, easier way to pay online!" border="0" name="submit" src="https://www.paypalobjects.com/en_US/DE/i/btn/btn_donateCC_LG.gif" type="image" />
-          <img alt="" border="0" height="1" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" />
-        </form>
       </header>
       <section>
         <h1>
 <a name="what-is-xtpl" class="anchor" href="#what-is-xtpl"><span class="octicon octicon-link"></span></a>What is XTPL?</h1>
 
-<p>XTPL is a <strong>template system for PHP</strong> that tries not to create new fancy language constructs or languages itself.
-XTPL uses <strong>plain HTML tags</strong> to trigger specific template functions, display variables, loop through arrays etc.</p>
+<p>XTPL is a <strong>template system for PHP</strong> that doesn't use any fancy, new syntax, but plain old HTML, or rather, XML.</p>
 
-<p>It is based on XML parsing and requires <strong>strict XML templates</strong>, but allows you to use any <strong>HTML5</strong> tag (or rather, <strong>any</strong> tag). While allowing that, it takes specific elements and enhances them with special functionality.</p>
+<h1>
+<a name="how-does-it-work" class="anchor" href="#how-does-it-work"><span class="octicon octicon-link"></span></a>How does it work?</h1>
 
-<p>You can find a list of what can be done with these tags below.</p>
-
-<p>This is <strong>server-side processed, enhanced HTML</strong>. It can do a lot of useful stuff.</p>
+<p>The XTPL <strong>Parser</strong> parses the XTPL file and handles specific nodes, if found.
+The node plugins are loaded dynamically, which means features like mapping a whole extension over your HTML code that handle new and existing HTML elements are easily possible.</p>
 
 <p>The output you get is <strong>PHTML</strong> which you can include in PHP.
 PHTML is just <strong>PHP with HTML</strong>, which renders a dynamic, server-side processed HTML page.</p>
 
-<h1>
-<a name="what-can-it-do-right-now" class="anchor" href="#what-can-it-do-right-now"><span class="octicon octicon-link"></span></a>What can it do right now?</h1>
+<p>If you don't want to handle the PHTML stuff by yourself, XTPL includes a Renderer that also caches for you, if you like.</p>
 
-<p>Some basic features work already. Many, many, many, many more will follow soon.</p>
+<h1>
+<a name="how-to-install" class="anchor" href="#how-to-install"><span class="octicon octicon-link"></span></a>How to install?</h1>
+
+<p>You can install either via downloading the <a href="https://github.com/TorbenKoehn/php-xtpl/archive/master.zip">ZIP from GitHub</a> or by using <a href="http://getcomposer.org/">Composer</a></p>
+
+<p>To install using composer, you need to add the following info in your <code>composer.json</code></p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"minimum-stability"</span><span class="p">:</span> <span class="s2">"dev"</span><span class="p">,</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"php"</span><span class="p">:</span> <span class="s2">"&gt;=5.3.0"</span><span class="p">,</span>
+        <span class="nt">"torbenkoehn/php-xtpl"</span><span class="p">:</span> <span class="s2">"*"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</pre></div>
+
+<p>After that just run</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>composer install
+</pre></div>
+
+<p>to install the XTPL library and make it available for you to use.</p>
+
+<h1>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use?</h1>
+
+<p>You can either let the XTPL Renderer handle all the work or you can get your hands dirty and do it with the raw API.</p>
+
+<p>The most easy way:</p>
+
+<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Xtpl\Renderer</span><span class="p">;</span>
+
+    <span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">displayFile</span><span class="p">(</span> <span class="s1">'your/path/to/the/xtpl/file'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'My Page Title'</span><span class="p">,</span>
+        <span class="s1">'posts'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'Some post title'</span><span class="p">,</span>
+                <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">'bla bla bla bla bla'</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span> <span class="p">);</span>
+</pre></div>
+
+<p>It doesn't matter if you use the <code>.xtpl</code>-Extension or not.</p>
+
+<p>Using display like that will <code>eval()</code> the code, and as we all know, eval is evil.
+You better give the renderer a caching directory as the first argument</p>
+
+<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Xtpl\Renderer</span><span class="p">(</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/cache'</span> <span class="p">);</span>
+</pre></div>
+
+<p>This directory of course needs to be writable, but this will improve the performance of the system <strong>greatly</strong>.</p>
+
+<p>Using this way, the renderer will handle all the caching on its own, you don't need to do a thing.</p>
+
+<p>If you want to dig in the dirt you can also use the system in a more raw manner, like this:</p>
+
+<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">renderFileToFile</span><span class="p">(</span> <span class="s1">'your/xtpl'</span><span class="p">,</span> <span class="s1">'./phtml/your/xtpl.phtml'</span> <span class="p">);</span>
+    <span class="nb">extract</span><span class="p">(</span> <span class="nv">$yourTemplateArgs</span> <span class="p">);</span>
+    <span class="k">include</span> <span class="s1">'./phtml/your/xtpl.phtml'</span><span class="p">;</span>
+</pre></div>
+
+<p><strong>Note:</strong> <em>For anything else, just look the codes above and in the docs below.</em></p>
+
+<h1>
+<a name="basic-features" class="anchor" href="#basic-features"><span class="octicon octicon-link"></span></a>Basic Features</h1>
 
 <h2>
 <a name="blocks" class="anchor" href="#blocks"><span class="octicon octicon-link"></span></a>Blocks</h2>
@@ -485,87 +541,144 @@ Through the XML restrictions you have to put complex code into <code>&lt;![CDATA
 <span class="cp">    ]]&gt;</span><span class="nt">&lt;/php&gt;</span>
 </pre></div>
 
-<p><strong>More documentation following soon.</strong></p>
+<h2>
+<a name="processing-instructions" class="anchor" href="#processing-instructions"><span class="octicon octicon-link"></span></a>Processing Instructions</h2>
+
+<p>You've already seen you can do inline PHP with a tag.
+Actually, you can also just use the <code>&lt;?php ... ?&gt;</code> syntax in any XTPL file.
+These are handled as <strong>processing instructions</strong> and are directly converted into elements.</p>
+
+<p>The following processing instructions are available right now:</p>
+
+<p><code>&lt;?php [your php code ] ?&gt;</code>
+Renders into a <code>&lt;php&gt;</code> element, which renders a real PHP block in the PHTML file.</p>
+
+<p><code>&lt;?css [your CSS] ?&gt;</code>
+Renders into a valid <code>&lt;style&gt;</code> element</p>
+
+<p><code>&lt;?js [your JavaScript] ?&gt;</code>
+Renders into a valid <code>&lt;script&gt;</code> element</p>
+
+<h2>
+<a name="extensions" class="anchor" href="#extensions"><span class="octicon octicon-link"></span></a>Extensions</h2>
+
+<p>XTPL can be extended in a really easy way.</p>
+
+<p>The parser takes specific namespaces where it gets its nodes from.
+You can add any namespace you like to provde new or existing, reworked elements to the parser.</p>
+
+<p>Imagine you use a <code>&lt;my-custom-tag&gt;</code> tag inside your XTPL file.</p>
+
+<p>The parser goes and looks for a <code>My\Custom\TagElement</code> class inside one of its extension namespaces
+If found, it processes it and renders it as a valid XTPL Node.</p>
+
+<p>Since newly added namespaces always get read first, it's easy to remove complete element namespaces this way.
+The Bootstrap Extension you read about in the next chapter will give a good example to that.</p>
+
+<p>The default namespaces are the following</p>
+
+<p><code>Xtpl\Nodes</code>
+<code>Xtpl\Extensions</code></p>
+
+<p>To include a new namespace, you can either call
+<code>$renderer-&gt;addExtension( 'Your\\Extension\\Namespace' );</code> on the <code>Xtpl\Renderer</code>
+or
+<code>$parser-&gt;addElementNamespace( 'Your\\Extension\\Namespace' );</code> on the <code>Xtpl\Parser</code></p>
+
+<p>To enable a XTPL Extension, you call
+<code>$renderer-&gt;addXtplExtension( 'ExtensionName' )</code> on the <code>Xtpl\Renderer</code>
+or
+<code>$parser-&gt;addElementNamespace( 'Xtpl\\Extensions\\ExtensionName' );</code> on the <code>Xtpl\Parser</code></p>
+
+<p>Usually you should be working with the <code>Xtpl\Renderer</code>, just so you know.</p>
+
+<h2>
+<a name="default-extensions" class="anchor" href="#default-extensions"><span class="octicon octicon-link"></span></a>Default Extensions</h2>
+
+<p>While surely you can develop extensions by yourself easily, you don't have to.
+XTPL actually brings a whole set of new elements into HTML.</p>
+
+<p>You can either activate them by calling them by their complete namespace or you can include a single namespace to map them over your existing HTML.</p>
+
+<h3>
+<a name="single-extensions-xtplextensions" class="anchor" href="#single-extensions-xtplextensions"><span class="octicon octicon-link"></span></a>Single Extensions (<code>Xtpl\Extensions</code>)</h3>
+
+<p>Single Extensions are simple, single elements that just provide some utility features.</p>
+
+<h4>
+<a name="email" class="anchor" href="#email"><span class="octicon octicon-link"></span></a>Email</h4>
+
+<p>The tag <code>&lt;email&gt;someone@example.com&lt;/email&gt;</code> will be converted into <code>&lt;a href="mailto:someone@example.com"&gt;someone@example.com&lt;/a&gt;</code></p>
+
+<h4>
+<a name="html" class="anchor" href="#html"><span class="octicon octicon-link"></span></a>Html</h4>
+
+<p>The <code>&lt;html&gt;</code> tag has a new attribute called <code>version</code>.
+Right now it only supports the value <code>5</code>, which makes it automatically add
+<code>&lt;!doctype html&gt;</code> in front of your <code>&lt;html&gt;</code>-tag.</p>
+
+<h4>
+<a name="head" class="anchor" href="#head"><span class="octicon octicon-link"></span></a>Head</h4>
+
+<p>The <code>&lt;head&gt;</code> Extension actually just adds the UTF-8 charset by default, if you didn't add one manually.</p>
+
+<h4>
+<a name="br" class="anchor" href="#br"><span class="octicon octicon-link"></span></a>Br</h4>
+
+<p>The <code>&lt;br&gt;</code>-tag provides a new attribute <code>repeat</code>, that does exactly what you think it does.
+<code>&lt;br repeat="5" /&gt;</code> will render to <code>&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</code></p>
+
+<p>This is useful for layouts more often than one might think.</p>
+
+<h3>
+<a name="the-bootstrap-extension-xtplextensionsbootstrap" class="anchor" href="#the-bootstrap-extension-xtplextensionsbootstrap"><span class="octicon octicon-link"></span></a>The Bootstrap Extension (<code>Xtpl\Extensions\Bootstrap</code>)</h3>
+
+<p>The Bootstrap Extension is a full set of new HTML elements that provide the whole functionality of Twitter's Bootstrap framework with the easiest markup you've ever seen.</p>
+
+<p><strong>Note:</strong> <em>You don't have to load bootstrap by yourself! XTPl actually takes care of that and handles script and CSS requirements for bootstrap automatically. This means, you also got jQuery once you have one bootstrap element in your code. Watch the generated DOM!</em></p>
+
+<p>There are two ways to use the bootstrap-extension.</p>
+
+<h4>
+<a name="direct-calling" class="anchor" href="#direct-calling"><span class="octicon octicon-link"></span></a>Direct Calling</h4>
+
+<p>You can directly call bootstrap extensions by using their namespace. Remember, the <code>Xtpl\Extensions</code> namespace is always loaded.
+With <code>&lt;bootstrap-button theme="primary"&gt;My shiny button!&lt;/bootstrap-button&gt;</code> you get a fully working Bootstrap-Button that automatically handles anything you do with it.</p>
+
+<h4>
+<a name="extension-mapping" class="anchor" href="#extension-mapping"><span class="octicon octicon-link"></span></a>Extension Mapping</h4>
+
+<p>If you use Bootstrap for your whole project anyways, you can also just map the whole extension namespace over your XTPL file.
+You can do this by enabling the Bootstrap Extension.
+Just call <code>$renderer-&gt;addXtplExtension( 'Bootstrap' );</code> on your <code>Xtpl\Renderer</code></p>
+
+<p>The Bootstrap Extension brings <strong>78 new elements</strong> into your XTPL templates.
+To see what they can you, you should better check out the following XTPL Templates</p>
+
+<p><a href="Bootstrap%20Extension%20Example%20Templates">https://github.com/TorbenKoehn/php-xtpl/tree/master/templates/bootstrap-extension</a></p>
+
+<h2>
+<a name="develop-your-own-extensions" class="anchor" href="#develop-your-own-extensions"><span class="octicon octicon-link"></span></a>Develop your own extensions</h2>
+
+<p>There actually is no documentation on how extension elements work right now.
+You may just look at the existing Bootstrap-Extension to get a full view of how they are made.</p>
+
+<p><a href="https://github.com/TorbenKoehn/php-xtpl/tree/master/library/Xtpl/Extensions/Bootstrap">Boostrap Extension PHP Files</a></p>
 
 <h1>
-<a name="what-else-can-i-do-with-it" class="anchor" href="#what-else-can-i-do-with-it"><span class="octicon octicon-link"></span></a>What else can I do with it?</h1>
-
-<p>You can enhance it. XTPL includes a plugin system with some default extensions.
-Based on the tags you use you can add new tags and classes that handle them.</p>
-
-<p>You might think it just translates XML to HTML, but it actually creates a complete DOM with a bunch of traversing and manipulation methods in the background. This allows you to manipulate any specific point of the DOM from every specific or any other point that gets handled.
-The implementation does <strong>not</strong> use DOMDocument of PHP but an own DOM implementation (that at least uses similar naming) that works different and more efficient for this kind of project.</p>
-
-<p>An example might be Bootstrap-Extensions, that allow you to use bootstrap elements easily (e.g. <code>&lt;bs-btn type="success"&gt;Success!!&lt;/bs-btn&gt;</code>) and you don't even need to include any CSS or JS files by yourself, the elements can check if bootstrap is loaded or not by traversing the <code>&lt;head&gt;</code> element, if not, they can just <code>addChild()</code> a new <code>&lt;script&gt;</code> and <code>&lt;link&gt;</code> to it and it will be loaded when it's required. Actually, there is a method called <code>addCss( $css )</code> in it that already does that for you :)</p>
-
-<p>The possibilities here are unlimited.
-It works kind of like server-side HTML Custom Elements.
-With enough plugins you don't need a line of plain PHP to get your dynamic website working with pure HTML syntax.</p>
-
-<p>To add an element plugin, create a PHP Class that extends from <code>Xtpl\Nodes\Element</code>, call it anything with <code>Element</code> in the end, put it into some namespace and let the parser know about your element namespace with</p>
-
-<div class="highlight highlight-php"><pre><span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">getCompiler</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getParser</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addElementNamespace</span><span class="p">(</span> <span class="s1">'Your\\Element\\Namespace'</span> <span class="p">);</span>
-</pre></div>
-
-<p>Then just go on rendering normally.</p>
-
-<p>What will happen is that the parser will inflect the name of the HTML tag it processes and find a class that fits it.
-e.g. an element like <code>&lt;my-custom-tag&gt;</code> will search for a class called <code>MyCustomTagElement</code> in the element namespaces of the parser. The DOM will then receive a new instance of this class instead of a plain <code>Element</code>-instance and allows you to modify the compiling and rendering process of that element.</p>
-
-<p>In your class you have a bunch of DOM utilities to make your elements as mighty as possible.
-Just take a look at the <code>Xtpl\Extensions</code> or the <code>Xtpl\Nodes</code> element namespaces to get a feeling for it.</p>
-
-<h1>
-<a name="planned-features" class="anchor" href="#planned-features"><span class="octicon octicon-link"></span></a>Planned features</h1>
+<a name="planned-features-and-fixes" class="anchor" href="#planned-features-and-fixes"><span class="octicon octicon-link"></span></a>Planned features and fixes</h1>
 
 <ul>
-<li>[ ] Less and CoffeeScript integration</li>
-<li>[ ] If-statements</li>
-<li>[ ] Medium-sized standard library</li>
-<li>[ ] Twitter Bootstrap elements</li>
-<li>[ ] Fancy filters (Markdown?)</li>
+<li>Less and CoffeeScript integration</li>
+<li>Markdown Integration</li>
+<li>More dynamic processing instructions</li>
+<li>Improved DOM management in Nodes</li>
+<li>Improved interpolation on fixed value attributes (e.g. <code>&lt;boostrap-button theme="{{theme}}" /&gt;</code> doesn't work right now)</li>
+<li>Twitter Bootstrap Collapse (Accordion), Carousel and Affix</li>
+<li>More Doc-Types</li>
+<li>More intelligent encoding detection and auto-generation</li>
+<li>More intelligent and nifty single extension elements</li>
 </ul><h1>
-<a name="how-does-the-compilation-work" class="anchor" href="#how-does-the-compilation-work"><span class="octicon octicon-link"></span></a>How does the compilation work?</h1>
-
-<p>You can either let the XTPL Renderer handle all the work or you can get your hands dirty and do it with the raw API.</p>
-
-<p>The most easy way:</p>
-
-<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Xtpl\Renderer</span><span class="p">;</span>
-
-    <span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">displayFile</span><span class="p">(</span> <span class="s1">'your/path/to/the/xtpl/file'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'My Page Title'</span><span class="p">,</span>
-        <span class="s1">'posts'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-            <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-                <span class="s1">'title'</span> <span class="o">=&gt;</span> <span class="s1">'Some post title'</span><span class="p">,</span>
-                <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">'bla bla bla bla bla'</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-    <span class="p">)</span> <span class="p">);</span>
-</pre></div>
-
-<p>It doesn't matter if you use the xtpl Extension or not.</p>
-
-<p>Using display like that will <code>eval()</code> the code, and as we all know, eval is evil.
-You better give the renderer a caching directory as the first argument</p>
-
-<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Xtpl\Renderer</span><span class="p">(</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">'/cache'</span> <span class="p">);</span>
-</pre></div>
-
-<p>This directory of course needs to be writable, but this will improve the performance of the system <strong>greatly</strong>.</p>
-
-<p>Using this way, the renderer will handle all the caching on its own, you don't need to do a thing.</p>
-
-<p>If you want to dig in the dirt you can also use the system in a more raw manner, like this:</p>
-
-<div class="highlight highlight-php"><pre>    <span class="nv">$xtpl</span> <span class="o">=</span> <span class="nv">$xtpl</span><span class="o">-&gt;</span><span class="na">renderFileToFile</span><span class="p">(</span> <span class="s1">'your/xtpl'</span><span class="p">,</span> <span class="s1">'./phtml/your/xtpl.phtml'</span> <span class="p">);</span>
-    <span class="nb">extract</span><span class="p">(</span> <span class="nv">$yourTemplateArgs</span> <span class="p">);</span>
-    <span class="k">include</span> <span class="s1">'./phtml/your/xtpl.phtml'</span><span class="p">;</span>
-</pre></div>
-
-<p><strong>For anything else, just look the codes above.</strong></p>
-
-<h1>
 <a name="why-is-it-called-xtpl" class="anchor" href="#why-is-it-called-xtpl"><span class="octicon octicon-link"></span></a>Why is it called XTPL?</h1>
 
 <p>Honestly, because I didn't find any fancy, fitting name yet.
