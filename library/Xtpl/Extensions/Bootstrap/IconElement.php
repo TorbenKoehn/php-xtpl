@@ -9,6 +9,7 @@ class IconElement extends SpanElement {
 
         if( $this->hasAttribute( 'TYPE' ) ) {
 
+            $this->ignoreAttribute( 'TYPE' );
             $icon = $this->getAttribute( 'TYPE' );
 
             if( $icon == 'bar' )

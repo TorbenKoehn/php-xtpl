@@ -48,7 +48,8 @@ $xtpl->menu = array(
         'Modals' => 'index.php?m=bootstrap-extension&a=modals',
         'Tabs' => 'index.php?m=bootstrap-extension&a=tabs',
         'Tooltips' => 'index.php?m=bootstrap-extension&a=tooltips',
-        'Panels' => 'index.php?m=bootstrap-extension&a=panels'
+        'Panels' => 'index.php?m=bootstrap-extension&a=panels',
+        'Carousels' => 'index.php?m=bootstrap-extension&a=carousels'
     )
 );
 
