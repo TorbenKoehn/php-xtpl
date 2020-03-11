@@ -113,6 +113,35 @@ class Renderer {
         include $path;
     }
 
+    public function StringToHtml( $string, array $vars = array(), $nice = false ) {
+
+        $vars = array_merge( $this->vars, $vars );
+        extract( $vars );
+        
+        ob_clean();
+        ob_start();
+        eval( '?>'.$this->render( $string, $nice ) );
+        $eval = ob_get_contents();
+        ob_end_clean();
+        return $eval;
+    }
+
+    public function FileToHtml( $file, array $vars = array(), $nice = false ) {
+
+        $vars = array_merge( $this->vars, $vars );
+        extract( $vars );
+
+        if( !empty( $this->baseDirectory ) )
+            $file = $this->baseDirectory.DIRECTORY_SEPARATOR.$file;
+        
+        ob_clean();
+        ob_start();
+        eval( '?>'.$this->renderFile( $file, $nice ) );
+        $eval = ob_get_contents();
+        ob_end_clean();
+        return $eval;
+    }
+
     public function addExtension( $extension ) {
 
         $this->getCompiler()->getParser()->addElementNamespace( $extension );
