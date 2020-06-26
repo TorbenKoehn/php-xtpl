@@ -18,8 +18,11 @@ class VarElement extends Element {
 
                     $this->addPhp( '$'.$this->getAttribute( 'NAME' ).' = \''.$this->getAttribute( 'VALUE' ).'\';' );
                 } else {
-
-                    $this->addPhp( 'echo $'.$this->getAttribute( 'NAME' ).';' );
+                    if( $this->hasAttribute( 'DEFAULT' ) ) {
+                        $this->addPhp( 'echo ((!empty($'.$this->getAttribute( 'NAME' ).')) ? $'.$this->getAttribute( 'NAME' ).': "'.$this->getAttribute( 'DEFAULT' ).'");' );
+                    } else {
+                        $this->addPhp( 'echo $'.$this->getAttribute( 'NAME' ).';' );
+                    }
                 }
             }
         }
